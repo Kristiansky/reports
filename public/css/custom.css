@@ -1,0 +1,9 @@
+/*Css*/
+.select2-results__options {
+    max-height: 330px !important;
+    overflow-y: auto;
+}
+#product_entries td, #product_entries th,
+#product_sales td, #product_sales th{
+    font-size: 12px !important;
+}

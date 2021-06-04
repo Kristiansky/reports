@@ -133,7 +133,7 @@
                             <th width="5%">{{__('main.courier')}}</th>
                             <th width="6%">{{__('main.awb')}}</th>
                             <th width="20%">{{__('main.status_courier')}}</th>
-                            <th width="12%">{{__('main.operations')}}</th>
+                            <th width="12%">{{__('main.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -304,7 +304,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{__('main.submit')}}</button>
+                                    <button type="submit" class="btn btn-success">{{__('main.save')}}</button>
                                 </div>
                             </div>
                         </div>

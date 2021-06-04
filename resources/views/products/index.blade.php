@@ -121,15 +121,15 @@
                     <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
                         <thead>
                         <tr>
-                            <th width="5%">{{__('main.product_id')}}</th>
+                            <th width="7%">{{__('main.product_id')}}</th>
                             <th width="10%">{{__('main.sku')}}</th>
                             <th width="30%">{{__('main.name')}}</th>
                             <th width="5%">{{__('main.stock')}}</th>
                             <th width="5%">{{__('main.incl_new')}}</th>
-                            <th width="15%">{{__('main.lots')}}</th>
+                            <th width="13%">{{__('main.lots')}}</th>
                             <th width="10%">{{__('main.lot_expiration')}}</th>
                             <th width="5%">{{__('main.damaged')}}</th>
-                            <th width="15%">{{__('main.operations')}}</th>
+                            <th width="15%">{{__('main.actions')}}</th>
                         </tr>
                         </thead>
                         <tbody>

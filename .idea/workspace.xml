@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/adminlte/bg/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/adminlte/bg/adminlte.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/adminlte/bg/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/adminlte/bg/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +65,9 @@
         <option value="Blade" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -177,8 +188,10 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1rNkFlz5JVCCXkuV2TIjW38IYji" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML&#10;TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -249,11 +262,26 @@
       <workItem from="1622526050550" duration="11457000" />
       <workItem from="1622613967053" duration="1235000" />
       <workItem from="1622631169254" duration="18053000" />
-      <workItem from="1622700674641" duration="4217000" />
+      <workItem from="1622700674641" duration="7721000" />
+      <workItem from="1622786886429" duration="616000" />
+      <workItem from="1622796212169" duration="6457000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

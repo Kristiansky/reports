@@ -21,4 +21,10 @@
         'locale' => 'ЛОКАЛИЗАЦИЯ',
         'dashboard' => 'Табло',
         'current_client' => session('client') ? session('client')->NumeClient1 .' ['. session('client')->group->name . ']' : '',
+        'change_client' => 'Смяна на клиент',
+        'place_order' => 'Нова поръчка',
+        'orders' => 'Поръчки',
+        'stock' => 'Стока',
+        'entries' => 'Вход стока',
+        'storage_report' => 'Отчет съхранение',
     ];

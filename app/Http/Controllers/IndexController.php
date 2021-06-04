@@ -86,6 +86,7 @@ class IndexController extends Controller
             ->get();
         $begin = new DateTime(session('dashboard_filter')['range_start']);
         $end = new DateTime(session('dashboard_filter')['range_end']);
+        $end->setTime(0,0,1);
     
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($begin, $interval, $end);

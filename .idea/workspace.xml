@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +259,7 @@
       <workItem from="1622631169254" duration="18053000" />
       <workItem from="1622700674641" duration="7721000" />
       <workItem from="1622786886429" duration="616000" />
-      <workItem from="1622796212169" duration="7376000" />
+      <workItem from="1622796212169" duration="10130000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -267,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622810216288</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Removed factories and seeds from composer.json">
+      <created>1622811158702</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622811158702</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +296,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Translated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Translated" />
+    <MESSAGE value="Removed factories and seeds from composer.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed factories and seeds from composer.json" />
   </component>
 </project>

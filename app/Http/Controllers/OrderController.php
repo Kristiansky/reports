@@ -162,7 +162,7 @@ class OrderController extends Controller
         }
         foreach ($productCategories as $productCategory){
             foreach ($productCategory->products->sortBy('idp') as $product){
-                if($product->stock() > 0 && !in_array($product->idp, $exclude)){
+                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
                     $data['products'][] = $product;
                 }
             }

@@ -33,21 +33,43 @@ class Product extends Model
      * @return int
      */
     public function stock(){
-        $entries = 0;
-        if(count($this->entries) > 0){
-            foreach ($this->entries as $entry){
-                $entries = $entries + $entry->bucati;
-            }
+        $entries_sub = Entry::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(bucati) AS suma'))
+            ->groupBy('idp')
+        ;
+        
+        $entries_sum = DB::table( DB::raw("({$entries_sub->toSql()}) as entries") )
+            ->mergeBindings($entries_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_entries'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+        
+        $orders_sub = Order::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(volum) AS suma'))
+            ->where('status', '=', 'expediat')
+            ->groupBy('idp')
+        ;
+        
+        $orders_sum = DB::table( DB::raw("({$orders_sub->toSql()}) as orders") )
+            ->mergeBindings($orders_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_orders'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+        
+        $return = 0;
+        if($entries_sum != null){
+            $return = $entries_sum->total_entries;
         }
-        $orders = 0;
-        if(count($this->orders) > 0){
-            foreach ($this->orders as $order){
-                if($order->getRawOriginal('status') == 'expediat'){
-                    $orders = $orders + $order->volum;
-                }
-            }
+        if($orders_sum != null){
+            $return = $return - $orders_sum->total_orders;
         }
-        return $entries - $orders;
+        return $return;
     }
     
     /**
@@ -55,19 +77,42 @@ class Product extends Model
      * @return int
      */
     public function stockInclNew(){
-        $entries = 0;
-        if(count($this->entries) > 0){
-            foreach ($this->entries as $entry){
-                $entries = $entries + $entry->bucati;
-            }
+        $entries_sub = Entry::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(bucati) AS suma'))
+            ->groupBy('idp')
+        ;
+    
+        $entries_sum = DB::table( DB::raw("({$entries_sub->toSql()}) as entries") )
+            ->mergeBindings($entries_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_entries'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+    
+        $orders_sub = Order::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(volum) AS suma'))
+            ->groupBy('idp')
+        ;
+    
+        $orders_sum = DB::table( DB::raw("({$orders_sub->toSql()}) as orders") )
+            ->mergeBindings($orders_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_orders'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+    
+        $return = 0;
+        if($entries_sum != null){
+            $return = $entries_sum->total_entries;
         }
-        $orders = 0;
-        if(count($this->orders) > 0){
-            foreach ($this->orders as $order){
-                $orders = $orders + $order->volum;
-            }
+        if($orders_sum != null){
+            $return = $return - $orders_sum->total_orders;
         }
-        return $entries - $orders;
+        return $return;
     }
     
     public function lots(){

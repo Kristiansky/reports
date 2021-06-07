@@ -138,8 +138,10 @@
                                 <td>{{$product->idp}}</td>
                                 <td>{{$product->codprodusclient}}</td>
                                 <td>{{$product->descriere}}</td>
-                                <td>{{$product->current_total_expediat}}</td>
-                                <td>{{$product->current_total}}</td>
+{{--                                <td>{{$product->current_total_expediat}}</td>--}}
+                                <td>{{$product->stock()}}</td>
+{{--                                <td>{{$product->current_total}}</td>--}}
+                                <td>{{$product->stockInclNew()}}</td>
                                 <td>
                                     @if($product->lots())
                                         @foreach($product->lots() as $lot)

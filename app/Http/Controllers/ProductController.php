@@ -86,6 +86,7 @@ class ProductController extends Controller
 //                $join->on('sales.idp', '=', 'stor_produse.idp');
 //            })
             ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
+            ->orderBy('stor_produse.idp', 'asc')
         ;
     
         if(request('export') && request('export') == '1'){
@@ -106,8 +107,8 @@ class ProductController extends Controller
                 $sheet->setCellValue('A' . $row, $product->idp);
                 $sheet->setCellValue('B' . $row, $product->codprodusclient);
                 $sheet->setCellValue('C' . $row, $product->descriere);
-                $sheet->setCellValue('D' . $row, $product->current_total_expediat);
-                $sheet->setCellValue('E' . $row, $product->current_total);
+                $sheet->setCellValue('D' . $row, $product->stock());
+                $sheet->setCellValue('E' . $row, $product->stockInclNew());
                 $lots = '';
                 $expiration_dates = '';
                 if($product->lots()){
@@ -135,9 +136,8 @@ class ProductController extends Controller
             $writer->save('php://output');
         
         }
-        
-        $products = $products->orderBy('stor_produse.idp', 'asc')
-            ->paginate(session('per_page'));
+    
+        $products = $products->paginate(session('per_page'));
 //        $paginator = new Paginator($products, session('per_page'), request('page') ? request('page') : 1, ['path' => route('product.index')]);
         return view('products.index', compact('products'/*, 'paginator'*/));
     }
@@ -171,19 +171,17 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $entries = array();
-        foreach($product->entries as $key=>$entry){
-            $entry_arr = $entry->getAttributes();
-            $details = DB::table('stor_receptii_detalii')
-                ->select('*')
-                ->where('idp', '=', $entry_arr['idp'])
-                ->where('dataexp', '=', $entry_arr['data_expirare'])
-                ->first();
-            if($details){
-                $entry_arr['idreceptie'] = $details->idreceptie;
-            }
-            $entries[$key]=$entry_arr;
-        }
+        $entries = DB::table('stor_intrari')
+            ->select('stor_intrari.idin', 'stor_intrari.bucati', 'stor_intrari.dataintrare', 'stor_intrari.aviz', 'stor_intrari.data_expirare', 'stor_receptii_detalii.idreceptie as idreceptie')
+            ->where('stor_intrari.idp', '=', $product->idp)
+            ->leftJoin('stor_receptii_detalii', function($q)
+            {
+                $q->on('stor_intrari.idp', '=', 'stor_receptii_detalii.idp')
+                    ->on('stor_intrari.data_expirare', '=', 'stor_receptii_detalii.dataexp');
+            })
+            ->get()
+        ;
+        
         $product->orders;
         return response()->json(['product' => $product, 'stock' => $product->stock(), 'stock_incl_new' => $product->stockInclNew(), 'lots' => $product->lots(), 'entries' => $entries]);
     }

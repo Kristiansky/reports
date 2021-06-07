@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -261,7 +262,7 @@
       <workItem from="1622796212169" duration="12617000" />
       <workItem from="1623046651229" duration="5923000" />
       <workItem from="1623055505725" duration="4629000" />
-      <workItem from="1623068926927" duration="943000" />
+      <workItem from="1623068926927" duration="1188000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -305,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623068641364</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="More fixes slow ajax product history">
+      <created>1623070002050</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1623070002050</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,6 +339,7 @@
     <MESSAGE value="Fixed dashboard css custom missing warning" />
     <MESSAGE value="Fixed slow loading products" />
     <MESSAGE value="Fixed slow ajax product history" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed slow ajax product history" />
+    <MESSAGE value="More fixes slow ajax product history" />
+    <option name="LAST_COMMIT_MESSAGE" value="More fixes slow ajax product history" />
   </component>
 </project>

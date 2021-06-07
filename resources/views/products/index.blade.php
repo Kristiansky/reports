@@ -71,14 +71,14 @@
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>
                             </div>
                         </div>
-                        <div class="row">
+                        {{--<div class="row">
                             <div class="col-md-2">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="without_stock" name="without_stock" value="1" {{isset(session('product_filter')['without_stock']) && session('product_filter')['without_stock'] == 1 ? 'checked' : ''}}>
                                     <label class="form-check-label" for="without_stock">{{__('main.all_products_without_stock_also')}}</label>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </form>
                 </div>
                 <!-- /.card-body -->

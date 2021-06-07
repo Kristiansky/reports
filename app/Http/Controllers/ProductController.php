@@ -39,14 +39,14 @@ class ProductController extends Controller
             return redirect(route('product.index'));
         }
     
-//        $entries = DB::table('stor_intrari')
-//            ->select('stor_intrari.idp', 'dataintrare', 'data_expirare', DB::raw('SUM(bucati) AS suma'))
-//            ->groupBy('stor_intrari.idp');
+        $entries = DB::table('stor_intrari')
+            ->select('stor_intrari.idp', 'dataintrare', 'data_expirare', DB::raw('SUM(bucati) AS suma'))
+            ->groupBy('stor_intrari.idp');
 
-//        $sales_expediat = DB::table('stor_iesiri')
-//            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
-//            ->where('status', '=', 'expediat')
-//            ->groupBy('stor_iesiri.idp');
+        $sales_expediat = DB::table('stor_iesiri')
+            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
+            ->where('status', '=', 'expediat')
+            ->groupBy('stor_iesiri.idp');
 
 //        $sales = DB::table('stor_iesiri')
 //            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
@@ -56,10 +56,9 @@ class ProductController extends Controller
             ->select(
                 'stor_produse.idp as idp',
                 'stor_produse.codprodusclient as codprodusclient',
-                'stor_produse.descriere as descriere'
-//                ,
+                'stor_produse.descriere as descriere',
 //                'entries.data_expirare as data_expirare',
-//                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales_expediat.suma, 0)) as current_total_expediat'),
+                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales_expediat.suma, 0)) as current_total_expediat')
 //                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales.suma, 0)) as current_total')
             )
             ->where(function ($query){
@@ -77,16 +76,16 @@ class ProductController extends Controller
                         ->whereBetween('entries.dataintrare', [session('product_filter')['entry_from_date'], session('product_filter')['entry_to_date']]);
                 }
             })
-//            ->leftJoinSub($entries, 'entries', function ($join) {
-//                $join->on('entries.idp', '=', 'stor_produse.idp');
-//            })
-//            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
-//                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
-//            })
+            ->leftJoinSub($entries, 'entries', function ($join) {
+                $join->on('entries.idp', '=', 'stor_produse.idp');
+            })
+            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
+                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
+            })
 //            ->leftJoinSub($sales, 'sales', function ($join) {
 //                $join->on('sales.idp', '=', 'stor_produse.idp');
 //            })
-//            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
+            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
         ;
     
         if(request('export') && request('export') == '1'){

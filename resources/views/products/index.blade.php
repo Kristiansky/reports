@@ -419,7 +419,7 @@
 
 						var html = '';
 						var product_sales_total = 0;
-						response.product.orders.forEach(function (order) {
+						response.orders.forEach(function (order) {
 							product_sales_total = parseInt(product_sales_total) + parseInt(order.volum);
 							html += "<tr>" +
 								"<td>" + order.idie + "</td>" +

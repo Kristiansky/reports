@@ -182,8 +182,12 @@ class ProductController extends Controller
             ->get()
         ;
         
-        $product->orders;
-        return response()->json(['product' => $product, 'stock' => $product->stock(), 'stock_incl_new' => $product->stockInclNew(), 'lots' => $product->lots(), 'entries' => $entries]);
+        $orders = DB::table('stor_iesiri')
+            ->select('stor_iesiri.idie', 'stor_iesiri.idextern', 'stor_iesiri.perscontact', 'stor_iesiri.volum', 'stor_iesiri.datai', 'stor_iesiri.status', 'stor_iesiri.expiration_batch', 'stor_iesiri.expiration_date')
+            ->where('stor_iesiri.idp', '=', $product->idp)
+            ->get()
+        ;
+        return response()->json(['product' => $product, 'stock' => $product->stock(), 'stock_incl_new' => $product->stockInclNew(), 'lots' => $product->lots(), 'entries' => $entries, 'orders' => $orders]);
     }
 
     /**

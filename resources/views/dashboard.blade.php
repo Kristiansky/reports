@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div class="col-6">
-            <form class="" action="{{route('home')}}" method="post" id="daterange_picker">
+            <form class="" action="{{route('home')}}" id="daterange_picker">
                 @csrf
                 @method('POST')
                 <div class="row">
@@ -107,7 +107,7 @@
 
 @section('js')
     <script>
-        $(document).ready(function () {
+		$(document).ready(function () {
 			var ctx = document.getElementById("sent_count").getContext('2d');
 			var sent_count = new Chart(ctx, {
 				type: 'bar',
@@ -126,16 +126,16 @@
 				data: {
 					labels: [
                         @foreach($dates as $key => $date)
-                        "{{$key}}",
+							"{{$key}}",
                         @endforeach
-                    ],
+					],
 					datasets: [{
 						label: '{{__('main.sent_orders')}}',
 						data: [
                             @foreach($dates as $key => $date)
-								{{$date['sent_count']}},
+                            {{$date['sent_count']}},
                             @endforeach
-                        ],
+						],
 						backgroundColor: [
 							'rgba(40, 167, 69, 0.2)',
 						],
@@ -157,7 +157,7 @@
 							'rgba(255, 193, 7,1)',
 						],
 						borderWidth: 1
-                    }]
+					}]
 				},
 				options: {
 					responsive: true,
@@ -181,11 +181,11 @@
 				// The data for our dataset
 				data: {
 					labels:
-                        [
-                        	@foreach($city_data as $city_datum)
-                            "{{$city_datum->localitate}}",
+						[
+                            @foreach($city_data as $city_datum)
+								"{{$city_datum->localitate}}",
                             @endforeach
-                        ],
+						],
 					datasets: [{
 						label: '{{__('main.sent_by_city')}}',
 						backgroundColor: 'rgba(40, 167, 69, 0.2)',
@@ -195,7 +195,7 @@
                             @foreach($city_data as $city_datum)
 								"{{$city_datum->total_sent_orders}}",
                             @endforeach
-                        ],
+						],
 					}]
 				},
 				options: {
@@ -238,8 +238,8 @@
 					endDate  : '{{session('dashboard_filter')['range_end']}}',
 				},
 				function (start, end) {
-                    $('#range_start').val(start.format("YYYY-MM-DD"));
-                    $('#range_end').val(end.format("YYYY-MM-DD"));
+					$('#range_start').val(start.format("YYYY-MM-DD"));
+					$('#range_end').val(end.format("YYYY-MM-DD"));
 					$('span#reportrange').html(start.format("YYYY-MM-DD") + ' - ' + end.format("YYYY-MM-DD"));
 					$('#daterange_picker [type="submit"]').trigger('click');
 				}

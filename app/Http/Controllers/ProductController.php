@@ -77,7 +77,7 @@ class ProductController extends Controller
 //            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
 //                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
 //            })
-            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
+//            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
             ->orderBy('stor_produse.idp', 'asc')
         ;
     

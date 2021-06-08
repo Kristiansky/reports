@@ -53,7 +53,8 @@ class ProductController extends Controller
             ->select(
                 'stor_produse.idp as idp',
                 'stor_produse.codprodusclient as codprodusclient',
-                'stor_produse.descriere as descriere'
+                'stor_produse.descriere as descriere',
+                'stor_produse.codbare as codbare'
 //                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales_expediat.suma, 0)) as current_total_expediat')
             )
             ->where(function ($query){

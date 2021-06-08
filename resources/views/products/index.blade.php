@@ -123,7 +123,8 @@
                         <tr>
                             <th width="7%">{{__('main.product_id')}}</th>
                             <th width="10%">{{__('main.sku')}}</th>
-                            <th width="30%">{{__('main.name')}}</th>
+                            <th width="10%">{{__('main.barcode')}}</th>
+                            <th width="20%">{{__('main.name')}}</th>
                             <th width="5%">{{__('main.stock')}}</th>
                             <th width="5%">{{__('main.incl_new')}}</th>
                             <th width="13%">{{__('main.lots')}}</th>
@@ -137,6 +138,7 @@
                             <tr>
                                 <td>{{$product->idp}}</td>
                                 <td>{{$product->codprodusclient}}</td>
+                                <td>{{$product->codbare}}</td>
                                 <td>{{$product->descriere}}</td>
 {{--                                <td>{{$product->current_total_expediat}}</td>--}}
                                 <td>{{$product->stock()}}</td>

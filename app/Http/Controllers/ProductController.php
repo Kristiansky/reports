@@ -164,16 +164,35 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $entries = DB::table('stor_intrari')
-            ->select('stor_intrari.idin', 'stor_intrari.bucati', 'stor_intrari.dataintrare', 'stor_intrari.aviz', 'stor_intrari.data_expirare', 'stor_receptii_detalii.idreceptie as idreceptie')
+        $entries_result = DB::table('stor_intrari')
+//            ->select('stor_intrari.idin', 'stor_intrari.bucati', 'stor_intrari.dataintrare', 'stor_intrari.aviz', 'stor_intrari.data_expirare', 'stor_receptii_detalii.idreceptie as idreceptie')
+            ->select('stor_intrari.idin', 'stor_intrari.bucati', 'stor_intrari.dataintrare', 'stor_intrari.aviz', 'stor_intrari.data_expirare')
             ->where('stor_intrari.idp', '=', $product->idp)
-            ->leftJoin('stor_receptii_detalii', function($q)
-            {
-                $q->on('stor_intrari.idp', '=', 'stor_receptii_detalii.idp')
-                    ->on('stor_intrari.data_expirare', '=', 'stor_receptii_detalii.dataexp');
-            })
-            ->get()
+//            ->leftJoin('stor_receptii_detalii', function($q)
+//            {
+//                $q->on('stor_intrari.idp', '=', 'stor_receptii_detalii.idp')
+//                    ->on('stor_intrari.data_expirare', '=', 'stor_receptii_detalii.dataexp');
+//            })
+            ->distinct()->get()
         ;
+//        dd($entries_result);
+        $entries = array();
+        foreach($entries_result as $key=>$row){
+            $entry = DB::table('stor_receptii_detalii')
+                ->select('idreceptie')
+                ->where('idp', '=', $product->idp)
+                ->where('dataexp', '=', $row->data_expirare)
+                ->first()
+            ;
+            $entries[] = array(
+                'idin' => $row->idin,
+                'bucati' => $row->bucati,
+                'dataintrare' => $row->dataintrare,
+                'aviz' => $row->aviz,
+                'data_expirare' => $row->data_expirare,
+                'idreceptie' => $entry->idreceptie
+            );
+        }
         
         $orders = DB::table('stor_iesiri')
             ->select('stor_iesiri.idie', 'stor_iesiri.idextern', 'stor_iesiri.perscontact', 'stor_iesiri.volum', 'stor_iesiri.datai', 'stor_iesiri.status', 'stor_iesiri.expiration_batch', 'stor_iesiri.expiration_date')

@@ -24,12 +24,6 @@
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" autocomplete="off" placeholder="{{__('main.search')}}" value="{{isset(session('entries_filter')['search']) ? session('entries_filter')['search'] : ''}}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-check pt-4 mt-1">
-                                    <input type="checkbox" class="form-check-input" id="without_stock" name="without_stock" value="1" {{isset(session('entries_filter')['without_stock']) && session('entries_filter')['without_stock'] == 1 ? 'checked' : ''}}>
-                                    <label class="form-check-label" for="without_stock">{{__('main.all_products_without_stock_also')}}</label>
-                                </div>
-                            </div>
                             <div class="col-md-3 pt-4 mt-2">
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>

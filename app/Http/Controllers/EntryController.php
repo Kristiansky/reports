@@ -36,38 +36,19 @@ class EntryController extends Controller
         if(!$client){
             return redirect(route('home'));
         }
-        if(session('entries_filter')['without_stock'] && session('entries_filter')['without_stock'] == 1){
-            $entries = DB::table('stor_produse')
-                ->select('stor_produse.idp','stor_intrari.dataintrare','stor_produse.codprodusclient','stor_produse.descriere', DB::raw('SUM(stor_intrari.bucati) AS bucati'))
-                ->leftJoin('stor_categorii', 'stor_produse.idc', '=', 'stor_categorii.idc')
-                ->leftJoin('auth_groups', 'auth_groups.id', '=', 'stor_categorii.idg')
-                ->leftJoin('stor_intrari', 'stor_intrari.idp', '=', 'stor_produse.idp')
-                ->where('auth_groups.id', '=', $client->group->id)
-                ->where(function ($query){
-                    $query->where('stor_produse.idp', session('entries_filter')['search'] ? '=' : '<>', session('entries_filter')['search'])
-                        ->orWhere('stor_produse.codprodusclient', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%')
-                        ->orWhere('stor_produse.descriere', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%');
-                })
-                ->groupBy('stor_produse.idp', 'stor_intrari.dataintrare')
-                ->orderBy('stor_intrari.idp', 'asc');
-        }else{
-            $entries = DB::table('stor_intrari')
-                ->select('stor_produse.idp','stor_intrari.dataintrare','stor_produse.codprodusclient','stor_produse.descriere', DB::raw('SUM(`stor_intrari`.`bucati`) AS `bucati`'))
-                ->join('stor_produse', 'stor_intrari.idp', '=', 'stor_produse.idp')
-                ->join('stor_categorii', 'stor_produse.idc', '=', 'stor_categorii.idc')
-                ->join('auth_groups', 'auth_groups.id', '=', 'stor_categorii.idg')
-                ->where('auth_groups.id', '=', $client->group->id)
-                ->where(function ($query){
-                    if(session('entries_filter')['search']){
-                        $query->where('stor_produse.idp', '=', session('entries_filter')['search'])
-                            ->orWhere('stor_produse.codprodusclient', 'like', '%' . session('entries_filter')['search'] . '%')
-                            ->orWhere('stor_produse.descriere', 'like', '%' . session('entries_filter')['search'] . '%');
-                    }
-                })
-                ->groupBy('stor_produse.idp', 'stor_intrari.dataintrare')
-                ->orderBy('stor_intrari.idp', 'asc');
-                
-        }
+        $entries = DB::table('stor_produse')
+            ->select('stor_produse.idp','stor_intrari.dataintrare','stor_produse.codprodusclient','stor_produse.descriere', DB::raw('SUM(stor_intrari.bucati) AS bucati'))
+            ->leftJoin('stor_categorii', 'stor_produse.idc', '=', 'stor_categorii.idc')
+            ->leftJoin('auth_groups', 'auth_groups.id', '=', 'stor_categorii.idg')
+            ->leftJoin('stor_intrari', 'stor_intrari.idp', '=', 'stor_produse.idp')
+            ->where('auth_groups.id', '=', $client->group->id)
+            ->where(function ($query){
+                $query->where('stor_produse.idp', session('entries_filter')['search'] ? '=' : '<>', session('entries_filter')['search'])
+                    ->orWhere('stor_produse.codprodusclient', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%')
+                    ->orWhere('stor_produse.descriere', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%');
+            })
+            ->groupBy('stor_produse.idp', 'stor_intrari.dataintrare')
+            ->orderBy('stor_intrari.dataintrare', 'desc');
     
         if(request('export') && request('export') == '1'){
             $entries = $entries->get();

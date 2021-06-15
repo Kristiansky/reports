@@ -190,7 +190,7 @@ class ProductController extends Controller
                 'dataintrare' => $row->dataintrare,
                 'aviz' => $row->aviz,
                 'data_expirare' => $row->data_expirare,
-                'idreceptie' => $entry->idreceptie
+                'idreceptie' => $entry ? $entry->idreceptie : ''
             );
         }
         

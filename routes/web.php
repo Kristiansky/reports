@@ -22,6 +22,15 @@ use Illuminate\Support\Facades\Route;
         Route::get('/change_client', 'IndexController@changeClientView')->name('change_client_view');
         Route::post('/change_client', 'IndexController@changeClientUpdate')->name('change_client_update');
         Route::post('/per_page', 'IndexController@changePerPage')->name('change_per_page');
+    
+        /**
+         * Temporary
+        */
+        Route::post('/storage_report', 'IndexController@storageReport')->name('storage_report');
+        Route::get('/storage_report', 'IndexController@storageReport')->name('storage_report');
+        /**
+         * Temporary
+         */
     });
     Route::middleware(['auth', 'check.client'])->group(function () {
         Route::get('/', 'IndexController@index')->name('home');
@@ -35,6 +44,4 @@ use Illuminate\Support\Facades\Route;
         Route::post('/product', 'ProductController@index')->name('product.index');
         Route::get('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/entries', 'EntryController@index')->name('entries.index');
-        Route::post('/storage_report', 'IndexController@storageReport')->name('storage_report');
-        Route::get('/storage_report', 'IndexController@storageReport')->name('storage_report');
     });

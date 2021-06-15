@@ -281,6 +281,7 @@ return [
             'text'        => 'storage_report',
             'route'       => 'storage_report',
             'icon'        => 'fa fa-warehouse',
+            'can' => 'admin-menu'
         ],
         /*['header' => 'account_settings'],
         [

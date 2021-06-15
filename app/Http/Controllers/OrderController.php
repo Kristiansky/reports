@@ -356,7 +356,10 @@ class OrderController extends Controller
                     }
                 }
             }
-            return redirect(route('order.create'));
+            session()->flash('message', __('main.order_success_add'));
+            session()->flash('message_type', 'success');
+            
+            return redirect(route('order.index'));
         }
         
         $data['stroptions'] = $this->str_options;

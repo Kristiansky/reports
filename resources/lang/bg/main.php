@@ -121,4 +121,12 @@
         'sent_by_city' => 'Изпратени до град',
         'top_selling_product' => 'Най-продаван продукт',
         'more' => 'Още',
+        'order_extra_info' => 'Доп. инф. доставка',
+        'order_cart_success_remove' => 'Продукта е премахнат от списъка',
+        'order_cart_success_add' => 'Продукта е доваен в списъка',
+        'add_file' => 'Качи файл',
+        'normal' => 'Нормално',
+        'upload_file' => 'Качи файл',
+        'choose_file' => 'Избери файл',
+        'download_template' => 'Изтегли темплейт',
     ];

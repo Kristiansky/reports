@@ -14,6 +14,7 @@ use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxRead;
 
 class OrderController extends Controller
 {
@@ -160,7 +161,9 @@ class OrderController extends Controller
                 $exclude[]=$item[0]['idp'];
             }
         }
+        $idcs = array();
         foreach ($productCategories as $productCategory){
+            $idcs[] = $productCategory->idc;
             foreach ($productCategory->products->sortBy('idp') as $product){
                 if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
                     $data['products'][] = $product;
@@ -205,6 +208,154 @@ class OrderController extends Controller
         }
         
         if(request('addProduct')){
+            return redirect(route('order.create'));
+        }
+        
+        if(request('addXlsx')){
+            $validation = array(
+                'xlsx_file' => 'required|file',
+            );
+            $request->validate($validation);
+            
+            $uploadedFile = $request->file('xlsx_file');
+            $reader = new XlsxRead();
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($uploadedFile);
+            $xlsx_arr = $spreadsheet->getActiveSheet()->toArray();
+            $orders = array();
+            foreach($xlsx_arr as $key => $row){
+                if($key == 0){
+                    continue;
+                }
+                $orders[$row[0]][]=$row;
+            }
+            foreach ($orders as $order){
+                $i=0;
+                foreach ($order as $key => $row){
+                    $codcomanda = $row[0];
+                    if (empty($codcomanda)) {
+                        continue;
+                    }
+                    
+                    $product = Product::where('codprodusclient','=',$row[10])->whereIn('idc',$idcs)->first();
+                    if($product == null){
+                        $product = Product::where('descriere','=','Unknown product')->whereIn('idc', $idcs)->first();
+                    }
+        
+                    $address = $row[5] . " " . $row[6];
+                    if (
+                        empty($row[7])
+                        && (strpos($address, 'econt') !== false
+                            || strpos($address, 'еконт') !== false
+                            || strpos($address, 'Еконт') !== false
+                        )
+                    ){
+                        $office_code = 1;
+                    } elseif (empty($row[7])){
+                        $office_code = 'Automat';
+                    }else{
+                        $office_code = $row[7];
+                    }
+        
+                    if($product->idc == 153 || $product->idc == 155){
+                        $packet_table = '';
+                        if($product->idc == 153){
+                            $packet_table = 'smart_packets';
+                        }elseif($product->idc == 155){
+                            $packet_table = 'escreo_packets';
+                        }
+                        $packet_products = DB::table($packet_table)
+                            ->select('quantity','SKU2')
+                            ->where('SKU1', '=', $product->codprodusclient)
+                            ->orderBy('id', 'asc')
+                            ->get();
+            
+                        foreach ($packet_products as $packet_product){
+                            $qty = (int)$packet_product->quantity * (int)$row[12];
+                            $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
+                            $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
+                            $order_array = [
+                                'ido' => $ido,
+                                'idso' => Auth::user()->id,
+                                'idp' => $current_product->idp,
+                                'volum' => $qty,
+                                'data1' => date("Y-m-d"),
+                                'data2' => date("Y-m-d"),
+                                'datai' => date("Y-m-d H:i:s"),
+                                'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
+                                'adresa' => $address,
+                                'localitate' => $row[3],
+                                'judet' => $row[3],
+                                'perscontact' => $row[1],
+                                'codpostal' => $row[4],
+                                'telpers' => $row[2],
+                                'ramburs' => $row[13] == '' ? 0 : $row[13],
+                                'sambata' => 0,
+                                'altele' => $office_code,
+                                'status' => 'Comanda',
+                                'pret' => 0,
+                                'modplata' => $row[13] != null ? 'cashondelivery' : '',
+                                'curier' => $row[8],
+                                'ship_instructions' => $row[6],
+                                'idextern' => $codcomanda,
+                            ];
+                
+                            if($i==0){
+                                $idcomanda = DB::table('stor_iesiri')->insertGetId(
+                                    $order_array
+                                );
+                                DB::table('stor_iesiri')
+                                    ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
+                            }else{
+                                DB::table('stor_iesiri')->insert(
+                                    $order_array
+                                );
+                            }
+                            $i++;
+                        }
+                    }else{
+                        $qty = (int)$row[12];
+                        $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
+                        $order_array = [
+                            'ido' => $ido,
+                            'idso' => Auth::user()->id,
+                            'idp' => $product->idp,
+                            'volum' => $qty,
+                            'data1' => date("Y-m-d"),
+                            'data2' => date("Y-m-d"),
+                            'datai' => date("Y-m-d H:i:s"),
+                            'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
+                            'adresa' => $address,
+                            'localitate' => $row[3],
+                            'judet' => $row[3],
+                            'perscontact' => $row[1],
+                            'codpostal' => $row[4],
+                            'telpers' => $row[2],
+                            'ramburs' => $row[13] != null ? $row[13] : 0,
+                            'sambata' => 0,
+                            'altele' => $office_code,
+                            'status' => 'Comanda',
+                            'pret' => 0,
+                            'modplata' => $row[13] != null ? 'cashondelivery' : '',
+                            'curier' => $row[8],
+                            'ship_instructions' => $row[6] != null ? $row[6] : '',
+                        ];
+            
+                        if($i==0){
+                            $idcomanda = DB::table('stor_iesiri')->insertGetId(
+                                $order_array
+                            );
+                            DB::table('stor_iesiri')
+                                ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
+                        }else{
+                            DB::table('stor_iesiri')->insert(
+                                $order_array
+                            );
+                        }
+                        $i++;
+                    }
+                }
+            }
             return redirect(route('order.create'));
         }
         

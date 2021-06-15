@@ -10,47 +10,77 @@
 @section('content')
     <div class="row">
         <div class="col-5">
-            <div class="card">
-                <div class="card-body">
-                    <form method="post" action="{{route('order.create')}}">
-                        @csrf
-                        @method('POST')
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="product"><code>*</code>{{__('main.choose_product')}}</label>
-                                    <select class="form-control form-control-sm select2 @error('product') is-invalid @enderror" id="product" name="product" required>
-                                        <option value="">{{ __('main.choose') }}</option>
-                                        @foreach($products as $product)
-                                            <option value="{{ $product->idp }}">{{$product->codprodusclient}}: {{$product->descriere}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('product')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="qty">
-                                        <code>*</code>
-                                        {{__('main.qty')}} |
-                                        {{__('main.stock_of')}}
-                                        <span id="text_stock_of_idp"></span>:
-                                        <span id="text_stock_of_qty"></span>
-                                    </label>
-                                    <input id="qty" type="number" name="qty" class="form-control form-control-sm @error('qty') is-invalid @enderror" placeholder="{{__('main.qty')}}" min="1" max="1" required autocomplete="off">
-                                    @error('qty')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" name="addProduct" value="1" class="btn btn-primary">{{__('main.add')}}</button>
-                    </form>
+            <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul class="nav nav-tabs" id="order-tabs-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="order-tabs-normal-tab" data-toggle="pill" href="#order-tabs-normal" role="tab" aria-controls="order-tabs-normal" aria-selected="true">{{__('main.normal')}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="order-tabs-xlsx-tab" data-toggle="pill" href="#order-tabs-xlsx" role="tab" aria-controls="order-tabs-xlsx" aria-selected="false">{{__('main.upload_file')}}</a>
+                        </li>
+                    </ul>
                 </div>
+                <div class="card-body">
+                    <div class="tab-content" id="order-tabs-tabContent">
+                        <div class="tab-pane fade active show" id="order-tabs-normal" role="tabpanel" aria-labelledby="order-tabs-normal">
+                            <form method="post" action="{{route('order.create')}}">
+                                @csrf
+                                @method('POST')
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="product"><code>*</code>{{__('main.choose_product')}}</label>
+                                            <select class="form-control form-control-sm select2 @error('product') is-invalid @enderror" id="product" name="product" required>
+                                                <option value="">{{ __('main.choose') }}</option>
+                                                @foreach($products as $product)
+                                                    <option value="{{ $product->idp }}">{{$product->codprodusclient}}: {{$product->descriere}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('product')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="qty">
+                                                <code>*</code>
+                                                {{__('main.qty')}} |
+                                                {{__('main.stock_of')}}
+                                                <span id="text_stock_of_idp"></span>:
+                                                <span id="text_stock_of_qty"></span>
+                                            </label>
+                                            <input id="qty" type="number" name="qty" class="form-control form-control-sm @error('qty') is-invalid @enderror" placeholder="{{__('main.qty')}}" min="1" max="1" required autocomplete="off">
+                                            @error('qty')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" name="addProduct" value="1" class="btn btn-primary">{{__('main.add')}}</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="order-tabs-xlsx" role="tabpanel" aria-labelledby="order-tabs-xlsx">
+                            <form action="{{route('order.create')}}" method="post" enctype="multipart/form-data" >
+                                @csrf
+                                @method('POST')
+                                <div class="form-group">
+                                    <label for="xlsx_file">{{__('main.choose_file')}}</label>
+                                    <input type="file" class="form-control-file form-control-sm @error('xlsx_file') is-invalid @enderror" id="xlsx_file" name="xlsx_file" required>
+                                    @error('xlsx_file')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <button type="submit" name="addXlsx" value="1" class="btn btn-primary">{{__('main.submit')}}</button>
+                                <a href="{{ asset('xlsx/example_order.xlsx') }}" class="btn btn-success float-right"><i class="fa fa-download"></i> {{__('main.download_template')}}</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
             </div>
         </div>
         <div class="col-7">

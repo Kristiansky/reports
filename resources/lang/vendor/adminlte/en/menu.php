@@ -20,4 +20,11 @@ return [
     'bulgarian' => 'Български',
     'locale' => 'LOCALE',
     'dashboard' => 'Dashboard',
+    'current_client' => session('client') ? session('client')->NumeClient1 .' ['. session('client')->group->name . ']' : '',
+    'change_client' => 'Change client',
+    'place_order' => 'Place order',
+    'orders' => 'Order',
+    'stock' => 'Stock',
+    'entries' => 'Entries',
+    'storage_report' => 'Storage report',
 ];

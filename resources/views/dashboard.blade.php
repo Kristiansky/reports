@@ -297,6 +297,7 @@
                     },
                     options: {
                         responsive: true,
+						maintainAspectRatio: false,
                     }
                 });
             @endif
@@ -323,6 +324,7 @@
                     },
                     options: {
                         responsive: true,
+						maintainAspectRatio: false,
                     }
                 });
             @endif

@@ -64,6 +64,11 @@
                             </form>
                         </div>
                         <div class="tab-pane fade" id="order-tabs-xlsx" role="tabpanel" aria-labelledby="order-tabs-xlsx">
+                            <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-exclamation-triangle"></i> {{__('main.alert')}}</h5>
+                                {{__('main.alert_about_order_file')}}
+                            </div>
                             <form action="{{route('order.create')}}" method="post" enctype="multipart/form-data" >
                                 @csrf
                                 @method('POST')

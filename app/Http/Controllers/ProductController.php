@@ -40,9 +40,9 @@ class ProductController extends Controller
         }
         
         //Todo: Enable No stock filter
-//        $entries = DB::table('stor_intrari')
-//            ->select('stor_intrari.idp', 'dataintrare', 'data_expirare', DB::raw('SUM(bucati) AS suma'))
-//            ->groupBy('stor_intrari.idp');
+        $entries = DB::table('stor_intrari')
+            ->select('stor_intrari.idp', 'dataintrare', 'data_expirare', DB::raw('SUM(bucati) AS suma'))
+            ->groupBy('stor_intrari.idp');
 //
 //        $sales_expediat = DB::table('stor_iesiri')
 //            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
@@ -72,9 +72,9 @@ class ProductController extends Controller
                         ->whereBetween('entries.dataintrare', [session('product_filter')['entry_from_date'], session('product_filter')['entry_to_date']]);
                 }
             })
-//            ->leftJoinSub($entries, 'entries', function ($join) {
-//                $join->on('entries.idp', '=', 'stor_produse.idp');
-//            })
+            ->leftJoinSub($entries, 'entries', function ($join) {
+                $join->on('entries.idp', '=', 'stor_produse.idp');
+            })
 //            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
 //                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
 //            })

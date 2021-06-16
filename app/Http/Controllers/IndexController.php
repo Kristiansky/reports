@@ -161,7 +161,9 @@
                 })
                 ->select(
                     DB::raw('COUNT(idcomanda) as sent_orders'),
-                    'localitate'
+                    'localitate',
+                    'tara',
+                    'curier'
                 )
                 ->groupBy('idcomanda')
             ;
@@ -202,6 +204,37 @@
                 ->get()
             ;
             $data['top_products'] = $top_products;
+    
+            $countries = DB::table(DB::raw("({$sub->toSql()}) as sub"))
+                ->mergeBindings($sub->getQuery())
+                ->select(
+                    DB::raw('COUNT(tara) as orders_count'),
+                    DB::raw('tara as country')
+                )
+                ->groupBy('country')
+                ->orderBy('orders_count', 'DESC')
+                ->get()
+            ;
+            
+            if($countries && $countries->count() > 1){
+                $data['countries'] = $countries;
+            }
+    
+            $couriers = DB::table(DB::raw("({$sub->toSql()}) as sub"))
+                ->mergeBindings($sub->getQuery())
+                ->select(
+                    DB::raw('COUNT(curier) as orders_count'),
+                    DB::raw('curier as courier')
+                )
+                ->groupBy('curier')
+                ->orderBy('orders_count', 'DESC')
+                ->get()
+            ;
+            
+            if($couriers && $couriers->count() > 1){
+                $data['couriers'] = $couriers;
+            }
+            
             return view('dashboard', $data);
         }
         

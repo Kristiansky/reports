@@ -40,12 +40,23 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <canvas id="sent_count" width="100%" height="23"></canvas>
-        </div>
-        <div class="col-md-6">
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">{{__('main.top_selling_product')}}</h3>
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i> {{__('main.orders_data')}}
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="height: 350px">
+                    <canvas id="sent_count"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <div class="@if(isset($countries) || isset($couriers)) col-md-3 @else col-md-6 @endif">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-box-open"></i> {{__('main.top_selling_product')}}</h3>
                     <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header -->
@@ -61,6 +72,38 @@
             </div>
             <!-- /.card -->
         </div>
+        @if(isset($countries) || isset($couriers))
+            <div class="col-md-3">
+                @if(isset($countries))
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie"></i> {{__('main.country_data')}}
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="height: 220px">
+                            <canvas id="country_data"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                @endif
+                @if(isset($couriers))
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-dolly"></i> {{__('main.courier_data')}}
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="height: 220px">
+                            <canvas id="courier_data"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                @endif
+            </div>
+        @endif
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-6 col-6">
@@ -93,8 +136,21 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-lg-12">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-building"></i> {{__('main.city_data')}}
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="height: 330px">
+                            <canvas id="city_data"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
             </div>
-            <canvas id="city_data" width="100%" height="40"></canvas>
         </div>
     </div>
 @stop
@@ -164,6 +220,7 @@
 				},
 				options: {
 					responsive: true,
+					maintainAspectRatio: false,
 					scales: {
 						yAxes: [{
 							ticks: {
@@ -203,6 +260,7 @@
 				},
 				options: {
 					responsive: true,
+					maintainAspectRatio: false,
 					scales: {
 						yAxes: [{
 							ticks: {
@@ -216,6 +274,58 @@
 					},
 				}
 			});
+            @if(isset($countries))
+                var ctx = document.getElementById('country_data').getContext('2d');
+                var country_pie_chart = new Chart(ctx,{
+                    type: 'pie',
+                    data: {
+                        labels: [
+                        	@foreach($countries as $country)
+                            '{{$country->country}}',
+                            @endforeach
+                        ],
+                        datasets: [
+                            {
+                                data: [
+                                    @foreach($countries as $country)
+										'{{$country->orders_count}}',
+                                    @endforeach
+                                ],
+                                backgroundColor : ['#00a65a', '#f39c12', '#00c0ef', '#f56954', '#3c8dbc', '#d2d6de'],
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            @endif
+            @if(isset($couriers))
+                var ctx = document.getElementById('courier_data').getContext('2d');
+                var courier_pie_chart = new Chart(ctx,{
+                    type: 'pie',
+                    data: {
+                        labels: [
+                        	@foreach($couriers as $courier)
+                            '{{$courier->courier}}',
+                            @endforeach
+                        ],
+                        datasets: [
+                            {
+                                data: [
+                                    @foreach($couriers as $courier)
+										'{{$courier->orders_count}}',
+                                    @endforeach
+                                ],
+                                backgroundColor : ['#3c8dbc', '#00a65a', '#f56954', '#f39c12', '#00c0ef'],
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            @endif
 			moment.locale('bg');
 			$('#daterange-btn').daterangepicker(
 				{

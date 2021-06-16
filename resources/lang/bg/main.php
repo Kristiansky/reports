@@ -129,4 +129,8 @@
         'upload_file' => 'Качи файл',
         'choose_file' => 'Избери файл',
         'download_template' => 'Изтегли темплейт',
+        'orders_data' => 'Данни за поръчки',
+        'courier_data' => 'Данни за куриери',
+        'country_data' => 'Данни за държави',
+        'city_data' => 'Данни за градове',
     ];

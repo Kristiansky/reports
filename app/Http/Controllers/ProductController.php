@@ -43,19 +43,19 @@ class ProductController extends Controller
         $entries = DB::table('stor_intrari')
             ->select('stor_intrari.idp', 'dataintrare', 'data_expirare', DB::raw('SUM(bucati) AS suma'))
             ->groupBy('stor_intrari.idp');
-//
-//        $sales_expediat = DB::table('stor_iesiri')
-//            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
-//            ->where('status', '=', 'expediat')
-//            ->groupBy('stor_iesiri.idp');
+
+        $sales_expediat = DB::table('stor_iesiri')
+            ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
+            ->where('status', '=', 'expediat')
+            ->groupBy('stor_iesiri.idp');
         
         $products = Product::whereIn('idc', $idc)
             ->select(
                 'stor_produse.idp as idp',
                 'stor_produse.codprodusclient as codprodusclient',
                 'stor_produse.descriere as descriere',
-                'stor_produse.codbare as codbare'
-//                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales_expediat.suma, 0)) as current_total_expediat')
+                'stor_produse.codbare as codbare',
+                DB::raw('(COALESCE(entries.suma, 0) - COALESCE(sales_expediat.suma, 0)) as current_total_expediat')
             )
             ->where(function ($query){
                 if(session('product_filter')['search'] && session('product_filter')['search'] != ''){
@@ -75,10 +75,10 @@ class ProductController extends Controller
             ->leftJoinSub($entries, 'entries', function ($join) {
                 $join->on('entries.idp', '=', 'stor_produse.idp');
             })
-//            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
-//                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
-//            })
-//            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
+            ->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
+                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
+            })
+            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
             ->orderBy('stor_produse.idp', 'asc')
         ;
     

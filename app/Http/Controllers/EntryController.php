@@ -29,7 +29,20 @@ class EntryController extends Controller
             return redirect(route('entries.index'));
         }elseif (request('reset') && request('reset') == '1'){
             session()->forget('entries_filter');
+            session()->forget('entries_sort');
+            session()->forget('entries_sort_direction');
             return redirect(route('entries.index'));
+        }
+    
+        if(request('sort')){
+            session()->put('entries_sort', request('sort'));
+            session()->put('entries_sort_direction', request('direction'));
+            return redirect(route('entries.index'));
+        }
+    
+        if(!session('entries_sort')){
+            session()->put('entries_sort', 'dataintrare');
+            session()->put('entries_sort_direction', 'desc');
         }
         
         $client = session('client');
@@ -48,7 +61,11 @@ class EntryController extends Controller
                     ->orWhere('stor_produse.descriere', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%');
             })
             ->groupBy('stor_produse.idp', 'stor_intrari.dataintrare')
-            ->orderBy('stor_intrari.dataintrare', 'desc');
+            ->orderBy(
+                session('entries_sort') ? session('entries_sort') : 'dataintrare',
+                session('entries_sort_direction') ? session('entries_sort_direction') : 'desc'
+            )
+        ;
     
         if(request('export') && request('export') == '1'){
             $entries = $entries->get();

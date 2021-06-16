@@ -121,15 +121,54 @@
                     <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
                         <thead>
                         <tr>
-                            <th width="7%">{{__('main.product_id')}}</th>
-                            <th width="10%">{{__('main.sku')}}</th>
-                            <th width="10%">{{__('main.barcode')}}</th>
-                            <th width="20%">{{__('main.name')}}</th>
-                            <th width="5%">{{__('main.stock')}}</th>
+                            @php
+                                if(session('products_sort_direction') && session('products_sort_direction') == 'desc'){
+                                    $direction = 'asc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                }elseif(session('products_sort_direction') && session('products_sort_direction') == 'asc'){
+                                    $direction = 'desc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                }else{
+                                    $direction = 'asc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                }
+                            @endphp
+
+                            <th width="9%">
+                                <a href="?sort=idp&direction={{$direction}}">
+                                    @if(session('products_sort') && session('products_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
+                                </a>
+                            </th>
+                            <th width="8%">
+                                <a href="?sort=codprodusclient&direction={{$direction}}">
+                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
+                                </a>
+                            </th>
+                            <th width="10%">
+                                <a href="?sort=codbare&direction={{$direction}}">
+                                    @if(session('products_sort') && session('products_sort') == 'codbare'){!!$icon!!}@endif {{__('main.barcode')}}
+                                </a>
+                            </th>
+                            <th width="20%">
+                                <a href="?sort=descriere&direction={{$direction}}">
+                                    @if(session('products_sort') && session('products_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
+                                </a>
+                            </th>
+                            <th width="5%">
+{{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
+{{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
+                                        {{__('main.stock')}}
+{{--                                </a>--}}
+                            </th>
                             <th width="5%">{{__('main.incl_new')}}</th>
                             <th width="13%">{{__('main.lots')}}</th>
                             <th width="10%">{{__('main.lot_expiration')}}</th>
-                            <th width="5%">{{__('main.damaged')}}</th>
+                            <th width="5%">
+{{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
+{{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
+                                        {{__('main.damaged')}}
+{{--                                </a>--}}
+                            </th>
                             <th width="15%">{{__('main.actions')}}</th>
                         </tr>
                         </thead>

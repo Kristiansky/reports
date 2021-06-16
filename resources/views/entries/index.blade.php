@@ -71,11 +71,44 @@
                     <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
                         <thead>
                         <tr>
-                            <th>{{__('main.product_id')}}</th>
-                            <th>{{__('main.sku')}}</th>
-                            <th>{{__('main.name')}}</th>
-                            <th>{{__('main.qty')}}</th>
-                            <th>{{__('main.entry_date')}}</th>
+                            @php
+                                if(session('entries_sort_direction') && session('entries_sort_direction') == 'desc'){
+                                    $direction = 'asc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                }elseif(session('entries_sort_direction') && session('entries_sort_direction') == 'asc'){
+                                    $direction = 'desc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                }else{
+                                    $direction = 'desc';
+                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                }
+                            @endphp
+
+                            <th>
+                                <a href="?sort=idp&direction={{$direction}}">
+                                    @if(session('entries_sort') && session('entries_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
+                                </a>
+                            </th>
+                            <th>
+                                <a href="?sort=codprodusclient&direction={{$direction}}">
+                                    @if(session('entries_sort') && session('entries_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
+                                </a>
+                            </th>
+                            <th>
+                                <a href="?sort=descriere&direction={{$direction}}">
+                                    @if(session('entries_sort') && session('entries_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
+                                </a>
+                            </th>
+                            <th>
+                                <a href="?sort=bucati&direction={{$direction}}">
+                                    @if(session('entries_sort') && session('entries_sort') == 'bucati'){!!$icon!!}@endif {{__('main.qty')}}
+                                </a>
+                            </th>
+                            <th>
+                                <a href="?sort=dataintrare&direction={{$direction}}">
+                                    @if(session('entries_sort') && session('entries_sort') == 'dataintrare'){!!$icon!!}@endif {{__('main.entry_date')}}
+                                </a>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>

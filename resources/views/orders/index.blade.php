@@ -122,16 +122,66 @@
                     <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
                         <thead>
                         <tr>
-                            <th width="5%">{{__('main.order_id')}}</th>
-                            <th width="5%">{{__('main.external_id')}}</th>
-                            <th width="7%">{{__('main.order_in_date')}}</th>
-                            <th width="8%">{{__('main.order_sent_date')}}</th>
-                            <th width="13%">{{__('main.to')}}</th>
-                            <th width="12%">{{__('main.status')}}</th>
-                            <th width="5%">{{__('main.qty')}}</th>
+
+                            @php
+                            if(session('orders_sort_direction') && session('orders_sort_direction') == 'desc'){
+                                $direction = 'asc';
+                                $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                            }elseif(session('orders_sort_direction') && session('orders_sort_direction') == 'asc'){
+                                $direction = 'desc';
+                                $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                            }else{
+                                $direction = 'desc';
+                                $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                            }
+                            @endphp
+
+                            <th width="5%">
+                                <a href="?sort=idcomanda&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'idcomanda'){!!$icon!!}@endif {{__('main.order_id')}}
+                                </a>
+                            </th>
+                            <th width="5%">
+                                <a href="?sort=idextern&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'idextern'){!!$icon!!}@endif {{__('main.external_id')}}
+                                </a>
+                            </th>
+                            <th width="7%">
+                                <a href="?sort=datai&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'datai'){!!$icon!!}@endif {{__('main.order_in_date')}}
+                                </a>
+                            </th>
+                            <th width="8%">
+                                <a href="?sort=data_procesare_comanda&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'data_procesare_comanda'){!!$icon!!}@endif {{__('main.order_sent_date')}}
+                                </a>
+                            </th>
+                            <th width="13%">
+                                <a href="?sort=perscontact&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'perscontact'){!!$icon!!}@endif {{__('main.to')}}
+                                </a>
+                            </th>
+                            <th width="12%">
+                                <a href="?sort=status&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'status'){!!$icon!!}@endif {{__('main.status')}}
+                                </a>
+                            </th>
+                            <th width="5%">
+                                <a href="?sort=qty&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'qty'){!!$icon!!}@endif {{__('main.qty')}}
+                                </a>
+                            </th>
                             <th width="2%"></th>
-                            <th width="5%">{{__('main.courier')}}</th>
-                            <th width="6%">{{__('main.awb')}}</th>
+                            <th width="5%">
+                                <a href="?sort=curier&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'curier'){!!$icon!!}@endif {{__('main.courier')}}
+                                </a>
+                            </th>
+                            <th width="6%">
+                                <a href="?sort=awb&direction={{$direction}}">
+                                    @if(session('orders_sort') && session('orders_sort') == 'awb'){!!$icon!!}@endif {{__('main.awb')}}
+                                </a>
+                            </th>
                             <th width="20%">{{__('main.status_courier')}}</th>
                             <th width="12%">{{__('main.actions')}}</th>
                         </tr>

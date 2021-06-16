@@ -36,7 +36,20 @@ class ProductController extends Controller
             return redirect(route('product.index'));
         }elseif (request('reset') && request('reset') == '1'){
             session()->forget('product_filter');
+            session()->forget('products_sort');
+            session()->forget('products_sort_direction');
             return redirect(route('product.index'));
+        }
+    
+        if(request('sort')){
+            session()->put('products_sort', request('sort'));
+            session()->put('products_sort_direction', request('direction'));
+            return redirect(route('product.index'));
+        }
+        
+        if(!session('products_sort')){
+            session()->put('products_sort', 'idp');
+            session()->put('products_sort_direction', 'asc');
         }
         
         //Todo: Enable No stock filter
@@ -79,7 +92,10 @@ class ProductController extends Controller
 //                $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
 //            })
 //            ->having('current_total_expediat', '>', !session('product_filter')['without_stock'] && session('product_filter')['without_stock'] == 0 ? 0 : -1)
-            ->orderBy('stor_produse.idp', 'asc')
+            ->orderBy(
+                session('products_sort') ? session('products_sort') : 'stor_produse.idp',
+                session('products_sort_direction') ? session('products_sort_direction') : 'asc'
+            )
         ;
     
         if(request('export') && request('export') == '1'){

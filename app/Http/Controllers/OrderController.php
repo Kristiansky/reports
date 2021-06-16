@@ -47,8 +47,22 @@ class OrderController extends Controller
             return redirect(route('order.index'));
         }elseif (request('reset') && request('reset') == '1'){
             session()->forget('order_filter');
+            session()->forget('orders_sort');
+            session()->forget('orders_sort_direction');
             return redirect(route('order.index'));
         }
+        
+        if(request('sort')){
+            session()->put('orders_sort', request('sort'));
+            session()->put('orders_sort_direction', request('direction'));
+            return redirect(route('order.index'));
+        }
+        
+        if(!session('orders_sort')){
+            session()->put('orders_sort', 'idcomanda');
+            session()->put('orders_sort_direction', 'desc');
+        }
+        
         $orders = Order::where('ido', '=', $ido)
             ->where(function ($query){
                 if(session('order_filter')['search'] && session('order_filter')['search'] != ''){
@@ -99,7 +113,10 @@ class OrderController extends Controller
                 DB::raw('SUM(volum) as qty')
             )
             ->groupBy('idcomanda')
-            ->orderBy('idie', 'desc');
+            ->orderBy(
+                session('orders_sort') ? session('orders_sort') : 'idcomanda',
+                session('orders_sort_direction') ? session('orders_sort_direction') : 'desc'
+            );
     
         if(request('export') && request('export') == '1'){
             $orders = $orders->get();

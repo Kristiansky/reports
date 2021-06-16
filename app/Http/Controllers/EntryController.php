@@ -24,6 +24,8 @@ class EntryController extends Controller
             $entries_filter = array(
                 'search' => request('search'),
                 'without_stock' => request('without_stock'),
+                'entry_from_date' => request('entry_from_date'),
+                'entry_to_date' => request('entry_to_date'),
             );
             session()->put('entries_filter', $entries_filter);
             return redirect(route('entries.index'));
@@ -41,7 +43,7 @@ class EntryController extends Controller
         }
     
         if(!session('entries_sort')){
-            session()->put('entries_sort', 'dataintrare');
+            session()->put('entries_sort', 'idp');
             session()->put('entries_sort_direction', 'desc');
         }
         
@@ -56,9 +58,20 @@ class EntryController extends Controller
             ->leftJoin('stor_intrari', 'stor_intrari.idp', '=', 'stor_produse.idp')
             ->where('auth_groups.id', '=', $client->group->id)
             ->where(function ($query){
-                $query->where('stor_produse.idp', session('entries_filter')['search'] ? '=' : '<>', session('entries_filter')['search'])
-                    ->orWhere('stor_produse.codprodusclient', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%')
-                    ->orWhere('stor_produse.descriere', session('entries_filter')['search'] ? 'like' : 'not like', '%' . session('entries_filter')['search'] . '%');
+                if(session('entries_filter')['search'] && session('entries_filter')['search'] != ''){
+                    $query->where('stor_produse.idp', '=', session('entries_filter')['search'])
+                        ->orWhere('codprodusclient', 'like', '%' . session('entries_filter')['search'] . '%')
+                        ->orWhere('descriere', 'like', '%' . session('entries_filter')['search'] . '%');
+                }
+                if((session('entries_filter')['entry_from_date'] && session('entries_filter')['entry_from_date']!="") && !session('entries_filter')['entry_to_date']){
+                    $query->where('stor_intrari.dataintrare', '!=', '0000-00-00')
+                        ->where('stor_intrari.dataintrare', '>=', session('entries_filter')['entry_from_date']);
+                }elseif((session('entries_filter')['entry_from_date'] && session('entries_filter')['entry_from_date']!="") && (session('entries_filter')['entry_to_date'] && session('entries_filter')['entry_to_date']!="")){
+                    $query->where('stor_intrari.dataintrare', '!=', '0000-00-00')
+                        ->where('stor_intrari.dataintrare', '!=', '')
+                        ->where('stor_intrari.dataintrare', '>=', session('entries_filter')['entry_from_date'])
+                        ->whereBetween('stor_intrari.dataintrare', [session('entries_filter')['entry_from_date'], session('entries_filter')['entry_to_date']]);
+                }
             })
             ->groupBy('stor_produse.idp', 'stor_intrari.dataintrare')
             ->orderBy(

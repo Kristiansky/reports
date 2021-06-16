@@ -24,6 +24,32 @@
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" autocomplete="off" placeholder="{{__('main.search')}}" value="{{isset(session('entries_filter')['search']) ? session('entries_filter')['search'] : ''}}">
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="entry_from_date">
+                                        {{__('main.entry_from_date')}}:
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-sm" name="entry_from_date" id="entry_from_date" autocomplete="off" placeholder="{{__('main.entry_from_date')}}" value="{{isset(session('entries_filter')['entry_from_date']) ? session('entries_filter')['entry_from_date'] : ''}}">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="entry_to_date">
+                                        {{__('main.entry_to_date')}}:
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-sm" name="entry_to_date" id="entry_to_date" autocomplete="off" placeholder="{{__('main.entry_to_date')}}" value="{{isset(session('entries_filter')['entry_to_date']) ? session('entries_filter')['entry_to_date'] : ''}}">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-3 pt-4 mt-2">
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
@@ -84,27 +110,27 @@
                                 }
                             @endphp
 
-                            <th>
+                            <th width="15%">
                                 <a href="?sort=idp&direction={{$direction}}">
                                     @if(session('entries_sort') && session('entries_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
                                 </a>
                             </th>
-                            <th>
+                            <th width="10%">
                                 <a href="?sort=codprodusclient&direction={{$direction}}">
                                     @if(session('entries_sort') && session('entries_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
                                 </a>
                             </th>
-                            <th>
+                            <th width="50%">
                                 <a href="?sort=descriere&direction={{$direction}}">
                                     @if(session('entries_sort') && session('entries_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
                                 </a>
                             </th>
-                            <th>
+                            <th width="10%">
                                 <a href="?sort=bucati&direction={{$direction}}">
                                     @if(session('entries_sort') && session('entries_sort') == 'bucati'){!!$icon!!}@endif {{__('main.qty')}}
                                 </a>
                             </th>
-                            <th>
+                            <th width="15%">
                                 <a href="?sort=dataintrare&direction={{$direction}}">
                                     @if(session('entries_sort') && session('entries_sort') == 'dataintrare'){!!$icon!!}@endif {{__('main.entry_date')}}
                                 </a>
@@ -153,6 +179,16 @@
 @section('js')
     <script>
 		$(document).ready(function () {
+			$('#entry_from_date, #entry_to_date').datetimepicker({
+				format: 'YYYY-MM-DD',
+				icons:
+					{
+						previous: 'fas fa-angle-left',
+						next: 'fas fa-angle-right',
+						up: 'fas fa-angle-up',
+						down: 'fas fa-angle-down'
+					}
+			});
 		});
     </script>
 @stop

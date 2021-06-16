@@ -44,4 +44,5 @@ use Illuminate\Support\Facades\Route;
         Route::post('/product', 'ProductController@index')->name('product.index');
         Route::get('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/entries', 'EntryController@index')->name('entries.index');
+        Route::post('/get_top_products', 'IndexController@getAllTopProducts');
     });

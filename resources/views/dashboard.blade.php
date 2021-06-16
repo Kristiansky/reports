@@ -49,12 +49,15 @@
                     <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" id="top_products_list">
                     @foreach($top_products as $product)
                         <p>{{$product->product_name}} <strong>{{$product->sold_products}}</strong></p>
                     @endforeach
                 </div>
                 <!-- /.card-body -->
+                <div class="card-footer text-center">
+                    <button class="btn btn-sm btn-success" id="load_more_top_selling">{{__('main.load_more')}} <i class="fas fa-arrow-circle-down"></i></button>
+                </div>
             </div>
             <!-- /.card -->
         </div>
@@ -244,6 +247,33 @@
 					$('#daterange_picker [type="submit"]').trigger('click');
 				}
 			);
+			var offset = 10;
+			$('#load_more_top_selling').on('click', function () {
+				$.ajax({
+					url: 'get_top_products',
+                    type:"POST",
+                    data:{
+                        'offset': offset,
+                        '_token': '{{ csrf_token() }}'
+                    },
+					success:function(response){
+						var list_html = '';
+						response.forEach(function(element){
+							list_html +='' +
+                                '<p>' +
+                                    element.product_name +
+                                    '<strong>' +
+                                        element.sold_products +
+                                    '</strong>' +
+                                '</p>';
+                        });
+                        $('#top_products_list').append(
+							list_html
+                        );
+						offset = offset + 10;
+					}
+				});
+			});
 		});
     </script>
 @stop

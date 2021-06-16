@@ -368,4 +368,34 @@
             $years = range(date("Y"),2017);
             return view('storage_report', compact('months', 'years', 'days_data', 'totals'));
         }
+        
+        public function getAllTopProducts(Request $request){
+            $client = session('client');
+            $ido = User::where('group_id','=',$client->group->id)->where('name','=',$client->group->name)->firstOrFail()->id;
+    
+            $top_products = Order::where('ido', '=', $ido)
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_start'] && session('dashboard_filter')['range_start'] != ''){
+                        $query->where(DB::raw('DATE(data_procesare_comanda)'), '>=', session('dashboard_filter')['range_start']);
+                    }
+                })
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_end'] && session('dashboard_filter')['range_end'] != ''){
+                        $query->where( DB::raw('DATE(data_procesare_comanda)'), '<=', session('dashboard_filter')['range_end']);
+                    }
+                })
+                ->select(
+                    DB::raw('COUNT(stor_iesiri.idp) as sold_products'),
+                    'stor_iesiri.idp',
+                    'stor_produse.descriere as product_name'
+                )
+                ->leftJoin('stor_produse', 'stor_iesiri.idp', '=', 'stor_produse.idp')
+                ->groupBy('idp')
+                ->orderBy('sold_products', 'DESC')
+                ->offset($request->get('offset'))
+                ->limit(10)
+                ->get()
+            ;
+            return response()->json($top_products);
+        }
     }

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +262,8 @@
       <workItem from="1623219609304" duration="2547000" />
       <workItem from="1623237319579" duration="1200000" />
       <workItem from="1623651623482" duration="2438000" />
-      <workItem from="1623739978713" duration="21825000" />
+      <workItem from="1623739978713" duration="22052000" />
+      <workItem from="1623823958765" duration="3354000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -364,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623768382976</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Returned on colors fix">
+      <created>1623768875487</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1623768875487</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,6 +410,7 @@
     <MESSAGE value="Adding order from XLSX File" />
     <MESSAGE value="Storage report link secured" />
     <MESSAGE value="Bug fixes on the product modal, duplicated rows of entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes on the product modal, duplicated rows of entry" />
+    <MESSAGE value="Returned on colors fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Returned on colors fix" />
   </component>
 </project>

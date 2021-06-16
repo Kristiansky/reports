@@ -47,7 +47,7 @@
                     </h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body" style="height: 350px">
+                <div class="card-body pb-0" style="height: 350px">
                     <canvas id="sent_count"></canvas>
                 </div>
                 <!-- /.card-body -->
@@ -144,7 +144,7 @@
                             </h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body" style="height: 330px">
+                        <div class="card-body pb-0" style="height: 328px">
                             <canvas id="city_data"></canvas>
                         </div>
                         <!-- /.card-body -->
@@ -216,6 +216,34 @@
 							'rgba(255, 193, 7,1)',
 						],
 						borderWidth: 1
+					},{
+						label: '{{__('main.sent_products')}}',
+						data: [
+                            @foreach($dates as $key => $date)
+                            {{$date['sent_product_count']}},
+                            @endforeach
+						],
+						backgroundColor: [
+							'rgba(0,107,255, 0.2)',
+						],
+						borderColor: [
+							'rgb(0,107,255)',
+						],
+						borderWidth: 1
+					},{
+						label: '{{__('main.returned_products')}}',
+						data: [
+                            @foreach($dates as $key => $date)
+                            {{$date['returned_product_count']}},
+                            @endforeach
+						],
+						backgroundColor: [
+							'rgba(255,59,0, 0.2)',
+						],
+						borderColor: [
+							'rgb(255,59,0)',
+						],
+						borderWidth: 1
 					}]
 				},
 				options: {
@@ -266,12 +294,22 @@
 							ticks: {
 								beginAtZero:true
 							}
+						}],
+						xAxes: [{
+							ticks: {
+								autoSkip: false,
+								fontSize: 10,
+								padding: 0
+							}
 						}]
 					},
 					tooltips: {
 						mode: 'nearest',
 						intersect: false,
 					},
+                    legend: {
+						display: false
+                    },
 				}
 			});
             @if(isset($countries))

@@ -96,12 +96,15 @@
                 $days[$dt->format("Y-m-d")] = array(
                     'sent_count' => 0,
                     'returned_count' => 0,
+                    'sent_product_count' => 0,
+                    'returned_product_count' => 0,
                 );
             }
             
             foreach ($orders_sent as $order){
                 $days[$order->date_processed]['sent_count'] = (int)$days[$order->date_processed]['sent_count'] + 1;
             }
+            
             $orders_returned_count = Order::where('ido', '=', $ido)
                 ->where(function ($query){
                     if(session('dashboard_filter')['range_start'] && session('dashboard_filter')['range_start'] != ''){
@@ -144,6 +147,56 @@
             
             foreach ($orders_returned as $order){
                 $days[$order->ceretur]['returned_count'] = (int)$days[$order->ceretur]['returned_count'] + 1;
+            }
+            
+            $sent_products = Order::where('ido', '=', $ido)
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_start'] && session('dashboard_filter')['range_start'] != ''){
+                        $query->where(DB::raw('DATE(data_procesare_comanda)'), '>=', session('dashboard_filter')['range_start']);
+                    }
+                })
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_end'] && session('dashboard_filter')['range_end'] != ''){
+                        $query->where( DB::raw('DATE(data_procesare_comanda)'), '<=', session('dashboard_filter')['range_end']);
+                    }
+                })
+                ->select(
+                    DB::raw('DATE(data_procesare_comanda) as date_processed'),
+                    'stor_iesiri.idp'
+                )
+                ->leftJoin('stor_produse', 'stor_iesiri.idp', '=', 'stor_produse.idp')
+                ->groupBy('stor_iesiri.idp', 'date_processed')
+                ->where('status', '=', 'expediat')
+                ->get();
+            ;
+    
+            foreach ($sent_products as $order){
+                $days[$order->date_processed]['sent_product_count'] = (int)$days[$order->date_processed]['sent_product_count'] + 1;
+            }
+            
+            $sent_products = Order::where('ido', '=', $ido)
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_start'] && session('dashboard_filter')['range_start'] != ''){
+                        $query->where(DB::raw('DATE(ceretur)'), '>=', session('dashboard_filter')['range_start']);
+                    }
+                })
+                ->where(function ($query){
+                    if(session('dashboard_filter')['range_end'] && session('dashboard_filter')['range_end'] != ''){
+                        $query->where( DB::raw('DATE(ceretur)'), '<=', session('dashboard_filter')['range_end']);
+                    }
+                })
+                ->select(
+                    'ceretur',
+                    'stor_iesiri.idp'
+                )
+                ->leftJoin('stor_produse', 'stor_iesiri.idp', '=', 'stor_produse.idp')
+                ->where('ceretur', '!=', '0000-00-00')
+                ->groupBy('stor_produse.idp', 'ceretur')
+                ->get();
+            ;
+    
+            foreach ($sent_products as $order){
+                $days[$order->ceretur]['returned_product_count'] = (int)$days[$order->ceretur]['returned_product_count'] + 1;
             }
             
             $data['dates'] = $days;

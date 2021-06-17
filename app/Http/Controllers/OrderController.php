@@ -132,6 +132,7 @@ class OrderController extends Controller
             $sheet->setCellValue('H1', __('main.courier'));
             $sheet->setCellValue('I1', __('main.awb'));
             $sheet->setCellValue('J1', __('main.status_courier'));
+            $sheet->setCellValue('K1', __('main.order_products'));
             $row = 1;
             foreach ($orders as $order) {
                 $row++;
@@ -145,6 +146,18 @@ class OrderController extends Controller
                 $sheet->setCellValue('H' . $row, $order->curier);
                 $sheet->setCellValue('I' . $row, $order->awb);
                 $sheet->setCellValue('J' . $row, $order->statuscurier);
+                if ($order->ceretur != '0000-00-00'){
+                    $products_text = '';
+                    foreach ($order->products as $product){
+                        $products_text .= $product['codprodusclient'] . ' - ' . $product['volum'] . ' - ' . ($product['is_returned'] ? __('main.returned') : __('main.not_returned')) . ";\r\n";
+                    }
+                }else{
+                    $products_text = '';
+                    foreach ($order->products as $product){
+                        $products_text .= $product['codprodusclient'] . ' - ' . $product['volum'] . ";\r\n";
+                    }
+                }
+                $sheet->setCellValue('K' . $row, $products_text);
             }
             $writer = new Xlsx($spreadsheet);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

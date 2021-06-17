@@ -138,4 +138,6 @@
         'alert_about_order_file' => 'Please, follow strictly the template structure! The software will not work with different structure.',
         'sent_products' => 'Sent products',
         'returned_products' => 'Returned products',
+        'returned' => 'Returned',
+        'not_returned' => 'Not returned',
     ];

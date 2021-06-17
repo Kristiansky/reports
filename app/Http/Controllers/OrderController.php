@@ -267,7 +267,7 @@ class OrderController extends Controller
                         continue;
                     }
                     
-                    $product = Product::where('codprodusclient','=',$row[10])->whereIn('idc',$idcs)->first();
+                    $product = Product::where('codprodusclient','=',$row[11])->whereIn('idc',$idcs)->first();
                     if($product == null){
                         $product = Product::where('descriere','=','Unknown product')->whereIn('idc', $idcs)->first();
                     }
@@ -301,7 +301,7 @@ class OrderController extends Controller
                             ->get();
             
                         foreach ($packet_products as $packet_product){
-                            $qty = (int)$packet_product->quantity * (int)$row[12];
+                            $qty = (int)$packet_product->quantity * (int)$row[13];
                             $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
                             $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
                             $order_array = [
@@ -319,15 +319,16 @@ class OrderController extends Controller
                                 'perscontact' => $row[1],
                                 'codpostal' => $row[4],
                                 'telpers' => $row[2],
-                                'ramburs' => $row[13] == '' ? 0 : $row[13],
+                                'ramburs' => $row[14] == '' ? 0 : $row[14],
                                 'sambata' => 0,
                                 'altele' => $office_code,
                                 'status' => 'Comanda',
                                 'pret' => 0,
-                                'modplata' => $row[13] != null ? 'cashondelivery' : '',
+                                'modplata' => $row[14] != null ? 'cashondelivery' : '',
                                 'curier' => $row[8],
                                 'ship_instructions' => $row[6],
                                 'idextern' => $codcomanda,
+                                'shipping_method' => $row[9],
                             ];
                 
                             if($i==0){
@@ -344,7 +345,7 @@ class OrderController extends Controller
                             $i++;
                         }
                     }else{
-                        $qty = (int)$row[12];
+                        $qty = (int)$row[13];
                         $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
                         $order_array = [
                             'ido' => $ido,
@@ -361,14 +362,16 @@ class OrderController extends Controller
                             'perscontact' => $row[1],
                             'codpostal' => $row[4],
                             'telpers' => $row[2],
-                            'ramburs' => $row[13] != null ? $row[13] : 0,
+                            'ramburs' => $row[14] != null ? $row[14] : 0,
                             'sambata' => 0,
                             'altele' => $office_code,
                             'status' => 'Comanda',
                             'pret' => 0,
-                            'modplata' => $row[13] != null ? 'cashondelivery' : '',
+                            'modplata' => $row[14] != null ? 'cashondelivery' : '',
                             'curier' => $row[8],
                             'ship_instructions' => $row[6] != null ? $row[6] : '',
+                            'idextern' => $codcomanda,
+                            'shipping_method' => $row[9],
                         ];
             
                         if($i==0){

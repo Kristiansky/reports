@@ -66,7 +66,7 @@ class OrderController extends Controller
         $orders = Order::where('ido', '=', $ido)
             ->where(function ($query){
                 if(session('order_filter')['search'] && session('order_filter')['search'] != ''){
-                    $query->where('idie', '=', session('order_filter')['search'])
+                    $query->where('idcomanda', '=', session('order_filter')['search'])
                         ->orWhere('idextern', '=', session('order_filter')['search'])
                         ->orWhere('perscontact', 'like', '%' . session('order_filter')['search'] . '%');
                 }

@@ -259,7 +259,7 @@
       <workItem from="1623651623482" duration="2438000" />
       <workItem from="1623739978713" duration="22052000" />
       <workItem from="1623823958765" duration="26088000" />
-      <workItem from="1623916968816" duration="10109000" />
+      <workItem from="1623916968816" duration="10353000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -492,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623934138587</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="favicon">
+      <created>1623934450717</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1623934450717</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,6 +540,7 @@
     <MESSAGE value="Fix order search qty issue" />
     <MESSAGE value="Fixing export filters for orders" />
     <MESSAGE value="Fix responsive" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix responsive" />
+    <MESSAGE value="favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="favicon" />
   </component>
 </project>

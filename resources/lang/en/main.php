@@ -140,4 +140,5 @@
         'returned_products' => 'Returned products',
         'returned' => 'Returned',
         'not_returned' => 'Not returned',
+        'include_products' => 'Incl. products',
     ];

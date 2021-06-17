@@ -140,4 +140,5 @@
         'returned_products' => 'Върнати продукти',
         'returned' => 'Върнат',
         'not_returned' => 'Не върнат',
+        'include_products' => 'Вкл. продуктите',
     ];

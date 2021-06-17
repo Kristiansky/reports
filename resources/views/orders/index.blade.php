@@ -37,28 +37,32 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="date_from">
-                                        {{__('main.order_date_from')}}
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-sm" name="date_from" id="date_from" autocomplete="off" placeholder="{{__('main.order_date_from')}}" value="{{isset(session('order_filter')['date_from']) ? session('order_filter')['date_from'] : ''}}">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="date_from">
+                                                {{__('main.order_date_from')}}
+                                            </label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control form-control-sm" name="date_from" id="date_from" autocomplete="off" placeholder="{{__('main.order_date_from')}}" value="{{isset(session('order_filter')['date_from']) ? session('order_filter')['date_from'] : ''}}">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="date_to">
-                                        {{__('main.order_date_to')}}
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-sm" name="date_to" id="date_to" autocomplete="off" placeholder="{{__('main.order_date_to')}}" value="{{isset(session('order_filter')['date_to']) ? session('order_filter')['date_to'] : ''}}">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="date_to">
+                                                {{__('main.order_date_to')}}
+                                            </label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control form-control-sm" name="date_to" id="date_to" autocomplete="off" placeholder="{{__('main.order_date_to')}}" value="{{isset(session('order_filter')['date_to']) ? session('order_filter')['date_to'] : ''}}">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,10 +78,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3 pt-4 mt-2">
-                                <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
-                                <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
-                                <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>
+                            <div class="col-md-4 pt-4 mt-2">
+                                <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2 float-left">{{__('main.filter')}}</button>
+                                <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2 float-left">{{__('main.reset')}}</button>
+                                <button type="submit" name="export" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_xlsx')}}</button>
+                                <div class="custom-control custom-checkbox float-left">
+                                    <input class="custom-control-input" type="checkbox" id="include_products" name="include_products" value="1">
+                                    <label for="include_products" class="custom-control-label">{{__('main.include_products')}}</label>
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -20,13 +20,13 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="search">{{__('main.search')}}</label>
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" autocomplete="off" placeholder="{{__('main.search')}}" value="{{isset(session('order_filter')['search']) ? session('order_filter')['search'] : ''}}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="status">{{__('main.status')}}</label>
                                     <select class="form-control form-control-sm" id="status" name="status">
@@ -37,9 +37,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-12 col-lg-3">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="date_from">
                                                 {{__('main.order_date_from')}}
@@ -52,7 +52,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="date_to">
                                                 {{__('main.order_date_to')}}
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-6 col-lg-1">
                                 <div class="form-group">
                                     <label for="country">{{__('main.country')}}</label>
                                     <select class="form-control form-control-sm" id="country" name="country">
@@ -78,11 +78,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 pt-4 mt-2">
+                            <div class="col-6 col-lg-4 pt-4 mt-2">
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2 float-left">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2 float-left">{{__('main.reset')}}</button>
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_xlsx')}}</button>
-                                <div class="custom-control custom-checkbox float-left">
+                                <div class="custom-control custom-checkbox float-lg-left float-right">
                                     <input class="custom-control-input" type="checkbox" id="include_products" name="include_products" value="1">
                                     <label for="include_products" class="custom-control-label">{{__('main.include_products')}}</label>
                                 </div>

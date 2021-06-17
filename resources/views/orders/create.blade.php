@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
             <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="order-tabs-tab" role="tablist">
@@ -88,7 +88,7 @@
                 <!-- /.card -->
             </div>
         </div>
-        <div class="col-7">
+        <div class="col-12 col-lg-7">
             @if(!empty($cart_products))
                 <div class="card">
                     <div class="card-header">

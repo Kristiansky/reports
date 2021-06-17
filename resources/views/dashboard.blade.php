@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             <form class="" action="{{route('home')}}" id="daterange_picker">
                 @csrf
                 @method('POST')
@@ -53,7 +53,7 @@
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="@if(isset($countries) || isset($couriers)) col-md-3 @else col-md-6 @endif">
+        <div class="col-6 @if(isset($countries) || isset($couriers)) col-lg-3 @else col-lg-6 @endif">
             <div class="card card-success">
                 <div class="card-header">
                     <h3 class="card-title"><i class="fas fa-box-open"></i> {{__('main.top_selling_product')}}</h3>
@@ -73,7 +73,7 @@
             <!-- /.card -->
         </div>
         @if(isset($countries) || isset($couriers))
-            <div class="col-md-3">
+            <div class="col-6 col-lg-3">
                 @if(isset($countries))
                     <div class="card card-success">
                         <div class="card-header">

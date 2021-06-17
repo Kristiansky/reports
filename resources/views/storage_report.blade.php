@@ -17,7 +17,7 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-3 col-lg-2">
                                 <div class="form-group">
                                     <label for="month">{{__('main.month')}}</label>
                                     <select class="form-control form-control-sm" id="month" name="month">
@@ -28,7 +28,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-3 col-lg-2">
                                 <div class="form-group">
                                     <label for="year">{{__('main.year')}}</label>
                                     <select class="form-control form-control-sm" id="year" name="year">
@@ -38,7 +38,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3 pt-4 mt-2">
+                            <div class="col-6 col-lg-3 pt-4 mt-2">
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>

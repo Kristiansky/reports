@@ -18,13 +18,13 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-4 col-lg-2">
                                 <div class="form-group">
                                     <label for="search">{{__('main.search')}}</label>
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" autocomplete="off" placeholder="{{__('main.search')}}" value="{{isset(session('entries_filter')['search']) ? session('entries_filter')['search'] : ''}}">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-4 col-lg-2">
                                 <div class="form-group">
                                     <label for="entry_from_date">
                                         {{__('main.entry_from_date')}}:
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-4 col-lg-2">
                                 <div class="form-group">
                                     <label for="entry_to_date">
                                         {{__('main.entry_to_date')}}:
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 pt-4 mt-2">
+                            <div class="col-12 col-lg-3 pt-0 pt-lg-4 mt-lg-2">
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>

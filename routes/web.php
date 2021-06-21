@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('/', 'IndexController@index')->name('home');
         Route::resource('/order', 'OrderController');
         Route::post('/order', 'OrderController@index')->name('order.index');
+        Route::post('/order/destroy', 'OrderController@destroy')->name('order.destroy');
         Route::post('/order/block', 'OrderController@block')->name('order.block');
         Route::post('/order/create', 'OrderController@create')->name('order.create');
         Route::post('/order/store', 'OrderController@store')->name('order.store');

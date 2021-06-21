@@ -665,10 +665,10 @@ class OrderController extends Controller
      * @param Order $order
      * @return Response
      */
-    public function destroy(Order $order)
+    public function destroy(Request $request)
     {
         DB::table('stor_iesiri')
-            ->where('idcomanda','=', $order->idie)
+            ->where('idcomanda','=', $request->idcomanda)
             ->delete();
         session()->flash('message', __('main.order_success_delete'));
         session()->flash('message_type', 'success');

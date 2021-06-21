@@ -214,9 +214,10 @@
                                         <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-primary editOrder" data-toggle="modal" data-target="#editOrderModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
                                     @endif
                                     @if($order->getRawOriginal('status') == 'Blocata')
-                                        <form method="post" action="{{route('order.destroy', $order->idcomanda)}}">
+                                        <form method="post" action="{{route('order.destroy')}}">
                                             @csrf
                                             @method('DELETE')
+                                            <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
                                             <button class="btn btn-danger btn-xs" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt"></i> {{__('main.delete')}}</button>
                                         </form>
                                     @endif

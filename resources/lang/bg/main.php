@@ -141,4 +141,5 @@
         'returned' => 'Върнат',
         'not_returned' => 'Не върнат',
         'include_products' => 'Вкл. продуктите',
+        'order_success_delete' => 'Успешно изтрита поръчка',
     ];

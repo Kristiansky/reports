@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -252,45 +253,68 @@ class OrderController extends Controller
                 'xlsx_file' => 'required|file',
             );
             $request->validate($validation);
+    
+            $filename = date('Ymdhis') . "_" . $request->file('xlsx_file')->getClientOriginalName();
             
-            $uploadedFile = $request->file('xlsx_file');
+            $request->file('xlsx_file')->storeAs('/clients/' . $client->cod_client . '/orders', $filename);
+    
+//            $stored_file = storage_path('/clients/' . $client->cod_client . '/orders/' . $filename);
+            
             $reader = new XlsxRead();
             $reader->setReadDataOnly(true);
-            $spreadsheet = $reader->load($uploadedFile);
+            $spreadsheet = $reader->load($request->file('xlsx_file'));
             $xlsx_arr = $spreadsheet->getActiveSheet()->toArray();
+            $headings = array_shift($xlsx_arr);
+            $fixed_headings = array();
+            foreach ($headings as $heading){
+                $heading = strtolower($heading);
+                $heading = preg_replace('/\s+/', '_', $heading);
+                $fixed_headings[] = $heading;
+            }
+            array_walk(
+                $xlsx_arr,
+                function (&$row) use ($fixed_headings) {
+                    $row = array_combine($fixed_headings, $row);
+                }
+            );
+//            dd($xlsx_arr);
             $orders = array();
             foreach($xlsx_arr as $key => $row){
-                if($key == 0){
-                    continue;
-                }
-                $orders[$row[0]][]=$row;
+//                if($key == 0){
+//                    continue;
+//                }
+                $orders[$row['order_id']][]=$row;
             }
             foreach ($orders as $order){
                 $i=0;
                 foreach ($order as $key => $row){
-                    $codcomanda = $row[0];
+                    $codcomanda = $row['order_id'];
                     if (empty($codcomanda)) {
                         continue;
                     }
                     
-                    $product = Product::where('codprodusclient','=',$row[11])->whereIn('idc',$idcs)->first();
+                    $product = Product::where('codprodusclient','=',$row['item_id'])->whereIn('idc',$idcs)->first();
                     if($product == null){
                         $product = Product::where('descriere','=','Unknown product')->whereIn('idc', $idcs)->first();
                     }
         
-                    $address = $row[5] . " " . $row[6];
-                    if (
-                        empty($row[7])
-                        && (strpos($address, 'econt') !== false
-                            || strpos($address, 'еконт') !== false
-                            || strpos($address, 'Еконт') !== false
-                        )
-                    ){
-                        $office_code = 1;
-                    } elseif (empty($row[7])){
+                    $address = $row['address'] . " " . $row['comments'];
+                    if (isset($row['office_code'])){
+                        if (
+                            empty($row['office_code'])
+                            && (strpos($address, 'econt') !== false
+                                || strpos($address, 'еконт') !== false
+                                || strpos($address, 'Еконт') !== false
+                            )
+                        ){
+                            $office_code = 1;
+                        } elseif (empty($row['office_code'])){
+                            $office_code = 'Automat';
+                        }else{
+                            $office_code = $row['office_code'];
+                        }
+                    } else {
                         $office_code = 'Automat';
-                    }else{
-                        $office_code = $row[7];
                     }
         
                     if($product->idc == 153 || $product->idc == 155){
@@ -307,7 +331,7 @@ class OrderController extends Controller
                             ->get();
             
                         foreach ($packet_products as $packet_product){
-                            $qty = (int)$packet_product->quantity * (int)$row[13];
+                            $qty = (int)$packet_product->quantity * (int)$row['quantity'];
                             $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
                             $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
                             $order_array = [
@@ -320,21 +344,21 @@ class OrderController extends Controller
                                 'datai' => date("Y-m-d H:i:s"),
                                 'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
                                 'adresa' => $address,
-                                'localitate' => $row[3],
-                                'judet' => $row[3],
-                                'perscontact' => $row[1],
-                                'codpostal' => $row[4],
-                                'telpers' => $row[2],
-                                'ramburs' => $row[14] == '' ? 0 : $row[14],
+                                'localitate' => $row['town'],
+                                'judet' => $row['town'],
+                                'perscontact' => $row['contact_person'],
+                                'codpostal' => $row['postcode'],
+                                'telpers' => $row['phone'],
+                                'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
                                 'sambata' => 0,
                                 'altele' => $office_code,
                                 'status' => 'Comanda',
                                 'pret' => 0,
-                                'modplata' => $row[14] != null ? 'cashondelivery' : '',
-                                'curier' => $row[8],
-                                'ship_instructions' => $row[6],
+                                'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                                'curier' => $row['courier'],
+                                'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                                 'idextern' => $codcomanda,
-                                'shipping_method' => $row[9],
+                                'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                             ];
                 
                             if($i==0){
@@ -351,7 +375,7 @@ class OrderController extends Controller
                             $i++;
                         }
                     }else{
-                        $qty = (int)$row[13];
+                        $qty = (int)$row['quantity'];
                         $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
                         $order_array = [
                             'ido' => $ido,
@@ -363,21 +387,21 @@ class OrderController extends Controller
                             'datai' => date("Y-m-d H:i:s"),
                             'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
                             'adresa' => $address,
-                            'localitate' => $row[3],
-                            'judet' => $row[3],
-                            'perscontact' => $row[1],
-                            'codpostal' => $row[4],
-                            'telpers' => $row[2],
-                            'ramburs' => $row[14] != null ? $row[14] : 0,
+                            'localitate' => $row['town'],
+                            'judet' => $row['town'],
+                            'perscontact' => $row['contact_person'],
+                            'codpostal' => $row['postcode'],
+                            'telpers' => $row['phone'],
+                            'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
                             'sambata' => 0,
                             'altele' => $office_code,
                             'status' => 'Comanda',
                             'pret' => 0,
-                            'modplata' => $row[14] != null ? 'cashondelivery' : '',
-                            'curier' => $row[8],
-                            'ship_instructions' => $row[6] != null ? $row[6] : '',
+                            'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                            'curier' => $row['courier'],
+                            'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                             'idextern' => $codcomanda,
-                            'shipping_method' => $row[9],
+                            'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                         ];
             
                         if($i==0){
@@ -421,7 +445,7 @@ class OrderController extends Controller
         $i=0;
         foreach(session('cart_products') as $cart_product){
             $product = Product::where('idp','=',$cart_product[0]['idp'])->firstOrFail();
-            if($product->idc == 153 || $product->idc == 155){
+            /*if($product->idc == 153 || $product->idc == 155){
                 $packet_table = '';
                 if($product->idc == 153){
                     $packet_table = 'smart_packets';
@@ -500,7 +524,7 @@ class OrderController extends Controller
                     }
                     $i++;
                 }
-            }else{
+            }else{*/
                 $qty = $cart_product[0]['qty'];
                 $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
                 $address = $request->get('tstr') . " " . $request->get('str');
@@ -566,7 +590,7 @@ class OrderController extends Controller
                 }
     
                 $i++;
-            }
+//            }
         }
     
         session()->forget('cart_products');

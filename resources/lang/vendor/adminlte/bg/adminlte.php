@@ -4,6 +4,7 @@
         
         'full_name'                   => 'Full name',
         'email'                       => 'Email',
+        'username'                    => 'Потребител',
         'password'                    => 'Парола',
         'retype_password'             => 'Retype password',
         'remember_me'                 => 'Remember Me',

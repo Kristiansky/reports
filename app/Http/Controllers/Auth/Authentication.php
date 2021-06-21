@@ -11,7 +11,13 @@
     class Authentication extends Controller{
         
         public static function attempt($credentials){
-            $user = User::where('email', '=', $credentials['email'])->where('password', '=', md5($credentials['password']))->first();
+            $find1 = strpos($credentials['username'], '@');
+            $find2 = strpos($credentials['username'], '.');
+            if ($find1 !== false && $find2 !== false && $find2 > $find1){
+                $user = User::where('email', '=', $credentials['username'])->where('password', '=', md5($credentials['password']))->first();
+            }else{
+                $user = User::where('username', '=', $credentials['username'])->where('password', '=', md5($credentials['password']))->first();
+            }
             if($user != null){
                 Auth::login($user, true);
                 Session::put('per_page', 25);

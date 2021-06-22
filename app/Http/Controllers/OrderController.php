@@ -81,7 +81,7 @@ class OrderController extends Controller
                     $query->where('datai', '>', session('order_filter')['date_from'].' 00:00:00');
                 }
                 if(session('order_filter')['date_to'] && session('order_filter')['date_to'] != ''){
-                    $query->where('datai', '<', session('order_filter')['date_to'].' 00:00:00');
+                    $query->where('datai', '<', session('order_filter')['date_to'].' 23:59:59');
                 }
                 if(session('order_filter')['country'] && session('order_filter')['country'] != ''){
                     $query->where('tara', '=', session('order_filter')['country']);

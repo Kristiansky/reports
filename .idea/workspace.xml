@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +272,8 @@
       <workItem from="1623823958765" duration="26088000" />
       <workItem from="1623916968816" duration="11558000" />
       <workItem from="1624022507084" duration="616000" />
-      <workItem from="1624257129130" duration="14175000" />
+      <workItem from="1624257129130" duration="15319000" />
+      <workItem from="1624342774981" duration="5592000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -542,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624274705723</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fix order excel upload">
+      <created>1624286188325</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1624286188325</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,6 +591,7 @@
     <MESSAGE value="Fix responsive" />
     <MESSAGE value="favicon" />
     <MESSAGE value="fix order destroy bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix order destroy bug" />
+    <MESSAGE value="fix order excel upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix order excel upload" />
   </component>
 </project>

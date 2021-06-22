@@ -40,6 +40,23 @@
             }
             
             $client = session('client');
+    
+            $begin = new DateTime(session('dashboard_filter')['range_start']);
+            $end = new DateTime(session('dashboard_filter')['range_end']);
+            $end->setTime(0,0,1);
+    
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($begin, $interval, $end);
+    
+            $days=array();
+            foreach ($period as $dt) {
+                $days[$dt->format("Y-m-d")] = array(
+                    'sent_count' => 0,
+                    'returned_count' => 0,
+                    'sent_product_count' => 0,
+                    'returned_product_count' => 0,
+                );
+            }
             
             $ido = User::where('group_id','=',$client->group->id)->where('name','=',$client->group->name)->firstOrFail()->id;
             
@@ -84,22 +101,6 @@
                 ->groupBy('idcomanda', 'date_processed')
                 ->where('status', '=', 'expediat')
                 ->get();
-            $begin = new DateTime(session('dashboard_filter')['range_start']);
-            $end = new DateTime(session('dashboard_filter')['range_end']);
-            $end->setTime(0,0,1);
-            
-            $interval = DateInterval::createFromDateString('1 day');
-            $period = new DatePeriod($begin, $interval, $end);
-            
-            $days=array();
-            foreach ($period as $dt) {
-                $days[$dt->format("Y-m-d")] = array(
-                    'sent_count' => 0,
-                    'returned_count' => 0,
-                    'sent_product_count' => 0,
-                    'returned_product_count' => 0,
-                );
-            }
             
             foreach ($orders_sent as $order){
                 $days[$order->date_processed]['sent_count'] = (int)$days[$order->date_processed]['sent_count'] + 1;
@@ -213,7 +214,8 @@
                     }
                 })
                 ->select(
-                    DB::raw('COUNT(idcomanda) as sent_orders'),
+//                    DB::raw('COUNT(idcomanda) as sent_orders'),
+                    'idcomanda',
                     'localitate',
                     'tara',
                     'curier'
@@ -224,7 +226,7 @@
             $city_data = DB::table(DB::raw("({$sub->toSql()}) as sub"))
                 ->mergeBindings($sub->getQuery())
                 ->select(
-                    DB::raw('SUM(sent_orders) as total_sent_orders'),
+                    DB::raw('COUNT(idcomanda) as total_sent_orders'),
                     'localitate'
                 )
                 ->groupBy('localitate')

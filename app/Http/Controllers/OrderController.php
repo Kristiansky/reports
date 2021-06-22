@@ -346,8 +346,9 @@ class OrderController extends Controller
                                 'adresa' => $address,
                                 'localitate' => $row['town'],
                                 'judet' => $row['town'],
+                                'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
                                 'perscontact' => $row['contact_person'],
-                                'codpostal' => $row['postcode'],
+                                'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                                 'telpers' => $row['phone'],
                                 'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
                                 'sambata' => 0,
@@ -355,10 +356,11 @@ class OrderController extends Controller
                                 'status' => 'Comanda',
                                 'pret' => 0,
                                 'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
-                                'curier' => $row['courier'],
+                                'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                 'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                                 'idextern' => $codcomanda,
                                 'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                                'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                             ];
                 
                             if($i==0){
@@ -389,8 +391,9 @@ class OrderController extends Controller
                             'adresa' => $address,
                             'localitate' => $row['town'],
                             'judet' => $row['town'],
+                            'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
                             'perscontact' => $row['contact_person'],
-                            'codpostal' => $row['postcode'],
+                            'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                             'telpers' => $row['phone'],
                             'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
                             'sambata' => 0,
@@ -398,10 +401,11 @@ class OrderController extends Controller
                             'status' => 'Comanda',
                             'pret' => 0,
                             'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
-                            'curier' => $row['courier'],
+                            'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                             'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                             'idextern' => $codcomanda,
                             'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                            'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                         ];
             
                         if($i==0){
@@ -445,7 +449,9 @@ class OrderController extends Controller
         $i=0;
         foreach(session('cart_products') as $cart_product){
             $product = Product::where('idp','=',$cart_product[0]['idp'])->firstOrFail();
-            /*if($product->idc == 153 || $product->idc == 155){
+            //TODO Packets
+            /*
+            if($product->idc == 153 || $product->idc == 155){
                 $packet_table = '';
                 if($product->idc == 153){
                     $packet_table = 'smart_packets';
@@ -457,6 +463,8 @@ class OrderController extends Controller
                     ->where('SKU1', '=', $product->codprodusclient)
                     ->orderBy('id', 'asc')
                     ->get();
+                dd(empty($packet_products));
+                //TODO Add product to order method
                 foreach ($packet_products as $packet_product){
                     $qty = (int)$packet_product->quantity * (int)$cart_product[0]['qty'];
                     $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();

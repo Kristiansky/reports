@@ -25,6 +25,11 @@ class OrderController extends Controller
     
     public $country_options = array('BG','GR','RO','IT','ES','GB','DE','NL');
     
+    public $packets_to_clients = array(
+        153 => 'smart_packets',
+        155 => 'escreo_packets',
+    );
+    
     /**
      * Display a listing of the resource.
      *
@@ -277,14 +282,12 @@ class OrderController extends Controller
                     $row = array_combine($fixed_headings, $row);
                 }
             );
-//            dd($xlsx_arr);
+
             $orders = array();
             foreach($xlsx_arr as $key => $row){
-//                if($key == 0){
-//                    continue;
-//                }
                 $orders[$row['order_id']][]=$row;
             }
+            
             foreach ($orders as $order){
                 $i=0;
                 foreach ($order as $key => $row){
@@ -316,28 +319,67 @@ class OrderController extends Controller
                     } else {
                         $office_code = 'Automat';
                     }
-        
-                    if($product->idc == 153 || $product->idc == 155){
-                        $packet_table = '';
-                        if($product->idc == 153){
-                            $packet_table = 'smart_packets';
-                        }elseif($product->idc == 155){
-                            $packet_table = 'escreo_packets';
-                        }
-                        $packet_products = DB::table($packet_table)
+                    
+                    if (isset($this->packets_to_clients[$product->idc])){
+                        $packet_products = DB::table($this->packets_to_clients[$product->idc])
                             ->select('quantity','SKU2')
                             ->where('SKU1', '=', $product->codprodusclient)
                             ->orderBy('id', 'asc')
                             ->get();
-            
-                        foreach ($packet_products as $packet_product){
-                            $qty = (int)$packet_product->quantity * (int)$row['quantity'];
-                            $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
-                            $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
+                        if ($packet_products->isNotEmpty()){
+                            foreach ($packet_products as $packet_product){
+                                $qty = (int)$packet_product->quantity * (int)$row['quantity'];
+                                $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
+                                $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
+                                $order_array = [
+                                    'ido' => $ido,
+                                    'idso' => Auth::user()->id,
+                                    'idp' => $current_product->idp,
+                                    'volum' => $qty,
+                                    'data1' => date("Y-m-d"),
+                                    'data2' => date("Y-m-d"),
+                                    'datai' => date("Y-m-d H:i:s"),
+                                    'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
+                                    'adresa' => $address,
+                                    'localitate' => $row['town'],
+                                    'judet' => $row['town'],
+                                    'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
+                                    'perscontact' => $row['contact_person'],
+                                    'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
+                                    'telpers' => $row['phone'],
+                                    'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
+                                    'sambata' => 0,
+                                    'altele' => $office_code,
+                                    'status' => 'Comanda',
+                                    'pret' => 0,
+                                    'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                                    'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
+                                    'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
+                                    'idextern' => $codcomanda,
+                                    'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                                    'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
+                                ];
+        
+                                if($i==0){
+                                    $idcomanda = DB::table('stor_iesiri')->insertGetId(
+                                        $order_array
+                                    );
+                                    DB::table('stor_iesiri')
+                                        ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
+                                }else{
+                                    DB::table('stor_iesiri')->insert(
+                                        $order_array
+                                    );
+                                }
+                                $i++;
+                            }
+                        }else{
+                            $qty = (int)$row['quantity'];
+                            $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
                             $order_array = [
                                 'ido' => $ido,
                                 'idso' => Auth::user()->id,
-                                'idp' => $current_product->idp,
+                                'idp' => $product->idp,
                                 'volum' => $qty,
                                 'data1' => date("Y-m-d"),
                                 'data2' => date("Y-m-d"),
@@ -350,7 +392,7 @@ class OrderController extends Controller
                                 'perscontact' => $row['contact_person'],
                                 'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                                 'telpers' => $row['phone'],
-                                'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
+                                'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
                                 'sambata' => 0,
                                 'altele' => $office_code,
                                 'status' => 'Comanda',
@@ -362,7 +404,7 @@ class OrderController extends Controller
                                 'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                                 'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                             ];
-                
+    
                             if($i==0){
                                 $idcomanda = DB::table('stor_iesiri')->insertGetId(
                                     $order_array
@@ -407,7 +449,7 @@ class OrderController extends Controller
                             'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                             'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                         ];
-            
+    
                         if($i==0){
                             $idcomanda = DB::table('stor_iesiri')->insertGetId(
                                 $order_array
@@ -446,160 +488,7 @@ class OrderController extends Controller
         );
         $request->validate($validation);
     
-        $i=0;
-        foreach(session('cart_products') as $cart_product){
-            $product = Product::where('idp','=',$cart_product[0]['idp'])->firstOrFail();
-            //TODO Packets
-            /*
-            if($product->idc == 153 || $product->idc == 155){
-                $packet_table = '';
-                if($product->idc == 153){
-                    $packet_table = 'smart_packets';
-                }elseif($product->idc == 155){
-                    $packet_table = 'escreo_packets';
-                }
-                $packet_products = DB::table($packet_table)
-                    ->select('quantity','SKU2')
-                    ->where('SKU1', '=', $product->codprodusclient)
-                    ->orderBy('id', 'asc')
-                    ->get();
-                dd(empty($packet_products));
-                //TODO Add product to order method
-                foreach ($packet_products as $packet_product){
-                    $qty = (int)$packet_product->quantity * (int)$cart_product[0]['qty'];
-                    $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->firstOrFail();
-                    $ido = User::where('group_id','=',$current_product->category->group->id)->where('name','=',$current_product->category->group->name)->firstOrFail()->id;
-                    $address = $request->get('tstr') . " " . $request->get('str');
-                    if($nr = $request->get('nr') != ''){
-                        $address .= ' Nr. ' . $nr;
-                    }
-                    if($bl = $request->get('bl') != ''){
-                        $address .= ' Bl. ' . $bl;
-                    }
-                    if($sc = $request->get('sc') != ''){
-                        $address .= ' Sc. ' . $sc;
-                    }
-                    if($ap = $request->get('ap') != ''){
-                        $address .= ' Apt. ' . $ap;
-                    }
-                    if($et = $request->get('et') != ''){
-                        $address .= ' Et. ' . $et;
-                    }
-                    $order_array = [
-                        'ido' => $ido,
-                        'idso' => Auth::user()->id,
-                        'idp' => $current_product->idp,
-                        'volum' => $qty,
-                        'data1' => $request->get('data1'),
-                        'data2' => $request->get('data2'),
-                        'datai' => date("Y-m-d H:i:s"),
-                        'locatie' => $request->get('locatie'),
-                        'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
-                        'adresa' => $address,
-                        'tstr' => $request->get('tstr'),
-                        'str' => $request->get('str'),
-                        'nr' => $nr,
-                        'bl' => $bl,
-                        'sc' => $sc,
-                        'ap' => $ap,
-                        'et' => $et,
-                        'localitate' => $request->get('localitate'),
-                        'judet' => $request->get('judet'),
-                        'perscontact' => $request->get('perscontact'),
-                        'codpostal' => $request->get('codpostal'),
-                        'telpers' => $request->get('telpers'),
-                        'ramburs' => $request->get('ramburs'),
-                        'rambursalttip' => $request->get('rambursalttip'),
-                        'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
-                        'altele' => $request->get('altele'),
-                        'status' => 'Comanda',
-                        'pret' => 0,
-                        'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
-                        'curier' => $request->get('curier'),
-                        'ship_instructions' => $request->get('locatie') . ' ' . $product->descriere,
-                    ];
-    
-                    if($i==0){
-                        $idcomanda = DB::table('stor_iesiri')->insertGetId(
-                            $order_array
-                        );
-                        DB::table('stor_iesiri')
-                            ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
-                    }else{
-                        DB::table('stor_iesiri')->insert(
-                            $order_array
-                        );
-                    }
-                    $i++;
-                }
-            }else{*/
-                $qty = $cart_product[0]['qty'];
-                $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->firstOrFail()->id;
-                $address = $request->get('tstr') . " " . $request->get('str');
-                if($nr = $request->get('nr') != ''){
-                    $address .= ' Nr. ' . $nr;
-                }
-                if($bl = $request->get('bl') != ''){
-                    $address .= ' Bl. ' . $bl;
-                }
-                if($sc = $request->get('sc') != ''){
-                    $address .= ' Sc. ' . $sc;
-                }
-                if($ap = $request->get('ap') != ''){
-                    $address .= ' Apt. ' . $ap;
-                }
-                if($et = $request->get('et') != ''){
-                    $address .= ' Et. ' . $et;
-                }
-                $order_array = [
-                    'ido' => $ido,
-                    'idso' => Auth::user()->id,
-                    'idp' => $product->idp,
-                    'volum' => $qty,
-                    'data1' => $request->get('data1'),
-                    'data2' => $request->get('data2'),
-                    'datai' => date("Y-m-d H:i:s"),
-                    'locatie' => $request->get('locatie'),
-                    'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
-                    'adresa' => $address,
-                    'tstr' => $request->get('tstr'),
-                    'str' => $request->get('str'),
-                    'nr' => $nr,
-                    'bl' => $bl,
-                    'sc' => $sc,
-                    'ap' => $ap,
-                    'et' => $et,
-                    'localitate' => $request->get('localitate'),
-                    'judet' => $request->get('judet'),
-                    'perscontact' => $request->get('perscontact'),
-                    'codpostal' => $request->get('codpostal'),
-                    'telpers' => $request->get('telpers'),
-                    'ramburs' => $request->get('ramburs'),
-                    'rambursalttip' => $request->get('rambursalttip'),
-                    'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
-                    'altele' => $request->get('altele'),
-                    'status' => 'Comanda',
-                    'pret' => 0,
-                    'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
-                    'curier' => $request->get('curier'),
-                    'ship_instructions' => $request->get('locatie'),
-                ];
-    
-                if($i==0){
-                    $idcomanda = DB::table('stor_iesiri')->insertGetId(
-                        $order_array
-                    );
-                    DB::table('stor_iesiri')
-                        ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
-                }else{
-                    DB::table('stor_iesiri')->insert(
-                        $order_array
-                    );
-                }
-    
-                $i++;
-//            }
-        }
+        $this->addProductsToOrder($request);
     
         session()->forget('cart_products');
         
@@ -724,5 +613,101 @@ class OrderController extends Controller
         );
     
         return true;
+    }
+    
+    public function addProductsToOrder(Request $request){
+        $i=0;
+        $idcomanda = 0;
+        foreach(session('cart_products') as $cart_product){
+            $product = Product::where('idp','=',$cart_product[0]['idp'])->first();
+            if (isset($this->packets_to_clients[$product->idc])){
+                $packet_products = DB::table($this->packets_to_clients[$product->idc])
+                    ->select('quantity','SKU2')
+                    ->where('SKU1', '=', $product->codprodusclient)
+                    ->orderBy('id', 'asc')
+                    ->get();
+                if ($packet_products->isNotEmpty()){
+                    foreach ($packet_products as $packet_product) {
+                        $qty = (int)$packet_product->quantity * (int)$cart_product[0]['qty'];
+                        $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->first();
+                        $idcomanda = $this->insertProductToOrder($current_product, $qty, $request, $i, $idcomanda);
+                        $i++;
+                    }
+                }else{
+                    $idcomanda = $this->insertProductToOrder($product, $cart_product[0]['qty'], $request, $i, $idcomanda);
+                    $i++;
+                }
+            }else{
+                $idcomanda = $this->insertProductToOrder($product, $cart_product[0]['qty'], $request, $i, $idcomanda);
+                $i++;
+            }
+        }
+    }
+    
+    public function insertProductToOrder(Product $product, $qty, Request $request, $i, $idcomanda){
+        $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->first()->id;
+        $address = $request->get('tstr') . " " . $request->get('str');
+        if($nr = $request->get('nr') != ''){
+            $address .= ' Nr. ' . $nr;
+        }
+        if($bl = $request->get('bl') != ''){
+            $address .= ' Bl. ' . $bl;
+        }
+        if($sc = $request->get('sc') != ''){
+            $address .= ' Sc. ' . $sc;
+        }
+        if($ap = $request->get('ap') != ''){
+            $address .= ' Apt. ' . $ap;
+        }
+        if($et = $request->get('et') != ''){
+            $address .= ' Et. ' . $et;
+        }
+        $order_array = [
+            'ido' => $ido,
+            'idso' => Auth::user()->id,
+            'idp' => $product->idp,
+            'volum' => $qty,
+            'data1' => $request->get('data1'),
+            'data2' => $request->get('data2'),
+            'datai' => date("Y-m-d H:i:s"),
+            'locatie' => $request->get('locatie'),
+            'idcomanda' => $idcomanda,
+            'adresa' => $address,
+            'tstr' => $request->get('tstr'),
+            'str' => $request->get('str'),
+            'nr' => $nr,
+            'bl' => $bl,
+            'sc' => $sc,
+            'ap' => $ap,
+            'et' => $et,
+            'localitate' => $request->get('localitate'),
+            'judet' => $request->get('judet'),
+            'perscontact' => $request->get('perscontact'),
+            'codpostal' => $request->get('codpostal'),
+            'telpers' => $request->get('telpers'),
+            'ramburs' => $request->get('ramburs'),
+            'rambursalttip' => $request->get('rambursalttip'),
+            'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
+            'altele' => $request->get('altele'),
+            'status' => 'Comanda',
+            'pret' => 0,
+            'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
+            'curier' => $request->get('curier'),
+            'ship_instructions' => $request->get('locatie') . ' ' . $product->descriere,
+        ];
+    
+        if($i==0){
+            $idcomanda = DB::table('stor_iesiri')->insertGetId(
+                $order_array
+            );
+            DB::table('stor_iesiri')
+                ->where('idie', $idcomanda)->update(['idcomanda' => $idcomanda]);
+            return $idcomanda;
+        }else{
+            DB::table('stor_iesiri')->insert(
+                $order_array
+            );
+            return true;
+        }
     }
 }

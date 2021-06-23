@@ -630,7 +630,7 @@ class OrderController extends Controller
                     foreach ($packet_products as $packet_product) {
                         $qty = (int)$packet_product->quantity * (int)$cart_product[0]['qty'];
                         $current_product = Product::where('codprodusclient','=',$packet_product->SKU2)->where('idc','=',$product->idc)->first();
-                        $idcomanda = $this->insertProductToOrder($current_product, $qty, $request, $i, $idcomanda);
+                        $idcomanda = $this->insertProductToOrder($current_product, $qty, $request, $i, $idcomanda, $product->descriere);
                         $i++;
                     }
                 }else{
@@ -644,7 +644,7 @@ class OrderController extends Controller
         }
     }
     
-    public function insertProductToOrder(Product $product, $qty, Request $request, $i, $idcomanda){
+    public function insertProductToOrder(Product $product, $qty, Request $request, $i, $idcomanda, $packet_title = ''){
         $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->first()->id;
         $address = $request->get('tstr') . " " . $request->get('str');
         if($nr = $request->get('nr') != ''){
@@ -693,7 +693,7 @@ class OrderController extends Controller
             'pret' => 0,
             'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
             'curier' => $request->get('curier'),
-            'ship_instructions' => $request->get('locatie') . ' ' . $product->descriere,
+            'ship_instructions' => $request->get('locatie') . $i == 0 ? $packet_title : '',
         ];
     
         if($i==0){

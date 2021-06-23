@@ -44,7 +44,7 @@
         'address' => 'Адрес',
         'street' => 'Улица',
         'number' => 'Номер',
-        'block' => 'Квартал',
+        'block' => 'Блок',
         'entrance' => 'Вход',
         'floor' => 'Етаж',
         'apartment' => 'Апартамент',
@@ -142,4 +142,5 @@
         'not_returned' => 'Не върнат',
         'include_products' => 'Вкл. продуктите',
         'order_success_delete' => 'Успешно изтрита поръчка',
+        'choose_county' => 'Избор област',
     ];

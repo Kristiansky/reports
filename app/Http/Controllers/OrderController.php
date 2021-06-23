@@ -647,19 +647,24 @@ class OrderController extends Controller
     public function insertProductToOrder(Product $product, $qty, Request $request, $i, $idcomanda, $packet_title = ''){
         $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->first()->id;
         $address = $request->get('tstr') . " " . $request->get('str');
-        if($nr = $request->get('nr') != ''){
+        $nr = $request->get('nr');
+        $bl = $request->get('bl');
+        $sc = $request->get('sc');
+        $ap = $request->get('ap');
+        $et = $request->get('et');
+        if($nr != ''){
             $address .= ' Nr. ' . $nr;
         }
-        if($bl = $request->get('bl') != ''){
+        if($bl != ''){
             $address .= ' Bl. ' . $bl;
         }
-        if($sc = $request->get('sc') != ''){
-            $address .= ' Sc. ' . $sc;
+        if($sc != ''){
+            $address .= ' Vh. ' . $sc;
         }
-        if($ap = $request->get('ap') != ''){
-            $address .= ' Apt. ' . $ap;
+        if($ap != ''){
+            $address .= ' Ap. ' . $ap;
         }
-        if($et = $request->get('et') != ''){
+        if($et != ''){
             $address .= ' Et. ' . $et;
         }
         $order_array = [
@@ -707,7 +712,7 @@ class OrderController extends Controller
             DB::table('stor_iesiri')->insert(
                 $order_array
             );
-            return true;
+            return $idcomanda;
         }
     }
 }

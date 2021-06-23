@@ -142,4 +142,5 @@
         'not_returned' => 'Not returned',
         'include_products' => 'Incl. products',
         'order_success_delete' => 'Order successfully deleted',
+        'choose_county' => 'Choose county',
     ];

@@ -243,7 +243,7 @@
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <div class="form-group">
-                                        <label for="judet">{{__('main.choose_district')}}</label>
+                                        <label for="judet">{{__('main.choose_county')}}</label>
                                         <select name="judet" id="judet" class="form-control form-control-sm">
                                             <option value="">{{ __('main.choose') }}</option>
                                             <option value="Sofia-grad">Sofia-grad</option>

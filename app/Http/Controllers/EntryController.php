@@ -102,6 +102,7 @@ class EntryController extends Controller
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="'. urlencode('entries-' . date("H-i-s-d-m-Y") . '.xlsx').'"');
             $writer->save('php://output');
+            exit;
         }
         $entries = $entries->paginate(session('per_page'));
 //        $paginator = new Paginator($entries, session('per_page'), request('page') ? request('page') : 1, ['path' => route('entries.index')]);

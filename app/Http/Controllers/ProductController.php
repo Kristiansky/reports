@@ -143,7 +143,7 @@ class ProductController extends Controller
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="'. urlencode('stock-' . date("H-i-s-d-m-Y") . '.xlsx').'"');
             $writer->save('php://output');
-        
+            exit;
         }
     
         $products = $products->paginate(session('per_page'));

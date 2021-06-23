@@ -449,7 +449,7 @@
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
                 header('Content-Disposition: attachment; filename="'. urlencode('storage_report-' . date("H-i-s-d-m-Y") . '.xlsx').'"');
                 $writer->save('php://output');
-                
+                exit;
             }
             
             $months = array_reduce(range(1,12),function($rslt,$m){ $rslt[$m] = date('F',mktime(0,0,0,$m,10)); return $rslt; });

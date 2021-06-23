@@ -175,7 +175,7 @@ class OrderController extends Controller
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="'. urlencode('orders-' . date("H-i-s-d-m-Y") . '.xlsx').'"');
             $writer->save('php://output');
-            
+            exit;
         }
     
         $orders = $orders->paginate(session('per_page'));

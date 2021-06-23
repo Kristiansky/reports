@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
     Route::middleware(['auth', 'check.admin'])->group(function () {
         Route::get('/change_client', 'IndexController@changeClientView')->name('change_client_view');
         Route::post('/change_client', 'IndexController@changeClientUpdate')->name('change_client_update');
-        Route::post('/per_page', 'IndexController@changePerPage')->name('change_per_page');
     });
     Route::middleware(['auth', 'check.client'])->group(function () {
         Route::post('/storage_report', 'IndexController@storageReport')->name('storage_report');
@@ -39,4 +38,5 @@ use Illuminate\Support\Facades\Route;
         Route::get('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/get_top_products', 'IndexController@getAllTopProducts');
+        Route::post('/per_page', 'IndexController@changePerPage')->name('change_per_page');
     });

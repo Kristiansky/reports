@@ -62,9 +62,14 @@ class Order extends Model
                 $return[$key]['idp'] = $item->idp;
                 $return[$key]['codprodusclient'] = $item->codprodusclient;
                 $return[$key]['codbare'] = $item->codbare;
-                $returned_result = DB::table('stor_intrari')->where('aviz', '=', $this->idie)->first();
+                $returned_result = DB::table('stor_intrari')
+                    ->where('aviz', '=', $this->idie)
+                    ->where('idp', '=', $item->idp)
+                    ->first()
+                ;
                 if($returned_result){
                     $return[$key]['is_returned'] = true;
+                    $return[$key]['return_reason'] = $returned_result->return_reason;
                 }else{
                     $return[$key]['is_returned'] = false;
                 }

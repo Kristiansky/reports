@@ -450,6 +450,7 @@
                             <th>{{__('main.sku')}}</th>
                             <th>{{__('main.barcode')}}</th>
                             <th>{{__('main.is_returned')}}</th>
+                            <th>{{__('main.return_reason')}}</th>
                         </tr>
                         </thead>
                         <tbody id="order_products">
@@ -588,8 +589,10 @@
 						var table_html = '';
 						response.products.forEach(function(element){
 							var returned = "";
+							var return_reason = "";
 							if(element.is_returned === true){
 								returned = "{{__('main.yes')}}";
+								return_reason = element.return_reason == null ? '' : element.return_reason;
                             }
 							table_html +=
                                 "<tr>" +
@@ -599,6 +602,7 @@
                                     "<td>" + element.codprodusclient + "</td>" +
                                     "<td>" + element.codbare + "</td>" +
                                     "<td>" + returned + "</td>" +
+                                    "<td>" + return_reason + "</td>" +
                                 "</tr>";
                         });
 						$('#order_products').html(table_html);

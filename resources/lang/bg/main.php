@@ -143,4 +143,5 @@
         'include_products' => 'Вкл. продуктите',
         'order_success_delete' => 'Успешно изтрита поръчка',
         'choose_county' => 'Избор област',
+        'return_reason' => 'Причина за връщане',
     ];

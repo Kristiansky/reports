@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +270,7 @@
       <workItem from="1624257129130" duration="15319000" />
       <workItem from="1624342774981" duration="19122000" />
       <workItem from="1624374759167" duration="1030000" />
-      <workItem from="1624428686600" duration="6671000" />
+      <workItem from="1624428686600" duration="8275000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -588,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624451632630</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Per page bug fix">
+      <created>1624452721768</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1624452721768</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="More fixes slow ajax product history" />
     <MESSAGE value="Hidden no stock filter" />
     <MESSAGE value="Fixed dashboard filter and dashboard returned data bug" />
     <MESSAGE value="Added barcode in product list" />
@@ -633,6 +645,7 @@
     <MESSAGE value="Export bug fix" />
     <MESSAGE value="Fix add order packet description in ship instruction" />
     <MESSAGE value="Add order manually bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add order manually bug fixes" />
+    <MESSAGE value="Per page bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Per page bug fix" />
   </component>
 </project>

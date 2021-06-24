@@ -144,4 +144,5 @@
         'order_success_delete' => 'Order successfully deleted',
         'choose_county' => 'Choose county',
         'return_reason' => 'Reason for return',
+        'current_stock' => 'Current stock',
     ];

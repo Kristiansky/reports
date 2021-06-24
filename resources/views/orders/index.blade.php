@@ -374,6 +374,7 @@
                                 <th>{{__('main.product_name')}}</th>
                                 <th>{{__('main.qty')}}</th>
                                 <th>{{__('main.internal_id')}}</th>
+                                <th>{{__('main.current_stock')}}</th>
                                 <th>{{__('main.sku')}}</th>
                                 <th>{{__('main.barcode')}}</th>
                                 <th>{{__('main.action')}}</th>
@@ -447,6 +448,7 @@
                             <th>{{__('main.product_name')}}</th>
                             <th>{{__('main.qty')}}</th>
                             <th>{{__('main.internal_id')}}</th>
+                            <th>{{__('main.current_stock')}}</th>
                             <th>{{__('main.sku')}}</th>
                             <th>{{__('main.barcode')}}</th>
                             <th class="d-none returned">{{__('main.is_returned')}}</th>
@@ -547,6 +549,7 @@
 								"<td>" + element.descriere + "</td>" +
 								"<td><input type='number' class='form-control form-control-sm' name='qty["+ element.idp + "]' value='" + element.volum + "' /></td>" +
 								"<td>" + element.idp + "</td>" +
+								"<td>" + element.stock + "</td>" +
 								"<td>" + element.codprodusclient + "</td>" +
 								"<td>" + element.codbare + "</td>" +
 								"<td><button class='btn btn-danger btn-xs' type='submit' name='removeProduct' value='" + element.idp + "'><i class='fa fa-trash'></i> {{__('main.remove')}} </button></td>" +
@@ -603,6 +606,7 @@
                                     "<td>" + element.descriere + "</td>" +
                                     "<td>" + element.volum + "</td>" +
                                     "<td>" + element.idp + "</td>" +
+								    "<td>" + element.stock + "</td>" +
                                     "<td>" + element.codprodusclient + "</td>" +
                                     "<td>" + element.codbare + "</td>" +
 								    return_part +

@@ -57,11 +57,13 @@ class Order extends Model
         if($result){
             $return = array();
             foreach($result as $key=>$item){
+                $current_product = Product::where('idp', '=', $item->idp)->first();
                 $return[$key]['descriere'] = $item->descriere;
                 $return[$key]['volum'] = $item->volum;
                 $return[$key]['idp'] = $item->idp;
                 $return[$key]['codprodusclient'] = $item->codprodusclient;
                 $return[$key]['codbare'] = $item->codbare;
+                $return[$key]['stock'] = $current_product->stock();
                 $returned_result = DB::table('stor_intrari')
                     ->where('aviz', '=', $this->idie)
                     ->where('idp', '=', $item->idp)

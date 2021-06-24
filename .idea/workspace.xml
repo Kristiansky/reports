@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -269,7 +271,7 @@
       <workItem from="1624342774981" duration="19122000" />
       <workItem from="1624374759167" duration="1030000" />
       <workItem from="1624428686600" duration="9246000" />
-      <workItem from="1624515761968" duration="232000" />
+      <workItem from="1624515761968" duration="6219000" />
     </task>
     <task id="LOCAL-00001" summary="Translated">
       <created>1622810216288</created>
@@ -607,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624459074113</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Product export add barcode">
+      <created>1624516014462</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1624516014462</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -627,7 +636,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed dashboard filter and dashboard returned data bug" />
     <MESSAGE value="Added barcode in product list" />
     <MESSAGE value="Adding order from XLSX File" />
     <MESSAGE value="Storage report link secured" />
@@ -652,6 +660,7 @@
     <MESSAGE value="Add order manually bug fixes" />
     <MESSAGE value="Per page bug fix" />
     <MESSAGE value="Returns info update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Returns info update" />
+    <MESSAGE value="Product export add barcode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product export add barcode" />
   </component>
 </project>

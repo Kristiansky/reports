@@ -104,20 +104,22 @@ class ProductController extends Controller
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->setCellValue('A1', __('main.product_id'));
             $sheet->setCellValue('B1', __('main.sku'));
-            $sheet->setCellValue('C1', __('main.name'));
-            $sheet->setCellValue('D1', __('main.stock'));
-            $sheet->setCellValue('E1', __('main.incl_new'));
-            $sheet->setCellValue('F1', __('main.lots'));
-            $sheet->setCellValue('G1', __('main.lot_expiration'));
-            $sheet->setCellValue('H1', __('main.damaged'));
+            $sheet->setCellValue('C1', __('main.barcode'));
+            $sheet->setCellValue('D1', __('main.name'));
+            $sheet->setCellValue('E1', __('main.stock'));
+            $sheet->setCellValue('F1', __('main.incl_new'));
+            $sheet->setCellValue('G1', __('main.lots'));
+            $sheet->setCellValue('H1', __('main.lot_expiration'));
+            $sheet->setCellValue('I1', __('main.damaged'));
             $row = 1;
             foreach ($products as $product) {
                 $row++;
                 $sheet->setCellValue('A' . $row, $product->idp);
                 $sheet->setCellValue('B' . $row, $product->codprodusclient);
-                $sheet->setCellValue('C' . $row, $product->descriere);
-                $sheet->setCellValue('D' . $row, $product->stock());
-                $sheet->setCellValue('E' . $row, $product->stockInclNew());
+                $sheet->setCellValue('C' . $row, $product->codbare);
+                $sheet->setCellValue('D' . $row, $product->descriere);
+                $sheet->setCellValue('E' . $row, $product->stock());
+                $sheet->setCellValue('F' . $row, $product->stockInclNew());
                 $lots = '';
                 $expiration_dates = '';
                 if($product->lots()){
@@ -131,13 +133,13 @@ class ProductController extends Controller
                         }
                     }
                 }
-                $sheet->setCellValue('F' . $row, $lots);
-                $sheet->setCellValue('G' . $row, $expiration_dates);
+                $sheet->setCellValue('G' . $row, $lots);
+                $sheet->setCellValue('H' . $row, $expiration_dates);
                 $damaged = '';
                 if($product->damaged()){
                     $damaged = $product->damaged()->total;
                 }
-                $sheet->setCellValue('H' . $row, $damaged);
+                $sheet->setCellValue('I' . $row, $damaged);
             }
             $writer = new Xlsx($spreadsheet);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

@@ -449,8 +449,8 @@
                             <th>{{__('main.internal_id')}}</th>
                             <th>{{__('main.sku')}}</th>
                             <th>{{__('main.barcode')}}</th>
-                            <th>{{__('main.is_returned')}}</th>
-                            <th>{{__('main.return_reason')}}</th>
+                            <th class="d-none returned">{{__('main.is_returned')}}</th>
+                            <th class="d-none returned">{{__('main.return_reason')}}</th>
                         </tr>
                         </thead>
                         <tbody id="order_products">
@@ -581,18 +581,22 @@
 						$('#order_other_info').html(response.altele);
 						$('#order_ship_instructions').html(response.ship_instructions);
 						if(response.returned === true){
-                            $('#row_returned').removeClass('d-none');
+                            $('#row_returned, .returned').removeClass('d-none');
                             $('#order_returned').html('{{__('main.yes')}}')
                         }else{
-							$('#row_returned').addClass('d-none');
+							$('#row_returned, .returned').addClass('d-none');
                         }
 						var table_html = '';
 						response.products.forEach(function(element){
 							var returned = "";
 							var return_reason = "";
+							var return_part = '';
 							if(element.is_returned === true){
 								returned = "{{__('main.yes')}}";
 								return_reason = element.return_reason == null ? '' : element.return_reason;
+								return_part =
+								"<td>" + returned + "</td>" +
+								"<td>" + return_reason + "</td>";
                             }
 							table_html +=
                                 "<tr>" +
@@ -601,8 +605,7 @@
                                     "<td>" + element.idp + "</td>" +
                                     "<td>" + element.codprodusclient + "</td>" +
                                     "<td>" + element.codbare + "</td>" +
-                                    "<td>" + returned + "</td>" +
-                                    "<td>" + return_reason + "</td>" +
+								    return_part +
                                 "</tr>";
                         });
 						$('#order_products').html(table_html);

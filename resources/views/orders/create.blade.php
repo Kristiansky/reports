@@ -417,10 +417,10 @@
                                 <div class="col-12 col-md-3 col-xl-5">
                                     <div class="form-group">
                                         <label for="altele">
-                                            {{__('main.other_info')}} ({{__('main.office_code')}})
+                                            {{__('main.office_code')}}
                                         </label>
                                         <div class="form-group">
-                                            <input id="altele" type="text" name="altele" class="form-control form-control-sm" placeholder="{{__('main.other_info')}}" autocomplete="off">
+                                            <input id="altele" type="text" name="altele" class="form-control form-control-sm" placeholder="{{__('main.office_code')}}" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>

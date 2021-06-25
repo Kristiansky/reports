@@ -149,4 +149,5 @@
         'shipment_instructions' => 'Shipment instructions',
         'office_code' => 'Courier office code',
         'url_invoice' => 'URL Invoice',
+        'add_product' => 'Add product',
     ];

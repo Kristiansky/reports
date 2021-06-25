@@ -374,16 +374,38 @@
                         <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>{{__('main.product_name')}}</th>
-                                <th>{{__('main.qty')}}</th>
-                                <th>{{__('main.internal_id')}}</th>
-                                <th>{{__('main.current_stock')}}</th>
-                                <th>{{__('main.sku')}}</th>
-                                <th>{{__('main.barcode')}}</th>
-                                <th>{{__('main.action')}}</th>
+                                <th width="25%">{{__('main.product_name')}}</th>
+                                <th width="10%">{{__('main.qty')}}</th>
+                                <th width="15%">{{__('main.internal_id')}}</th>
+                                <th width="10%">{{__('main.current_stock')}}</th>
+                                <th width="15%">{{__('main.sku')}}</th>
+                                <th width="15%">{{__('main.barcode')}}</th>
+                                <th width="10%">{{__('main.action')}}</th>
                             </tr>
                             </thead>
                             <tbody id="edit_order_products">
+                            </tbody>
+                            <tbody id="add_order_products">
+                                <tr>
+                                    <td id="choose_product_holder">
+                                        <div class="form-group">
+                                            <select class="form-control form-control-sm select2" id="adding_product" name="adding_product" data-width="100%">
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td id="quantity_product_holder">
+                                        <div class="form-group">
+                                            <input id="adding_qty" type="number" name="adding_qty" class="form-control form-control-sm" placeholder="{{__('main.qty')}}" min="1" max="1" autocomplete="off">
+                                        </div>
+                                    </td>
+                                    <td id="internal_id_product_holder"></td>
+                                    <td id="current_stock_product_holder"></td>
+                                    <td id="sku_product_holder"></td>
+                                    <td id="barcode_product_holder"></td>
+                                    <td>
+                                        <button class="btn btn btn-success btn-xs" type='submit' name='addingProduct'><i class="fa fa-plus-circle"></i> {{__('main.add')}}</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </form>
@@ -480,10 +502,12 @@
 @section('plugins.Moment', true)
 @section('plugins.Datetimepicker', true)
 @section('plugins.Sweetalert2', true)
+@section('plugins.Select2', true)
 
 @section('js')
     <script>
 		$(document).ready(function () {
+			$('.select2').select2();
 			$('#date_from, #date_to').datetimepicker({
 				format: 'YYYY-MM-DD',
 				icons:
@@ -527,28 +551,51 @@
 					}
 				});
 				$.ajax({
-					url: 'order/'+idcomanda,
+					url: 'order/'+idcomanda+'/edit',
 					type:"GET",
 					success:function(response){
 						$('#editOverlay').addClass('d-none');
-						$('#edit_order_number').html(response.idextern);
-						$('#edit_order_in_date').html(response.data1);
-						$('#edit_order_payment_method').html(response.modplata);
-						$('#ramburs').val(response.ramburs);
-						$('#adresa').val(response.adresa);
-						$('#codpostal').val(response.codpostal);
-						$('#localitate').val(response.localitate);
-						$('#judet').val(response.judet);
-						$('#perscontact').val(response.perscontact);
-						$('#telpers').val(response.telpers);
-						$('#emailpers').val(response.emailpers);
-						if(response.sambata == '1' || response.sambata == 'da'){
+						var adding_products_html = "<option value=''>{{ __('main.choose') }}</option>";
+						var products_details=[];
+						response.adding_products.forEach(function(adding_product){
+							products_details[adding_product.idp] = {
+								'stock': adding_product.stock,
+								'codprodusclient': adding_product.codprodusclient,
+								'codbare': adding_product.codbare,
+							};
+							adding_products_html +=
+                                '<option value="'+adding_product.idp+'">'+adding_product.codprodusclient+': '+adding_product.descriere+'</option>'
+                                ;
+                        });
+						$('#adding_product').html(adding_products_html);
+
+						$('#adding_product').on('change', function () {
+							var chosen_idp = $(this).val();
+							$('input#adding_qty').attr('max', products_details[chosen_idp].stock).attr('required',true);
+							$('#internal_id_product_holder').html(chosen_idp);
+							$('#current_stock_product_holder').html(products_details[chosen_idp].stock);
+							$('#sku_product_holder').html(products_details[chosen_idp].codprodusclient);
+							$('#barcode_product_holder').html(products_details[chosen_idp].codbare);
+						});
+
+						$('#edit_order_number').html(response.order.idextern);
+						$('#edit_order_in_date').html(response.order.data1);
+						$('#edit_order_payment_method').html(response.order.modplata);
+						$('#ramburs').val(response.order.ramburs);
+						$('#adresa').val(response.order.adresa);
+						$('#codpostal').val(response.order.codpostal);
+						$('#localitate').val(response.order.localitate);
+						$('#judet').val(response.order.judet);
+						$('#perscontact').val(response.order.perscontact);
+						$('#telpers').val(response.order.telpers);
+						$('#emailpers').val(response.order.emailpers);
+						if(response.order.sambata == '1' || response.order.sambata == 'da'){
 							$('#sambata').prop("checked", true);
 						}
-						$('#ship_instructions').val(response.ship_instructions);
-						$('#altele').val(response.altele);
+						$('#ship_instructions').val(response.order.ship_instructions);
+						$('#altele').val(response.order.altele);
 						var table_html = '';
-						response.products.forEach(function(element){
+						response.order.products.forEach(function(element){
 							table_html +=
 								"<tr>" +
 								"<td>" + element.descriere + "</td>" +
@@ -569,6 +616,7 @@
 			    $('.editOrder[data-idcomanda="{{session('edited_order_idcomanda')}}"]').trigger( "click" );
 			    editOrderModal({{session('edited_order_idcomanda')}});
             @endif
+
 			$(document).on('click', '.editOrder' , function () {
 				var idcomanda = $(this).attr('data-idcomanda');
 				$('#editOverlay').removeClass('d-none');

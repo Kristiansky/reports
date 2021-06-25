@@ -524,7 +524,27 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $client = session('client');
+        $productCategories = $client->group->product_categories;
+        $adding_products = array();
+        $exclude = array();
+        if($order->products){
+            foreach ($order->products as $item) {
+                $exclude[]=$item['idp'];
+            }
+        }
+        $idcs = array();
+        foreach ($productCategories as $productCategory){
+            $idcs[] = $productCategory->idc;
+            foreach ($productCategory->products->sortBy('idp') as $product){
+                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
+                    $product['stock'] = (int)$product->stock();
+                    $adding_products[] = $product;
+                }
+            }
+        }
+        
+        return response()->json(['order'=>$order,'adding_products'=>$adding_products]);
     }
 
     /**
@@ -554,6 +574,56 @@ class OrderController extends Controller
             }
             session()->flash('edited_order_idcomanda', $order->idcomanda);
             session()->flash('message', __('main.order_cart_success_remove'));
+            session()->flash('message_type', 'success');
+            return redirect(route('order.index') . "?page=" . $request->current_page);
+        }
+        if(isset($request->addingProduct)){
+            $last_row = Order::where('idcomanda', '=', $order->idie)
+                ->get()->last();
+    
+            $order_array = [
+                'ido' => $last_row->ido,
+                'idso' => Auth::user()->id,
+                'idp' => $request->adding_product,
+                'volum' => $request->adding_qty,
+                'data1' => $last_row->data1,
+                'data2' => $last_row->data2,
+                'datai' => $last_row->datai,
+                'locatie' => $last_row->locatie,
+                'idcomanda' => $last_row->idcomanda,
+                'adresa' => $last_row->adresa,
+                'tstr' => $last_row->tstr,
+                'str' => $last_row->str,
+                'nr' => $last_row->nr,
+                'bl' => $last_row->bl,
+                'sc' => $last_row->sc,
+                'ap' => $last_row->ap,
+                'et' => $last_row->et,
+                'localitate' => $last_row->localitate,
+                'tara' => $last_row->tara,
+                'judet' => $last_row->judet,
+                'perscontact' => $last_row->perscontact,
+                'codpostal' => $last_row->codpostal,
+                'telpers' => $last_row->telpers,
+                'emailpers' => $last_row->emailpers,
+                'ramburs' => $last_row->ramburs,
+                'url_factura' => $last_row->url_factura,
+                'sambata' => $last_row->sambata,
+                'altele' => $last_row->altele,
+                'status' => $last_row->getRawOriginal('status'),
+                'pret' => $last_row->pret,
+                'modplata' => $last_row->modplata,
+                'curier' => $last_row->curier,
+                'shipping_method' => $last_row->shipping_method,
+                'ship_instructions' => $last_row->ship_instructions,
+            ];
+    
+            DB::table('stor_iesiri')->insert(
+                $order_array
+            );
+            
+            session()->flash('edited_order_idcomanda', $order->idcomanda);
+            session()->flash('message', __('main.order_cart_success_add'));
             session()->flash('message_type', 'success');
             return redirect(route('order.index') . "?page=" . $request->current_page);
         }
@@ -737,7 +807,7 @@ class OrderController extends Controller
             'pret' => 0,
             'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
             'curier' => $request->get('curier'),
-            'shipping_method' => $request->get('shipping_method') ? $request->get('shipping_method') : null,
+            'shipping_method' => $request->get('shipping_method') ? $request->get('shipping_method') : "",
             'ship_instructions' => $request->get('ship_instructions') . $i == 0 ? $packet_title : '',
         ];
     

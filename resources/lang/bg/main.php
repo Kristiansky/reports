@@ -123,7 +123,7 @@
         'more' => 'Още',
         'order_extra_info' => 'Доп. инф. доставка',
         'order_cart_success_remove' => 'Продукта е премахнат от списъка',
-        'order_cart_success_add' => 'Продукта е доваен в списъка',
+        'order_cart_success_add' => 'Продукта е добавен в списъка',
         'add_file' => 'Качи файл',
         'normal' => 'Нормално',
         'upload_file' => 'Качи файл',
@@ -149,4 +149,5 @@
         'shipment_instructions' => 'Инструкции изпращане',
         'office_code' => 'Код на куриерски офис',
         'url_invoice' => 'URL Фактура',
+        'add_product' => 'Добави продукт',
     ];

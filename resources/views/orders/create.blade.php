@@ -175,23 +175,23 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl-3">
+                                {{--<div class="col-12 col-xl-3">
                                     <div class="form-group">
                                         <label for="locatie">
                                             {{__('main.order_delivery_extra_info')}}:
                                         </label>
                                         <input id="locatie" type="text" name="locatie" class="form-control form-control-sm" placeholder="{{__('main.order_extra_info')}}" autocomplete="off">
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
-                            <div class="row">
+                            {{--<div class="row">
                                 <div class="col-12 col-md-3 col-xl-1">
                                     <label>
                                         {{__('main.address')}}</label>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="row">
-                                <div class="col-12 col-md-3 col-xl-1">
+                                {{--<div class="col-12 col-md-3 col-xl-1">
                                     <div class="form-group">
                                         <select name="tstr" id="tstr" class="form-control form-control-sm">
                                             <option value="">{{ __('main.choose') }}</option>
@@ -200,13 +200,15 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-3 col-xl-2">
+                                </div>--}}
+                                <div class="col-12 col-md-3 col-xl-3">
                                     <div class="form-group">
-                                        <input id="str" type="text" name="str" class="form-control form-control-sm" placeholder="{{__('main.street')}}" autocomplete="off">
+                                        <label for="str">
+                                            {{__('main.address')}}</label>
+                                        <input id="str" type="text" name="str" class="form-control form-control-sm" placeholder="{{__('main.address')}}" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3 col-xl-1">
+                                {{--<div class="col-12 col-md-3 col-xl-1">
                                     <div class="form-group">
                                         <input id="nr" type="text" name="nr" class="form-control form-control-sm" placeholder="{{__('main.number')}}" autocomplete="off">
                                     </div>
@@ -230,15 +232,23 @@
                                     <div class="form-group">
                                         <input id="ap" type="text" name="ap" class="form-control form-control-sm" placeholder="{{__('main.apartment')}}" autocomplete="off">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
+                                </div>--}}
+                            {{--</div>
+                            <div class="row">--}}
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="localitate">
                                         {{__('main.city')}}
                                     </label>
                                     <div class="form-group">
                                         <input id="localitate" type="text" name="localitate" class="form-control form-control-sm" placeholder="{{__('main.city')}}" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 col-xl-1">
+                                    <label for="codpostal">
+                                        {{__('main.post_code')}}
+                                    </label>
+                                    <div class="form-group">
+                                        <input id="codpostal" type="text" name="codpostal" class="form-control form-control-sm" placeholder="{{__('main.post_code')}}" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">
@@ -278,13 +288,16 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-1">
-                                    <label for="codpostal">
-                                        {{__('main.post_code')}}
-                                    </label>
                                     <div class="form-group">
-                                        <input id="codpostal" type="text" name="codpostal" class="form-control form-control-sm" placeholder="{{__('main.post_code')}}" autocomplete="off">
+                                        <label for="tara">{{__('main.choose_country')}}</label>
+                                        <select name="tara" id="tara" class="form-control form-control-sm">
+                                            <option value="">{{ __('main.choose') }}</option>
+                                            <option value="BG">BG</option><option value="GR">GR</option><option value="RO">RO</option><option value="AR">AR</option><option value="AT">AT</option><option value="AU">AU</option><option value="BA">BA</option><option value="BE">BE</option><option value="BN">BN</option><option value="BR">BR</option><option value="BY">BY</option><option value="CA">CA</option><option value="CH">CH</option><option value="CL">CL</option><option value="CN">CN</option><option value="CO">CO</option><option value="CZ">CZ</option><option value="DE">DE</option><option value="DK">DK</option><option value="EC">EC</option><option value="EE">EE</option><option value="ES">ES</option><option value="FI">FI</option><option value="FR">FR</option><option value="GB">GB</option><option value="GL">GL</option><option value="GR">GR</option><option value="HK">HK</option><option value="HR">HR</option><option value="HU">HU</option><option value="ID">ID</option><option value="IE">IE</option><option value="IL">IL</option><option value="IN">IN</option><option value="IS">IS</option><option value="IT">IT</option><option value="JE">JE</option><option value="JP">JP</option><option value="KE">KE</option><option value="KR">KR</option><option value="KW">KW</option><option value="LB">LB</option><option value="LK">LK</option><option value="LV">LV</option><option value="MT">MT</option><option value="MX">MX</option><option value="MY">MY</option><option value="NL">NL</option><option value="NO">NO</option><option value="NZ">NZ</option><option value="PH">PH</option><option value="PL">PL</option><option value="PR">PR</option><option value="PT">PT</option><option value="QA">QA</option><option value="RE">RE</option><option value="RU">RU</option><option value="SA">SA</option><option value="SE">SE</option><option value="SG">SG</option><option value="SI">SI</option><option value="SK">SK</option><option value="SM">SM</option><option value="TH">TH</option><option value="TW">TW</option><option value="TZ">TZ</option><option value="UA">UA</option><option value="US">US</option>
+                                        </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="perscontact">
                                         {{__('main.person_name')}}
@@ -299,6 +312,14 @@
                                     </label>
                                     <div class="form-group">
                                         <input id="telpers" type="text" name="telpers" class="form-control form-control-sm" placeholder="{{__('main.phone')}}" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 col-xl-2">
+                                    <label for="emailpers">
+                                        {{__('main.email')}}
+                                    </label>
+                                    <div class="form-group">
+                                        <input id="emailpers" type="email" name="emailpers" class="form-control form-control-sm" placeholder="{{__('main.email')}}" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -329,6 +350,16 @@
                                         <input id="rambursalttip" type="text" name="rambursalttip" class="form-control form-control-sm" placeholder="{{__('main.COD_Documents')}}" autocomplete="off">
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-3 col-xl-5">
+                                    <div class="form-group">
+                                        <label for="ship_instructions">
+                                            {{__('main.shipment_instructions')}}
+                                        </label>
+                                        <div class="form-group">
+                                            <input id="ship_instructions" type="text" name="ship_instructions" class="form-control form-control-sm" placeholder="{{__('main.shipment_instructions')}}" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-3 col-xl-2">
@@ -350,6 +381,7 @@
                                                 <option value="econt">Econt</option>
                                                 <option value="transpress">Transpress</option>
                                                 <option value="inout">Inout</option>
+                                                <option value="inout2">Inout 2</option>
                                                 <option value="postone">Postone</option>
                                                 <option value="dhl">DHL</option>
                                             </select>
@@ -359,6 +391,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @if(session('client')->cod_client == 'PAOLITA')
+                                    <div class="col-12 col-md-3 col-xl-2">
+                                        <label for="shipping_method">
+                                            {{__('main.shipping_method')}}
+                                        </label>
+                                        <div class="form-group">
+                                            <select name="shipping_method" id="shipping_method" class="form-control form-control-sm">
+                                                <option value="">{{ __('main.choose') }}</option>
+                                                <option value="crossborder">crossborder</option>
+                                                <option value="eushipmentsairexpress">eushipmentsairexpress</option>
+                                                <option value="eushipmentsglobal premium">eushipmentsglobal premium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-12 col-md-3 col-xl-2 pt-4 mt-2">
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
@@ -370,7 +417,7 @@
                                 <div class="col-12 col-md-3 col-xl-5">
                                     <div class="form-group">
                                         <label for="altele">
-                                            {{__('main.other_info')}}
+                                            {{__('main.other_info')}} ({{__('main.office_code')}})
                                         </label>
                                         <div class="form-group">
                                             <input id="altele" type="text" name="altele" class="form-control form-control-sm" placeholder="{{__('main.other_info')}}" autocomplete="off">

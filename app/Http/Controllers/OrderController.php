@@ -319,6 +319,13 @@ class OrderController extends Controller
                     } else {
                         $office_code = 'Automat';
                     }
+    
+                    $phone = $row['phone'];
+                    $phoneMatch = array();
+                    if (($client->cod_client == 'BDC' || $client->cod_client == 'WOW') && preg_match('/(\+?359)?0?(.*)/', $phone, $phoneMatch)) {
+                        $phone = '0' . $phoneMatch[2];
+                    }
+                    $phone = empty($phone) ? "" : $phone;
                     
                     if (isset($this->packets_to_clients[$product->idc])){
                         $packet_products = DB::table($this->packets_to_clients[$product->idc])
@@ -346,7 +353,7 @@ class OrderController extends Controller
                                     'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
                                     'perscontact' => $row['contact_person'],
                                     'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
-                                    'telpers' => $row['phone'],
+                                    'telpers' => $phone,
                                     'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
                                     'sambata' => 0,
                                     'altele' => $office_code,
@@ -391,7 +398,7 @@ class OrderController extends Controller
                                 'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
                                 'perscontact' => $row['contact_person'],
                                 'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
-                                'telpers' => $row['phone'],
+                                'telpers' => $phone,
                                 'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
                                 'sambata' => 0,
                                 'altele' => $office_code,
@@ -436,7 +443,7 @@ class OrderController extends Controller
                             'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
                             'perscontact' => $row['contact_person'],
                             'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
-                            'telpers' => $row['phone'],
+                            'telpers' => $phone,
                             'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
                             'sambata' => 0,
                             'altele' => $office_code,
@@ -686,10 +693,12 @@ class OrderController extends Controller
             'ap' => $ap,
             'et' => $et,
             'localitate' => $request->get('localitate'),
+            'tara' => $request->get('tara') == '' ? 'BG' : $request->get('tara'),
             'judet' => $request->get('judet'),
             'perscontact' => $request->get('perscontact'),
             'codpostal' => $request->get('codpostal'),
             'telpers' => $request->get('telpers'),
+            'emailpers' => $request->get('emailpers'),
             'ramburs' => $request->get('ramburs'),
             'rambursalttip' => $request->get('rambursalttip'),
             'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
@@ -698,7 +707,8 @@ class OrderController extends Controller
             'pret' => 0,
             'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
             'curier' => $request->get('curier'),
-            'ship_instructions' => $request->get('locatie') . $i == 0 ? $packet_title : '',
+            'shipping_method' => $request->get('shipping_method') ? $request->get('shipping_method') : null,
+            'ship_instructions' => $request->get('ship_instructions') . $i == 0 ? $packet_title : '',
         ];
     
         if($i==0){

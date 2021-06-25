@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/create.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +46,13 @@
         <item name="nivelzerow7bg@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="nivelzerow7bg: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="nivelzerow7bg@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="nivelzerow7bg: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="clienti: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -271,14 +278,8 @@
       <workItem from="1624342774981" duration="19122000" />
       <workItem from="1624374759167" duration="1030000" />
       <workItem from="1624428686600" duration="9246000" />
-      <workItem from="1624515761968" duration="6219000" />
-    </task>
-    <task id="LOCAL-00001" summary="Translated">
-      <created>1622810216288</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1622810216288</updated>
+      <workItem from="1624515761968" duration="10881000" />
+      <workItem from="1624600245718" duration="3094000" />
     </task>
     <task id="LOCAL-00002" summary="Removed factories and seeds from composer.json">
       <created>1622811158702</created>
@@ -616,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624516014462</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Orders index fix">
+      <created>1624540108817</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1624540108818</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +644,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added barcode in product list" />
     <MESSAGE value="Adding order from XLSX File" />
     <MESSAGE value="Storage report link secured" />
     <MESSAGE value="Bug fixes on the product modal, duplicated rows of entry" />
@@ -661,6 +668,7 @@
     <MESSAGE value="Per page bug fix" />
     <MESSAGE value="Returns info update" />
     <MESSAGE value="Product export add barcode" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product export add barcode" />
+    <MESSAGE value="Orders index fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Orders index fix" />
   </component>
 </project>

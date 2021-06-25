@@ -145,4 +145,7 @@
         'choose_county' => 'Choose county',
         'return_reason' => 'Reason for return',
         'current_stock' => 'Current stock',
+        'choose_country' => 'Choose country',
+        'shipment_instructions' => 'Shipment instructions',
+        'office_code' => 'Courier office code',
     ];

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -275,14 +276,7 @@
       <workItem from="1624374759167" duration="1030000" />
       <workItem from="1624428686600" duration="9246000" />
       <workItem from="1624515761968" duration="10881000" />
-      <workItem from="1624600245718" duration="6278000" />
-    </task>
-    <task id="LOCAL-00006" summary="Fixed slow ajax product history">
-      <created>1623068641364</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1623068641364</updated>
+      <workItem from="1624600245718" duration="8525000" />
     </task>
     <task id="LOCAL-00007" summary="More fixes slow ajax product history">
       <created>1623070002050</created>
@@ -620,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624620741868</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Create order add field">
+      <created>1624621325588</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1624621325588</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

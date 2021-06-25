@@ -537,10 +537,21 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         if(isset($request->removeProduct)){
+            $old_order_id = $order->idie;
             DB::table('stor_iesiri')
                 ->where('idcomanda', '=', $order->idie)
                 ->where('idp', '=', (int)$request->removeProduct)
                 ->delete();
+            $remaining_rows = DB::table('stor_iesiri')
+                ->where('idcomanda', '=', $order->idie)->get();
+            if (!empty($remaining_rows)){
+                $new_order_id = $remaining_rows->first()->idie;
+                DB::table('stor_iesiri')
+                    ->where('idcomanda', '=', $old_order_id)
+                    ->update(
+                        ['idcomanda' => $new_order_id]
+                    );
+            }
             session()->flash('edited_order_idcomanda', $order->idcomanda);
             session()->flash('message', __('main.order_cart_success_remove'));
             session()->flash('message_type', 'success');

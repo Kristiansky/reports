@@ -682,7 +682,7 @@ class OrderController extends Controller
             'data1' => $request->get('data1'),
             'data2' => $request->get('data2'),
             'datai' => date("Y-m-d H:i:s"),
-            'locatie' => $request->get('locatie'),
+            'locatie' => $request->get('locatie') ? $request->get('locatie') : "",
             'idcomanda' => $idcomanda,
             'adresa' => $address,
             'tstr' => $request->get('tstr'),

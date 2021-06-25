@@ -7,3 +7,7 @@
 #product_sales td, #product_sales th{
     font-size: 12px !important;
 }
+.modal-dialog .overlay.light{
+    background-color: rgba(255,255,255,.5);
+    color: #212529;
+}

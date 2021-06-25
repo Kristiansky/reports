@@ -247,6 +247,9 @@
     <div class="modal fade" id="editOrderModal" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <div class="overlay light d-none" id="editOverlay">
+                    <i class="fas fa-3x fa-spinner fa-pulse"></i>
+                </div>
                 <div class="modal-header">
                     <h4 class="modal-title">{{__('main.order')}}: <span id="edit_order_number"></span></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -394,6 +397,9 @@
     <div class="modal fade" id="orderModal" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <div class="overlay light d-none" id="viewOverlay">
+                    <i class="fas fa-3x fa-spinner fa-pulse"></i>
+                </div>
                 <div class="modal-header">
                     <h4 class="modal-title">{{__('main.order')}}: <span id="order_number"></span></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -463,9 +469,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{__('main.close')}}</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 @stop
 
@@ -526,6 +530,7 @@
 					url: 'order/'+idcomanda,
 					type:"GET",
 					success:function(response){
+						$('#editOverlay').addClass('d-none');
 						$('#edit_order_number').html(response.idextern);
 						$('#edit_order_in_date').html(response.data1);
 						$('#edit_order_payment_method').html(response.modplata);
@@ -566,14 +571,17 @@
             @endif
 			$(document).on('click', '.editOrder' , function () {
 				var idcomanda = $(this).attr('data-idcomanda');
+				$('#editOverlay').removeClass('d-none');
 				editOrderModal(idcomanda);
 			});
             $('.openOrder').on('click', function () {
+				$('#viewOverlay').removeClass('d-none');
             	var idcomanda = $(this).attr('data-idcomanda');
 				$.ajax({
 					url: 'order/'+idcomanda,
 					type:"GET",
 					success:function(response){
+						$('#viewOverlay').addClass('d-none');
 						$('#order_number').html(response.idextern);
 						$('#order_in_date').html(response.data1);
 						$('#order_payment_method').html(response.modplata);

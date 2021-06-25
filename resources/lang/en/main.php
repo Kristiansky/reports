@@ -148,4 +148,5 @@
         'choose_country' => 'Choose country',
         'shipment_instructions' => 'Shipment instructions',
         'office_code' => 'Courier office code',
+        'url_invoice' => 'URL Invoice',
     ];

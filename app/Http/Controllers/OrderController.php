@@ -700,7 +700,7 @@ class OrderController extends Controller
             'telpers' => $request->get('telpers'),
             'emailpers' => $request->get('emailpers'),
             'ramburs' => $request->get('ramburs'),
-            'rambursalttip' => $request->get('rambursalttip'),
+            'url_factura' => $request->get('url_factura'),
             'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
             'altele' => $request->get('altele'),
             'status' => 'Comanda',

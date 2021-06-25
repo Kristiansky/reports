@@ -343,11 +343,11 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">
-                                    <label for="rambursalttip">
-                                        {{__('main.COD_Documents')}}
+                                    <label for="url_factura">
+                                        {{__('main.url_invoice')}}
                                     </label>
                                     <div class="form-group">
-                                        <input id="rambursalttip" type="text" name="rambursalttip" class="form-control form-control-sm" placeholder="{{__('main.COD_Documents')}}" autocomplete="off">
+                                        <input id="url_factura" type="text" name="url_factura" class="form-control form-control-sm" placeholder="{{__('main.url_invoice')}}" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-5">

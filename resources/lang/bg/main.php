@@ -148,4 +148,5 @@
         'choose_country' => 'Избор държава',
         'shipment_instructions' => 'Инструкции изпращане',
         'office_code' => 'Код на куриерски офис',
+        'url_invoice' => 'URL Фактура',
     ];

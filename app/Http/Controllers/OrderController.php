@@ -651,6 +651,7 @@ class OrderController extends Controller
         }
     }
     
+    
     public function insertProductToOrder(Product $product, $qty, Request $request, $i, $idcomanda, $packet_title = ''){
         $ido = User::where('group_id','=',$product->category->group->id)->where('name','=',$product->category->group->name)->first()->id;
         $address = $request->get('tstr') . " " . $request->get('str');
@@ -674,6 +675,24 @@ class OrderController extends Controller
         if($et != ''){
             $address .= ' Et. ' . $et;
         }
+        $locatie = "";
+        if ($request->get('locatie') == null){
+            $locatie = "";
+        }else{
+            $locatie = $request->get('locatie');
+        }
+        $tstr = "";
+        if ($request->get('tstr') == null){
+            $tstr = "";
+        }else{
+            $tstr = $request->get('tstr');
+        }
+        $str = "";
+        if ($request->get('str') == null){
+            $str = "";
+        }else{
+            $str = $request->get('str');
+        }
         $order_array = [
             'ido' => $ido,
             'idso' => Auth::user()->id,
@@ -682,16 +701,16 @@ class OrderController extends Controller
             'data1' => $request->get('data1'),
             'data2' => $request->get('data2'),
             'datai' => date("Y-m-d H:i:s"),
-            'locatie' => $request->get('locatie') ? $request->get('locatie') : "",
+            'locatie' => $locatie,
             'idcomanda' => $idcomanda,
             'adresa' => $address,
-            'tstr' => $request->get('tstr'),
-            'str' => $request->get('str'),
-            'nr' => $nr,
-            'bl' => $bl,
-            'sc' => $sc,
-            'ap' => $ap,
-            'et' => $et,
+            'tstr' => $tstr,
+            'str' => $str,
+            'nr' => $nr == null ? '' : $nr,
+            'bl' => $bl == null ? '' : $bl,
+            'sc' => $sc == null ? '' : $sc,
+            'ap' => $ap == null ? '' : $ap,
+            'et' => $et == null ? '' : $et,
             'localitate' => $request->get('localitate'),
             'tara' => $request->get('tara') == '' ? 'BG' : $request->get('tara'),
             'judet' => $request->get('judet'),

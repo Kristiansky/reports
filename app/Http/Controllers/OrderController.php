@@ -276,16 +276,76 @@ class OrderController extends Controller
                 $heading = preg_replace('/\s+/', '_', $heading);
                 $fixed_headings[] = $heading;
             }
+            $item_count = 0;
+            foreach ($fixed_headings as $key => $heading){
+                if (strpos($heading, 'item_id') !== false) {
+                    $item_count++;
+                    $fixed_headings[$key] = 'item_id_' . $item_count;
+                }
+                if (strpos($heading, 'name') !== false) {
+                    $fixed_headings[$key] = 'name_' . $item_count;
+                }
+                if (strpos($heading, 'quantity') !== false) {
+                    $fixed_headings[$key] = 'quantity_' . $item_count;
+                }
+            }
+            
             array_walk(
                 $xlsx_arr,
                 function (&$row) use ($fixed_headings) {
                     $row = array_combine($fixed_headings, $row);
                 }
             );
-
+    
+            foreach($xlsx_arr as $key => $row){
+                foreach ($row as $sub_key => $sub_row){
+                    if ($sub_row == null){
+                        unset($xlsx_arr[$key][$sub_key]);
+                    }
+                }
+            }
+            
+            foreach($xlsx_arr as $key => $row){
+                $item_recount = 0;
+                if (isset($row['order_id'])){
+                    foreach ($row as $sub_key => $sub_row){
+                        if (strpos($sub_key, 'item_id') !== false) {
+                            $item_recount++;
+                        }
+                    }
+                    $xlsx_arr[$key]['item_count'] = $item_recount;
+                }
+            }
+            
             $orders = array();
             foreach($xlsx_arr as $key => $row){
-                $orders[$row['order_id']][]=$row;
+                if (isset($row['order_id'])){
+                    if ($row['item_count'] > 1){
+                        for ($i=1;$i<=$row['item_count'];$i++){
+                            if (isset($row['item_id_'.$i])){
+                                $row['item_id'] = $row['item_id_'.$i];
+                            }
+                            if (isset($row['name_'.$i])){
+                                $row['name'] = $row['name_'.$i];
+                            }
+                            if (isset($row['quantity_'.$i])){
+                                $row['quantity'] = $row['quantity_'.$i];
+                            }
+                            unset($row['item_id_'.$i]);
+                            unset($row['name_'.$i]);
+                            unset($row['quantity_'.$i]);
+                            $orders[$row['order_id']][]=$row;
+                        }
+                    }else{
+                        $row['item_id'] = $row['item_id_1'];
+                        $row['name'] = $row['name_1'];
+                        $row['quantity'] = $row['quantity_1'];
+                        unset($row['item_id_1']);
+                        unset($row['name_1']);
+                        unset($row['quantity_1']);
+                        $orders[$row['order_id']][]=$row;
+                    }
+                }
             }
     
             $orderTotalFields = array('order_total', 'order total', 'order_value', 'order value', 'price');
@@ -302,8 +362,10 @@ class OrderController extends Controller
                     if($product == null){
                         $product = Product::where('descriere','=','Unknown product')->whereIn('idc', $idcs)->first();
                     }
-        
-                    $address = $row['address'] . " " . $row['comments'];
+    
+                    $comments = isset($row['comments']) ? $row['comments'] : '';
+                    $address_only = isset($row['address']) ? $row['address'] : '';
+                    $address = $address_only . " " . $comments;
                     if (isset($row['office_code'])){
                         if (
                             empty($row['office_code'])
@@ -364,7 +426,7 @@ class OrderController extends Controller
                                     'data2' => date("Y-m-d"),
                                     'datai' => date("Y-m-d H:i:s"),
                                     'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
-                                    'adresa' => $address,
+                                    'adresa' => $address_only,
                                     'localitate' => $row['town'],
                                     'judet' => $row['town'],
                                     'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
@@ -378,7 +440,7 @@ class OrderController extends Controller
                                     'pret' => 0,
                                     'modplata' => $metoda,
                                     'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
-                                    'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
+                                    'ship_instructions' => $comments,
                                     'idextern' => $codcomanda,
                                     'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                                     'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
@@ -409,7 +471,7 @@ class OrderController extends Controller
                                 'data2' => date("Y-m-d"),
                                 'datai' => date("Y-m-d H:i:s"),
                                 'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
-                                'adresa' => $address,
+                                'adresa' => $address_only,
                                 'localitate' => $row['town'],
                                 'judet' => $row['town'],
                                 'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
@@ -423,7 +485,7 @@ class OrderController extends Controller
                                 'pret' => 0,
                                 'modplata' => $metoda,
                                 'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
-                                'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
+                                'ship_instructions' => $comments,
                                 'idextern' => $codcomanda,
                                 'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                                 'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
@@ -454,7 +516,7 @@ class OrderController extends Controller
                             'data2' => date("Y-m-d"),
                             'datai' => date("Y-m-d H:i:s"),
                             'idcomanda' => (isset($idcomanda) ? $idcomanda : '0'),
-                            'adresa' => $address,
+                            'adresa' => $address_only,
                             'localitate' => $row['town'],
                             'judet' => $row['town'],
                             'tara' => isset($row['country']) ? $row['country']: (isset($row['courier']) && strtolower($row['courier']) == 'acs' ? 'GR' : "BG"),
@@ -468,7 +530,7 @@ class OrderController extends Controller
                             'pret' => 0,
                             'modplata' => $metoda,
                             'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
-                            'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
+                            'ship_instructions' => $comments,
                             'idextern' => $codcomanda,
                             'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
                             'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",

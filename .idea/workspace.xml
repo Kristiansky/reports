@@ -270,14 +270,7 @@
       <workItem from="1624428686600" duration="9246000" />
       <workItem from="1624515761968" duration="10881000" />
       <workItem from="1624600245718" duration="18836000" />
-      <workItem from="1624863692377" duration="1669000" />
-    </task>
-    <task id="LOCAL-00010" summary="Added barcode in product list">
-      <created>1623145494182</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1623145494182</updated>
+      <workItem from="1624863692377" duration="16339000" />
     </task>
     <task id="LOCAL-00011" summary="Adding order from XLSX File">
       <created>1623757915380</created>
@@ -615,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624635364579</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Order Adding products xlsx fix for payment method">
+      <created>1624866690215</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1624866690216</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +635,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed dashboard" />
     <MESSAGE value="Fixing products filters" />
     <MESSAGE value="Translations" />
     <MESSAGE value="Fix order search qty issue" />
@@ -660,6 +659,7 @@
     <MESSAGE value="Order Product delete bug fix" />
     <MESSAGE value="Order edit loading spinner" />
     <MESSAGE value="Order Adding products" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order Adding products" />
+    <MESSAGE value="Order Adding products xlsx fix for payment method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order Adding products xlsx fix for payment method" />
   </component>
 </project>

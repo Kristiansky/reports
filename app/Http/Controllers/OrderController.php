@@ -287,6 +287,8 @@ class OrderController extends Controller
             foreach($xlsx_arr as $key => $row){
                 $orders[$row['order_id']][]=$row;
             }
+    
+            $orderTotalFields = array('order_total', 'order total', 'order_value', 'order value', 'price');
             
             foreach ($orders as $order){
                 $i=0;
@@ -326,6 +328,21 @@ class OrderController extends Controller
                         $phone = '0' . $phoneMatch[2];
                     }
                     $phone = empty($phone) ? "" : $phone;
+    
+                    $valoareramburs = '';
+                    foreach ($orderTotalFields as $f){
+                        $valoareramburs = isset($row[$f]) && !empty($row[$f]) ? trim($row[$f]) : $valoareramburs;
+                    }
+                    @reset($orderTotalFields);
+    
+                    $metoda = strtoupper(trim($row['payment_method']));
+                    
+                    if (empty($metoda) || $metoda == 'COD') {
+                        $metoda = 'cashondelivery';
+                    } else {
+                        $metoda = 'NOCOD';
+                        //$valoareramburs='';
+                    }
                     
                     if (isset($this->packets_to_clients[$product->idc])){
                         $packet_products = DB::table($this->packets_to_clients[$product->idc])
@@ -354,12 +371,12 @@ class OrderController extends Controller
                                     'perscontact' => $row['contact_person'],
                                     'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                                     'telpers' => $phone,
-                                    'ramburs' => $row['order_value'] == '' ? 0 : $row['order_value'],
+                                    'ramburs' => $valoareramburs,
                                     'sambata' => 0,
                                     'altele' => $office_code,
                                     'status' => 'Comanda',
                                     'pret' => 0,
-                                    'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                                    'modplata' => $metoda,
                                     'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                     'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                                     'idextern' => $codcomanda,
@@ -399,12 +416,12 @@ class OrderController extends Controller
                                 'perscontact' => $row['contact_person'],
                                 'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                                 'telpers' => $phone,
-                                'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
+                                'ramburs' => $valoareramburs,
                                 'sambata' => 0,
                                 'altele' => $office_code,
                                 'status' => 'Comanda',
                                 'pret' => 0,
-                                'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                                'modplata' => $metoda,
                                 'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                 'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                                 'idextern' => $codcomanda,
@@ -444,12 +461,12 @@ class OrderController extends Controller
                             'perscontact' => $row['contact_person'],
                             'codpostal' => isset($row['postcode']) ? $row['postcode'] : '',
                             'telpers' => $phone,
-                            'ramburs' => $row['order_value'] != null ? $row['order_value'] : 0,
+                            'ramburs' => $valoareramburs,
                             'sambata' => 0,
                             'altele' => $office_code,
                             'status' => 'Comanda',
                             'pret' => 0,
-                            'modplata' => $row['order_value'] != null ? 'cashondelivery' : '',
+                            'modplata' => $metoda,
                             'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                             'ship_instructions' => $row['comments'] != null ? $row['comments'] : '',
                             'idextern' => $codcomanda,

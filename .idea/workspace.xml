@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -270,14 +270,7 @@
       <workItem from="1624428686600" duration="9246000" />
       <workItem from="1624515761968" duration="10881000" />
       <workItem from="1624600245718" duration="18836000" />
-      <workItem from="1624863692377" duration="16339000" />
-    </task>
-    <task id="LOCAL-00011" summary="Adding order from XLSX File">
-      <created>1623757915380</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1623757915380</updated>
+      <workItem from="1624863692377" duration="18190000" />
     </task>
     <task id="LOCAL-00012" summary="Storage report link secured">
       <created>1623758552389</created>
@@ -615,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624866690216</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Order Adding products xlsx bug fixes">
+      <created>1624886982714</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1624886982714</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +635,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing products filters" />
     <MESSAGE value="Translations" />
     <MESSAGE value="Fix order search qty issue" />
     <MESSAGE value="Fixing export filters for orders" />
@@ -660,6 +659,7 @@
     <MESSAGE value="Order edit loading spinner" />
     <MESSAGE value="Order Adding products" />
     <MESSAGE value="Order Adding products xlsx fix for payment method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order Adding products xlsx fix for payment method" />
+    <MESSAGE value="Order Adding products xlsx bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order Adding products xlsx bug fixes" />
   </component>
 </project>

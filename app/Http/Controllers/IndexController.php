@@ -248,7 +248,7 @@
                     }
                 })
                 ->select(
-                    DB::raw('COUNT(stor_iesiri.idp) as sold_products'),
+                    DB::raw('SUM(stor_iesiri.volum) as sold_products'),
                     'stor_iesiri.idp',
                     'stor_produse.descriere as product_name'
                 )
@@ -256,7 +256,6 @@
                 ->groupBy('idp')
                 ->orderBy('sold_products', 'DESC')
                 ->take(10)
-                ->get()
             ;
             $data['top_products'] = $top_products;
     

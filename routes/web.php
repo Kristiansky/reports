@@ -1,6 +1,7 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
+    
+    use Illuminate\Support\Facades\Redirect;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+    Route::get('admin/pre', function(){
+        return Redirect::to('', 301);
+    });
+
     Route::get('lang/{locale}', 'LocalizationController@index');
     
     Route::get('login', 'Auth\LoginController@login')->name('login');

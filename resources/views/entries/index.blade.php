@@ -94,7 +94,7 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
                         <thead>
                         <tr>
                             @php

@@ -118,7 +118,7 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
                         <thead>
                         <tr>
                             @php
@@ -244,7 +244,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-sm table-bordered table-hover">
+                    <table class="table table-sm table-bordered table-hover table-responsive">
                         <tbody>
                         <tr>
                             <th width="25%">{{__('main.product_id')}}</th>
@@ -274,7 +274,7 @@
                     </table>
                     <div class="row">
                         <div class="col-md-6">
-                            <table class="table table-sm table-bordered table-hover" id="product_entries">
+                            <table class="table table-sm table-bordered table-hover table-responsive" id="product_entries">
                                 <thead>
                                 <tr>
                                     <th colspan="6"><h4 class="text-center">{{__('main.entries')}}</h4></th>
@@ -300,7 +300,7 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <table class="table table-sm table-bordered table-hover" id="product_sales">
+                            <table class="table table-sm table-bordered table-hover table-responsive" id="product_sales">
                                 <thead>
                                 <tr>
                                     <th colspan="8"><h4 class="text-center">{{__('main.sales')}}</h4></th>
@@ -350,7 +350,7 @@
                     <form action="" method="post">
                         @csrf
                         @method('PATCH')
-                        <table class="table table-sm table-bordered table-hover">
+                        <table class="table table-sm table-bordered table-hover table-responsive">
                             <tr>
                                 <th width="25%">{{__('main.name')}}</th>
                                 <td width="75%">

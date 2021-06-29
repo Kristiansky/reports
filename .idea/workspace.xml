@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/entries/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/entries/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -278,21 +279,7 @@
       <workItem from="1624515761968" duration="10881000" />
       <workItem from="1624600245718" duration="18836000" />
       <workItem from="1624863692377" duration="19695000" />
-      <workItem from="1624952156688" duration="3041000" />
-    </task>
-    <task id="LOCAL-00013" summary="Bug fixes on the product modal, duplicated rows of entry">
-      <created>1623766124146</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1623766124146</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Bug fixes on the product modal, duplicated rows of entry">
-      <created>1623766448873</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1623766448873</updated>
+      <workItem from="1624952156688" duration="3531000" />
     </task>
     <task id="LOCAL-00015" summary="Bug fixes on the product modal, duplicated rows of entry">
       <created>1623768382976</created>
@@ -623,7 +610,21 @@
       <option name="project" value="LOCAL" />
       <updated>1624890883897</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Fix dashboard top products count">
+      <created>1624957342677</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1624957342678</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Fix dashboard top products count">
+      <created>1624957414945</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1624957414946</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +644,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix order search qty issue" />
     <MESSAGE value="Fixing export filters for orders" />
     <MESSAGE value="Fix responsive" />
     <MESSAGE value="favicon" />
@@ -668,6 +668,7 @@
     <MESSAGE value="Order Adding products xlsx fix for payment method" />
     <MESSAGE value="Order Adding products xlsx bug fixes" />
     <MESSAGE value="Product sales history ordering fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product sales history ordering fix" />
+    <MESSAGE value="Fix dashboard top products count" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix dashboard top products count" />
   </component>
 </project>

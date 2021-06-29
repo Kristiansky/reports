@@ -127,7 +127,7 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
                         <thead>
                         <tr>
 
@@ -262,7 +262,7 @@
                         @csrf
                         @method('PATCH')
                         <input type="hidden" name="current_page" value="{{$orders->currentPage()}}"/>
-                        <table class="table table-sm table-bordered table-hover">
+                        <table class="table table-sm table-bordered table-hover table-responsive">
                             <tr>
                                 <th width="25%">{{__('main.order_in_date')}}</th>
                                 <td width="75%"><span id="edit_order_in_date"></span></td>
@@ -371,7 +371,7 @@
                             </div>
                         </div>
                         <h5>{{__('main.order_products')}}</h5>
-                        <table class="table table-sm table-striped table-bordered">
+                        <table class="table table-sm table-striped table-bordered table-responsive">
                             <thead>
                             <tr>
                                 <th width="25%">{{__('main.product_name')}}</th>
@@ -429,7 +429,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-sm table-bordered table-hover">
+                    <table class="table table-sm table-bordered table-hover table-responsive">
                         <tbody>
                         <tr>
                             <th width="25%">{{__('main.order_in_date')}}</th>
@@ -470,7 +470,7 @@
                         </tbody>
                     </table>
                     <h5>{{__('main.order_products')}}</h5>
-                    <table class="table table-sm table-striped table-bordered">
+                    <table class="table table-sm table-striped table-bordered table-responsive">
                         <thead>
                         <tr>
                             <th>{{__('main.product_name')}}</th>

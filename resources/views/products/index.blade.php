@@ -197,10 +197,16 @@
                                 <td>
                                     @if($product->lots())
                                         @foreach($product->lots() as $lot)
+                                            @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
+                                                <span class="text-danger">
+                                            @endif
                                             @if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date'])
                                                 {{$lot['dataexp']}}<br/>
                                             @elseif(!session('product_filter')['expiration_date'])
                                                 {{$lot['dataexp']}}<br/>
+                                            @endif
+                                            @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
+                                                </span>
                                             @endif
                                         @endforeach
                                     @endif

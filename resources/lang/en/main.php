@@ -154,4 +154,5 @@
         'entered_date_to' => 'Entered to',
         'sent_date_from' => 'Sent from',
         'sent_date_to' => 'Sent to',
+        'expire_on' => 'expires on',
     ];

@@ -154,4 +154,5 @@
         'entered_date_to' => 'Влязла до',
         'sent_date_from' => 'Изпратена от',
         'sent_date_to' => 'Изпратена до',
+        'expire_on' => 'изтича на',
     ];

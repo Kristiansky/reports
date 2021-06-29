@@ -256,6 +256,7 @@
                 ->groupBy('idp')
                 ->orderBy('sold_products', 'DESC')
                 ->take(10)
+                ->get()
             ;
             $data['top_products'] = $top_products;
     

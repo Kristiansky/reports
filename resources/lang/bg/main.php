@@ -150,4 +150,8 @@
         'office_code' => 'Код на куриерски офис',
         'url_invoice' => 'URL Фактура',
         'add_product' => 'Добави продукт',
+        'entered_date_from' => 'Влязла от',
+        'entered_date_to' => 'Влязла до',
+        'sent_date_from' => 'Изпратена от',
+        'sent_date_to' => 'Изпратена до',
     ];

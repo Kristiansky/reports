@@ -44,8 +44,10 @@ class OrderController extends Controller
             $order_filter = array(
                 'search' => request('search'),
                 'status' => request('status'),
-                'date_from' => request('date_from'),
-                'date_to' => request('date_to'),
+                'entered_date_from' => request('entered_date_from'),
+                'entered_date_to' => request('entered_date_to'),
+                'sent_date_from' => request('sent_date_from'),
+                'sent_date_to' => request('sent_date_to'),
                 'country' => request('country'),
                 'other' => request('other'),
             );
@@ -76,12 +78,17 @@ class OrderController extends Controller
                         ->orWhere('idextern', '=', session('order_filter')['search'])
                         ->orWhere('perscontact', 'like', '%' . session('order_filter')['search'] . '%');
                 }
-                
-                if(session('order_filter')['date_from'] && session('order_filter')['date_from'] != ''){
-                    $query->where('datai', '>', session('order_filter')['date_from'].' 00:00:00');
+                if(session('order_filter')['entered_date_from'] && session('order_filter')['entered_date_from'] != ''){
+                    $query->where('datai', '>', session('order_filter')['entered_date_from'].' 00:00:00');
                 }
-                if(session('order_filter')['date_to'] && session('order_filter')['date_to'] != ''){
-                    $query->where('datai', '<', session('order_filter')['date_to'].' 23:59:59');
+                if(session('order_filter')['entered_date_to'] && session('order_filter')['entered_date_to'] != ''){
+                    $query->where('datai', '<', session('order_filter')['entered_date_to'].' 23:59:59');
+                }
+                if(session('order_filter')['sent_date_from'] && session('order_filter')['sent_date_from'] != ''){
+                    $query->where('data_procesare_comanda', '>', session('order_filter')['sent_date_from'].' 00:00:00');
+                }
+                if(session('order_filter')['sent_date_to'] && session('order_filter')['sent_date_to'] != ''){
+                    $query->where('data_procesare_comanda', '<', session('order_filter')['sent_date_to'].' 23:59:59');
                 }
                 if(session('order_filter')['country'] && session('order_filter')['country'] != ''){
                     $query->where('tara', '=', session('order_filter')['country']);

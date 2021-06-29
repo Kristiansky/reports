@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -277,14 +281,7 @@
       <workItem from="1624515761968" duration="10881000" />
       <workItem from="1624600245718" duration="18836000" />
       <workItem from="1624863692377" duration="19695000" />
-      <workItem from="1624952156688" duration="4172000" />
-    </task>
-    <task id="LOCAL-00016" summary="Returned on colors fix">
-      <created>1623768875487</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1623768875487</updated>
+      <workItem from="1624952156688" duration="8180000" />
     </task>
     <task id="LOCAL-00017" summary="Load more top products">
       <created>1623829357076</created>
@@ -622,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624957864507</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="admin/pre Redirect 301">
+      <created>1624964872700</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1624964872700</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -642,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix responsive" />
     <MESSAGE value="favicon" />
     <MESSAGE value="fix order destroy bug" />
     <MESSAGE value="fix order excel upload" />
@@ -667,6 +670,7 @@
     <MESSAGE value="Product sales history ordering fix" />
     <MESSAGE value="Fix dashboard top products count" />
     <MESSAGE value="Fix table responsiveness" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix table responsiveness" />
+    <MESSAGE value="admin/pre Redirect 301" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin/pre Redirect 301" />
   </component>
 </project>

@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -280,14 +278,8 @@
       <workItem from="1624515761968" duration="10881000" />
       <workItem from="1624600245718" duration="18836000" />
       <workItem from="1624863692377" duration="19695000" />
-      <workItem from="1624952156688" duration="13412000" />
-    </task>
-    <task id="LOCAL-00019" summary="Fixed dashboard">
-      <created>1623834762895</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1623834762895</updated>
+      <workItem from="1624952156688" duration="14264000" />
+      <workItem from="1625032448042" duration="2807000" />
     </task>
     <task id="LOCAL-00020" summary="Fixed dashboard">
       <created>1623834963680</created>
@@ -625,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624972647051</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Red text on expiration date less than 90d">
+      <created>1624975800267</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1624975800267</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +644,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix order destroy bug" />
     <MESSAGE value="fix order excel upload" />
     <MESSAGE value="Dashboard sent orders bug fix" />
     <MESSAGE value="Fix Manual new order bug" />
@@ -670,6 +668,7 @@
     <MESSAGE value="Fix table responsiveness" />
     <MESSAGE value="admin/pre Redirect 301" />
     <MESSAGE value="orders filtering" />
-    <option name="LAST_COMMIT_MESSAGE" value="orders filtering" />
+    <MESSAGE value="Red text on expiration date less than 90d" />
+    <option name="LAST_COMMIT_MESSAGE" value="Red text on expiration date less than 90d" />
   </component>
 </project>

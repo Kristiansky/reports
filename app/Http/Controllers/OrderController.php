@@ -306,7 +306,7 @@ class OrderController extends Controller
     
             foreach($xlsx_arr as $key => $row){
                 foreach ($row as $sub_key => $sub_row){
-                    if ($sub_row == null){
+                    if ((strpos($sub_key, 'item_id') !== false || strpos($sub_key, 'name') !== false || strpos($sub_key, 'quantity') !== false) && $sub_row == null){
                         unset($xlsx_arr[$key][$sub_key]);
                     }
                 }

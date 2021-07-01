@@ -771,22 +771,27 @@ class OrderController extends Controller
     }
     
     public function block(Request $request){
-        DB::table('stor_iesiri')
-            ->where('idcomanda','=', $request->idcomanda)
-            ->update([
-                'status' => 'Blocata',
-                'deadline' => '0000-00-00 00:00:00',
-            ]);
-        DB::table('stor_log_comenzi')->insert(
-            [
-                'ido' => Auth::user()->id,
-                'idcomanda' => $request->idcomanda,
-                'actiune' => "Blocata",
-                'data' => date("Y-m-d H:i:s"),
-            ]
-        );
+        $order = Order::where('idcomanda','=', $request->idcomanda)->first();
+        if ($order->getRawOriginal('status') == 'InProcesare'){
+            return 'in_process';
+        }else{
+            DB::table('stor_iesiri')
+                ->where('idcomanda','=', $request->idcomanda)
+                ->update([
+                    'status' => 'Blocata',
+                    'deadline' => '0000-00-00 00:00:00',
+                ]);
+            DB::table('stor_log_comenzi')->insert(
+                [
+                    'ido' => Auth::user()->id,
+                    'idcomanda' => $request->idcomanda,
+                    'actiune' => "Blocata",
+                    'data' => date("Y-m-d H:i:s"),
+                ]
+            );
     
-        return true;
+            return 'blocked';
+        }
     }
     
     public function addProductsToOrder(Request $request){

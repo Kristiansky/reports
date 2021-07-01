@@ -89,6 +89,7 @@
         'yes' => 'Yes',
         'close' => 'Close',
         'order_blocked' => 'Order blocked',
+        'order_in_process' => 'Order is in process',
         'email' => 'Email',
         'are_you_sure' => 'Are you sure?',
         'delete' => 'Delete',

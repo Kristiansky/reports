@@ -573,11 +573,22 @@
 						'idcomanda': idcomanda,
 						'_token': '{{ csrf_token() }}'
 					},
-					success:function(){
-						Toast.fire({
-							icon: "warning",
-							title: "{{__('main.order_blocked')}}"
-						})
+					success:function(response){
+						if (response == 'in_process'){
+							Toast.fire({
+								icon: "danger",
+								title: "{{__('main.order_in_process')}}"
+							});
+							setTimeout(function() {
+								location.reload();
+							}, 2000);
+							throw new Error("{{__('main.order_in_process')}}");
+                        }else{
+							Toast.fire({
+								icon: "warning",
+								title: "{{__('main.order_blocked')}}"
+							})
+                        }
 					}
 				});
 				$.ajax({

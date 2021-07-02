@@ -94,61 +94,63 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
-                        <thead>
-                        <tr>
-                            @php
-                                if(session('entries_sort_direction') && session('entries_sort_direction') == 'desc'){
-                                    $direction = 'asc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
-                                }elseif(session('entries_sort_direction') && session('entries_sort_direction') == 'asc'){
-                                    $direction = 'desc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
-                                }else{
-                                    $direction = 'desc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
-                                }
-                            @endphp
-
-                            <th width="15%">
-                                <a href="?sort=idp&direction={{$direction}}">
-                                    @if(session('entries_sort') && session('entries_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
-                                </a>
-                            </th>
-                            <th width="10%">
-                                <a href="?sort=codprodusclient&direction={{$direction}}">
-                                    @if(session('entries_sort') && session('entries_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
-                                </a>
-                            </th>
-                            <th width="50%">
-                                <a href="?sort=descriere&direction={{$direction}}">
-                                    @if(session('entries_sort') && session('entries_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
-                                </a>
-                            </th>
-                            <th width="10%">
-                                <a href="?sort=bucati&direction={{$direction}}">
-                                    @if(session('entries_sort') && session('entries_sort') == 'bucati'){!!$icon!!}@endif {{__('main.qty')}}
-                                </a>
-                            </th>
-                            <th width="15%">
-                                <a href="?sort=dataintrare&direction={{$direction}}">
-                                    @if(session('entries_sort') && session('entries_sort') == 'dataintrare'){!!$icon!!}@endif {{__('main.entry_date')}}
-                                </a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($entries as $entry)
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                            <thead>
                             <tr>
-                                <td>{{$entry->idp}}</td>
-                                <td>{{$entry->codprodusclient}}</td>
-                                <td>{{$entry->descriere}}</td>
-                                <td>{{$entry->bucati}}</td>
-                                <td>{{$entry->dataintrare}}</td>
+                                @php
+                                    if(session('entries_sort_direction') && session('entries_sort_direction') == 'desc'){
+                                        $direction = 'asc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                    }elseif(session('entries_sort_direction') && session('entries_sort_direction') == 'asc'){
+                                        $direction = 'desc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                    }else{
+                                        $direction = 'desc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                    }
+                                @endphp
+
+                                <th width="15%">
+                                    <a href="?sort=idp&direction={{$direction}}">
+                                        @if(session('entries_sort') && session('entries_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
+                                    </a>
+                                </th>
+                                <th width="10%">
+                                    <a href="?sort=codprodusclient&direction={{$direction}}">
+                                        @if(session('entries_sort') && session('entries_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
+                                    </a>
+                                </th>
+                                <th width="50%">
+                                    <a href="?sort=descriere&direction={{$direction}}">
+                                        @if(session('entries_sort') && session('entries_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
+                                    </a>
+                                </th>
+                                <th width="10%">
+                                    <a href="?sort=bucati&direction={{$direction}}">
+                                        @if(session('entries_sort') && session('entries_sort') == 'bucati'){!!$icon!!}@endif {{__('main.qty')}}
+                                    </a>
+                                </th>
+                                <th width="15%">
+                                    <a href="?sort=dataintrare&direction={{$direction}}">
+                                        @if(session('entries_sort') && session('entries_sort') == 'dataintrare'){!!$icon!!}@endif {{__('main.entry_date')}}
+                                    </a>
+                                </th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($entries as $entry)
+                                <tr>
+                                    <td>{{$entry->idp}}</td>
+                                    <td>{{$entry->codprodusclient}}</td>
+                                    <td>{{$entry->descriere}}</td>
+                                    <td>{{$entry->bucati}}</td>
+                                    <td>{{$entry->dataintrare}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="row">
                         <div class="col-lg-4 pl-4 pt-4">
                             {{--{{__('main.showing_records', ['first_index' => $paginator->items()['from'], 'last_index' =>  $paginator->items()['to'], 'total_count' =>  $paginator->items()['total'] ])}}--}}

@@ -157,105 +157,107 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
-                        <thead>
-                        <tr>
-
-                            @php
-                            if(session('orders_sort_direction') && session('orders_sort_direction') == 'desc'){
-                                $direction = 'asc';
-                                $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
-                            }elseif(session('orders_sort_direction') && session('orders_sort_direction') == 'asc'){
-                                $direction = 'desc';
-                                $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
-                            }else{
-                                $direction = 'desc';
-                                $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
-                            }
-                            @endphp
-
-                            <th width="5%">
-                                <a href="?sort=idcomanda&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'idcomanda'){!!$icon!!}@endif {{__('main.order_id')}}
-                                </a>
-                            </th>
-                            <th width="5%">
-                                <a href="?sort=idextern&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'idextern'){!!$icon!!}@endif {{__('main.external_id')}}
-                                </a>
-                            </th>
-                            <th width="7%">
-                                <a href="?sort=datai&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'datai'){!!$icon!!}@endif {{__('main.order_in_date')}}
-                                </a>
-                            </th>
-                            <th width="8%">
-                                <a href="?sort=data_procesare_comanda&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'data_procesare_comanda'){!!$icon!!}@endif {{__('main.order_sent_date')}}
-                                </a>
-                            </th>
-                            <th width="13%">
-                                <a href="?sort=perscontact&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'perscontact'){!!$icon!!}@endif {{__('main.to')}}
-                                </a>
-                            </th>
-                            <th width="12%">
-                                <a href="?sort=status&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'status'){!!$icon!!}@endif {{__('main.status')}}
-                                </a>
-                            </th>
-                            <th width="5%">
-                                <a href="?sort=qty&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'qty'){!!$icon!!}@endif {{__('main.qty')}}
-                                </a>
-                            </th>
-                            <th width="2%"></th>
-                            <th width="5%">
-                                <a href="?sort=curier&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'curier'){!!$icon!!}@endif {{__('main.courier')}}
-                                </a>
-                            </th>
-                            <th width="6%">
-                                <a href="?sort=awb&direction={{$direction}}">
-                                    @if(session('orders_sort') && session('orders_sort') == 'awb'){!!$icon!!}@endif {{__('main.awb')}}
-                                </a>
-                            </th>
-                            <th width="20%">{{__('main.status_courier')}}</th>
-                            <th width="12%">{{__('main.actions')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($orders as $order)
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                            <thead>
                             <tr>
-                                <td>{{$order->idcomanda}}</td>
-                                <td>{{$order->idextern}}</td>
-                                <td>{{$order->datai}}</td>
-                                <td>{{$order->data_procesare_comanda == '0000-00-00 00:00:00' ? '' : $order->data_procesare_comanda}}</td>
-                                <td>{{$order->perscontact}}</td>
-                                <td>{!! $order->status !!}</td>
-                                <td>{{$order->qty}}</td>
-                                <td>@if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
-                                <td>{{$order->curier}}</td>
-                                <td>{{$order->awb}}</td>
-                                <td>{{\Illuminate\Support\Str::limit($order->statuscurier, 40, '...')}}</td>
-                                <td class="pr-1">
-                                    <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-success openOrder" data-toggle="modal" data-target="#orderModal"><i class="fa fa-eye"></i> {{__('main.view')}}</button>
-                                    @if($order->getRawOriginal('status') == 'Comanda' || $order->getRawOriginal('status') == 'Blocata')
-                                        <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-primary editOrder" data-toggle="modal" data-target="#editOrderModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
-                                    @endif
-                                    @if($order->getRawOriginal('status') == 'Blocata')
-                                        <form method="post" action="{{route('order.destroy')}}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
-                                            <button class="btn btn-danger btn-xs" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt"></i> {{__('main.delete')}}</button>
-                                        </form>
-                                    @endif
-                                </td>
+
+                                @php
+                                    if(session('orders_sort_direction') && session('orders_sort_direction') == 'desc'){
+                                        $direction = 'asc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                    }elseif(session('orders_sort_direction') && session('orders_sort_direction') == 'asc'){
+                                        $direction = 'desc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                    }else{
+                                        $direction = 'desc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                    }
+                                @endphp
+
+                                <th width="5%">
+                                    <a href="?sort=idcomanda&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'idcomanda'){!!$icon!!}@endif {{__('main.order_id')}}
+                                    </a>
+                                </th>
+                                <th width="5%">
+                                    <a href="?sort=idextern&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'idextern'){!!$icon!!}@endif {{__('main.external_id')}}
+                                    </a>
+                                </th>
+                                <th width="7%">
+                                    <a href="?sort=datai&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'datai'){!!$icon!!}@endif {{__('main.order_in_date')}}
+                                    </a>
+                                </th>
+                                <th width="8%">
+                                    <a href="?sort=data_procesare_comanda&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'data_procesare_comanda'){!!$icon!!}@endif {{__('main.order_sent_date')}}
+                                    </a>
+                                </th>
+                                <th width="13%">
+                                    <a href="?sort=perscontact&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'perscontact'){!!$icon!!}@endif {{__('main.to')}}
+                                    </a>
+                                </th>
+                                <th width="12%">
+                                    <a href="?sort=status&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'status'){!!$icon!!}@endif {{__('main.status')}}
+                                    </a>
+                                </th>
+                                <th width="5%">
+                                    <a href="?sort=qty&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'qty'){!!$icon!!}@endif {{__('main.qty')}}
+                                    </a>
+                                </th>
+                                <th width="2%"></th>
+                                <th width="5%">
+                                    <a href="?sort=curier&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'curier'){!!$icon!!}@endif {{__('main.courier')}}
+                                    </a>
+                                </th>
+                                <th width="6%">
+                                    <a href="?sort=awb&direction={{$direction}}">
+                                        @if(session('orders_sort') && session('orders_sort') == 'awb'){!!$icon!!}@endif {{__('main.awb')}}
+                                    </a>
+                                </th>
+                                <th width="20%">{{__('main.status_courier')}}</th>
+                                <th width="12%">{{__('main.actions')}}</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($orders as $order)
+                                <tr>
+                                    <td>{{$order->idcomanda}}</td>
+                                    <td>{{$order->idextern}}</td>
+                                    <td>{{$order->datai}}</td>
+                                    <td>{{$order->data_procesare_comanda == '0000-00-00 00:00:00' ? '' : $order->data_procesare_comanda}}</td>
+                                    <td>{{$order->perscontact}}</td>
+                                    <td>{!! $order->status !!}</td>
+                                    <td>{{$order->qty}}</td>
+                                    <td>@if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
+                                    <td>{{$order->curier}}</td>
+                                    <td>{{$order->awb}}</td>
+                                    <td>{{\Illuminate\Support\Str::limit($order->statuscurier, 40, '...')}}</td>
+                                    <td class="pr-1">
+                                        <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-success openOrder" data-toggle="modal" data-target="#orderModal"><i class="fa fa-eye"></i> {{__('main.view')}}</button>
+                                        @if($order->getRawOriginal('status') == 'Comanda' || $order->getRawOriginal('status') == 'Blocata')
+                                            <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-primary editOrder" data-toggle="modal" data-target="#editOrderModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
+                                        @endif
+                                        @if($order->getRawOriginal('status') == 'Blocata')
+                                            <form method="post" action="{{route('order.destroy')}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
+                                                <button class="btn btn-danger btn-xs" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt"></i> {{__('main.delete')}}</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="row">
                         <div class="col-lg-4 pl-4 pt-4">
                             {{--{{__('main.showing_records', ['first_index' => $paginator->items()['from'], 'last_index' =>  $paginator->items()['to'], 'total_count' =>  $paginator->items()['total'] ])}}--}}
@@ -292,107 +294,109 @@
                         @csrf
                         @method('PATCH')
                         <input type="hidden" name="current_page" value="{{$orders->currentPage()}}"/>
-                        <table class="table table-sm table-bordered table-hover table-responsive">
-                            <tr>
-                                <th width="25%">{{__('main.order_in_date')}}</th>
-                                <td width="75%"><span id="edit_order_in_date"></span></td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.payment_method')}}</th>
-                                <td><span id="edit_order_payment_method"></span></td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.total')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="number" step=".01" class="form-control form-control-sm" name="ramburs" id="ramburs" autocomplete="off" placeholder="{{__('main.total')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.address')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="adresa" id="adresa" autocomplete="off" placeholder="{{__('main.address')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.postal_code')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="codpostal" id="codpostal" autocomplete="off" placeholder="{{__('main.postal_code')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.city')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="localitate" id="localitate" autocomplete="off" placeholder="{{__('main.city')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.district')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="judet" id="judet" autocomplete="off" placeholder="{{__('main.district')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.person_name')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="perscontact" id="perscontact" autocomplete="off" placeholder="{{__('main.person_name')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.phone')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="telpers" id="telpers" autocomplete="off" placeholder="{{__('main.phone')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.email')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="email" class="form-control form-control-sm" name="emailpers" id="emailpers" autocomplete="off" placeholder="{{__('main.email')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{ __('main.saturday_delivery') }}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="sambata" value="da" name="sambata">
-                                            <label for="sambata" class="custom-control-label">{{ __('main.yes') }}</label>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-hover">
+                                <tr>
+                                    <th width="25%">{{__('main.order_date')}}</th>
+                                    <td width="75%"><span id="edit_order_in_date"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.payment_method')}}</th>
+                                    <td><span id="edit_order_payment_method"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.total')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="number" step=".01" class="form-control form-control-sm" name="ramburs" id="ramburs" autocomplete="off" placeholder="{{__('main.total')}}" value="">
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.ship_instructions')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="ship_instructions" id="ship_instructions" autocomplete="off" placeholder="{{__('main.ship_instructions')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.other_info')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="altele" id="altele" autocomplete="off" placeholder="{{__('main.other_info')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.address')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="adresa" id="adresa" autocomplete="off" placeholder="{{__('main.address')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.post_code')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="codpostal" id="codpostal" autocomplete="off" placeholder="{{__('main.post_code')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.city')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="localitate" id="localitate" autocomplete="off" placeholder="{{__('main.city')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.district')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="judet" id="judet" autocomplete="off" placeholder="{{__('main.district')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.recipient')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="perscontact" id="perscontact" autocomplete="off" placeholder="{{__('main.person_name')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.phone')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="telpers" id="telpers" autocomplete="off" placeholder="{{__('main.phone')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.email')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="email" class="form-control form-control-sm" name="emailpers" id="emailpers" autocomplete="off" placeholder="{{__('main.email')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('main.saturday_delivery') }}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox" id="sambata" value="da" name="sambata">
+                                                <label for="sambata" class="custom-control-label">{{ __('main.yes') }}</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.office_code')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="altele" id="altele" autocomplete="off" placeholder="{{__('main.office_code')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.ship_instructions')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="ship_instructions" id="ship_instructions" autocomplete="off" placeholder="{{__('main.ship_instructions')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -401,21 +405,22 @@
                             </div>
                         </div>
                         <h5>{{__('main.order_products')}}</h5>
-                        <table class="table table-sm table-striped table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th width="25%">{{__('main.product_name')}}</th>
-                                <th width="10%">{{__('main.qty')}}</th>
-                                <th width="15%">{{__('main.internal_id')}}</th>
-                                <th width="10%">{{__('main.current_stock')}}</th>
-                                <th width="15%">{{__('main.sku')}}</th>
-                                <th width="15%">{{__('main.barcode')}}</th>
-                                <th width="10%">{{__('main.action')}}</th>
-                            </tr>
-                            </thead>
-                            <tbody id="edit_order_products">
-                            </tbody>
-                            <tbody id="add_order_products">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="25%">{{__('main.product_name')}}</th>
+                                    <th width="10%">{{__('main.qty')}}</th>
+                                    <th width="15%">{{__('main.internal_id')}}</th>
+                                    <th width="10%">{{__('main.current_stock')}}</th>
+                                    <th width="15%">{{__('main.sku')}}</th>
+                                    <th width="15%">{{__('main.barcode')}}</th>
+                                    <th width="10%">{{__('main.action')}}</th>
+                                </tr>
+                                </thead>
+                                <tbody id="edit_order_products">
+                                </tbody>
+                                <tbody id="add_order_products">
                                 <tr>
                                     <td id="choose_product_holder">
                                         <div class="form-group">
@@ -436,8 +441,9 @@
                                         <button class="btn btn btn-success btn-xs" type='submit' name='addingProduct'><i class="fa fa-plus-circle"></i> {{__('main.add')}}</button>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -459,63 +465,67 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-sm table-bordered table-hover table-responsive">
-                        <tbody>
-                        <tr>
-                            <th width="25%">{{__('main.order_in_date')}}</th>
-                            <td width="75%"><span id="order_in_date"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.payment_method')}}</th>
-                            <td><span id="order_payment_method"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.total')}}</th>
-                            <td><span id="order_total"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.address')}}</th>
-                            <td><span id="order_address"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.recipient')}}</th>
-                            <td><span id="order_to"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.phone')}}</th>
-                            <td><span id="order_phone"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.other_info')}}</th>
-                            <td><span id="order_other_info"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.ship_instructions')}}</th>
-                            <td><span id="order_ship_instructions"></span></td>
-                        </tr>
-                        <tr class="d-none" id="row_returned">
-                            <th>{{__('main.is_returned')}}</th>
-                            <td><span id="order_returned"></span></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th width="25%">{{__('main.order_date')}}</th>
+                                <td width="75%"><span id="order_in_date"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.payment_method')}}</th>
+                                <td><span id="order_payment_method"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.total')}}</th>
+                                <td><span id="order_total"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.address')}}</th>
+                                <td><span id="order_address"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.recipient')}}</th>
+                                <td><span id="order_to"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.phone')}}</th>
+                                <td><span id="order_phone"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.office_code')}}</th>
+                                <td><span id="order_other_info"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.ship_instructions')}}</th>
+                                <td><span id="order_ship_instructions"></span></td>
+                            </tr>
+                            <tr class="d-none" id="row_returned">
+                                <th>{{__('main.is_returned')}}</th>
+                                <td><span id="order_returned"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <h5>{{__('main.order_products')}}</h5>
-                    <table class="table table-sm table-striped table-bordered table-responsive">
-                        <thead>
-                        <tr>
-                            <th>{{__('main.product_name')}}</th>
-                            <th>{{__('main.qty')}}</th>
-                            <th>{{__('main.internal_id')}}</th>
-                            <th>{{__('main.current_stock')}}</th>
-                            <th>{{__('main.sku')}}</th>
-                            <th>{{__('main.barcode')}}</th>
-                            <th class="d-none returned">{{__('main.is_returned')}}</th>
-                            <th class="d-none returned">{{__('main.return_reason')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody id="order_products">
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>{{__('main.product_name')}}</th>
+                                <th>{{__('main.qty')}}</th>
+                                <th>{{__('main.internal_id')}}</th>
+                                <th>{{__('main.current_stock')}}</th>
+                                <th>{{__('main.sku')}}</th>
+                                <th>{{__('main.barcode')}}</th>
+                                <th class="d-none returned">{{__('main.is_returned')}}</th>
+                                <th class="d-none returned">{{__('main.return_reason')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="order_products">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{__('main.close')}}</button>

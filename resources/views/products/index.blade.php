@@ -118,110 +118,112 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm table-responsive">
-                        <thead>
-                        <tr>
-                            @php
-                                if(session('products_sort_direction') && session('products_sort_direction') == 'desc'){
-                                    $direction = 'asc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
-                                }elseif(session('products_sort_direction') && session('products_sort_direction') == 'asc'){
-                                    $direction = 'desc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
-                                }else{
-                                    $direction = 'asc';
-                                    $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
-                                }
-                            @endphp
-
-                            <th width="9%">
-                                <a href="?sort=idp&direction={{$direction}}">
-                                    @if(session('products_sort') && session('products_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
-                                </a>
-                            </th>
-                            <th width="8%">
-                                <a href="?sort=codprodusclient&direction={{$direction}}">
-                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
-                                </a>
-                            </th>
-                            <th width="10%">
-                                <a href="?sort=codbare&direction={{$direction}}">
-                                    @if(session('products_sort') && session('products_sort') == 'codbare'){!!$icon!!}@endif {{__('main.barcode')}}
-                                </a>
-                            </th>
-                            <th width="20%">
-                                <a href="?sort=descriere&direction={{$direction}}">
-                                    @if(session('products_sort') && session('products_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
-                                </a>
-                            </th>
-                            <th width="5%">
-{{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
-{{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
-                                        {{__('main.stock')}}
-{{--                                </a>--}}
-                            </th>
-                            <th width="5%">{{__('main.incl_new')}}</th>
-                            <th width="13%">{{__('main.lots')}}</th>
-                            <th width="10%">{{__('main.lot_expiration')}}</th>
-                            <th width="5%">
-{{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
-{{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
-                                        {{__('main.damaged')}}
-{{--                                </a>--}}
-                            </th>
-                            <th width="15%">{{__('main.actions')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($products as $product)
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped table-hover mb-3 text-sm">
+                            <thead>
                             <tr>
-                                <td>{{$product->idp}}</td>
-                                <td>{{$product->codprodusclient}}</td>
-                                <td>{{$product->codbare}}</td>
-                                <td>{{$product->descriere}}</td>
-{{--                                <td>{{$product->current_total_expediat}}</td>--}}
-                                <td>{{$product->stock()}}</td>
-{{--                                <td>{{$product->current_total}}</td>--}}
-                                <td>{{$product->stockInclNew()}}</td>
-                                <td>
-                                    @if($product->lots())
-                                        @foreach($product->lots() as $lot)
-                                            @if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date'])
-                                                {{$lot['number_of_items']}} {{__('main.items_in')}} {{$lot['lotul']}}<br/>
-                                            @elseif(!session('product_filter')['expiration_date'])
-                                                {{$lot['number_of_items']}} {{__('main.items_in')}} {{$lot['lotul']}}<br/>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($product->lots())
-                                        @foreach($product->lots() as $lot)
-                                            @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
-                                                <span class="text-danger">
-                                            @endif
-                                            @if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date'])
-                                                {{$lot['dataexp']}}<br/>
-                                            @elseif(!session('product_filter')['expiration_date'])
-                                                {{$lot['dataexp']}}<br/>
-                                            @endif
-                                            @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
-                                                </span>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </td>
-                                <td>@if($product->damaged()){{$product->damaged()->total}}@endif</td>
-                                <td>
-                                    <button data-idp="{{$product->idp}}" type="button" class="btn btn-xs btn-success openHistory" data-toggle="modal" data-target="#historyModal"><i class="fa fa-history"></i> {{__('main.history')}}</button>
-                                    @if(auth()->user()->group->id == '2')
-                                        <button data-idp="{{$product->idp}}" type="button" class="btn btn-xs btn-primary editProduct" data-toggle="modal" data-target="#editProductModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
-                                    @endif
-                                </td>
+                                @php
+                                    if(session('products_sort_direction') && session('products_sort_direction') == 'desc'){
+                                        $direction = 'asc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                    }elseif(session('products_sort_direction') && session('products_sort_direction') == 'asc'){
+                                        $direction = 'desc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-up"></i>';
+                                    }else{
+                                        $direction = 'asc';
+                                        $icon = '<i class="fas fa-arrow-alt-circle-down"></i>';
+                                    }
+                                @endphp
+
+                                <th width="9%">
+                                    <a href="?sort=idp&direction={{$direction}}">
+                                        @if(session('products_sort') && session('products_sort') == 'idp'){!!$icon!!}@endif {{__('main.product_id')}}
+                                    </a>
+                                </th>
+                                <th width="8%">
+                                    <a href="?sort=codprodusclient&direction={{$direction}}">
+                                        @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif {{__('main.sku')}}
+                                    </a>
+                                </th>
+                                <th width="10%">
+                                    <a href="?sort=codbare&direction={{$direction}}">
+                                        @if(session('products_sort') && session('products_sort') == 'codbare'){!!$icon!!}@endif {{__('main.barcode')}}
+                                    </a>
+                                </th>
+                                <th width="20%">
+                                    <a href="?sort=descriere&direction={{$direction}}">
+                                        @if(session('products_sort') && session('products_sort') == 'descriere'){!!$icon!!}@endif {{__('main.name')}}
+                                    </a>
+                                </th>
+                                <th width="5%">
+                                    {{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
+                                    {{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
+                                    {{__('main.stock')}}
+                                    {{--                                </a>--}}
+                                </th>
+                                <th width="5%">{{__('main.incl_new')}}</th>
+                                <th width="13%">{{__('main.lots')}}</th>
+                                <th width="10%">{{__('main.lot_expiration')}}</th>
+                                <th width="5%">
+                                    {{--                                <a href="?sort=codprodusclient&direction={{$direction}}">--}}
+                                    {{--                                    @if(session('products_sort') && session('products_sort') == 'codprodusclient'){!!$icon!!}@endif --}}
+                                    {{__('main.damaged')}}
+                                    {{--                                </a>--}}
+                                </th>
+                                <th width="15%">{{__('main.actions')}}</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($products as $product)
+                                <tr>
+                                    <td>{{$product->idp}}</td>
+                                    <td>{{$product->codprodusclient}}</td>
+                                    <td>{{$product->codbare}}</td>
+                                    <td>{{$product->descriere}}</td>
+                                    {{--                                <td>{{$product->current_total_expediat}}</td>--}}
+                                    <td>{{$product->stock()}}</td>
+                                    {{--                                <td>{{$product->current_total}}</td>--}}
+                                    <td>{{$product->stockInclNew()}}</td>
+                                    <td>
+                                        @if($product->lots())
+                                            @foreach($product->lots() as $lot)
+                                                @if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date'])
+                                                    {{$lot['number_of_items']}} {{__('main.items_in')}} {{$lot['lotul']}}<br/>
+                                                @elseif(!session('product_filter')['expiration_date'])
+                                                    {{$lot['number_of_items']}} {{__('main.items_in')}} {{$lot['lotul']}}<br/>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($product->lots())
+                                            @foreach($product->lots() as $lot)
+                                                @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
+                                                    <span class="text-danger">
+                                            @endif
+                                                        @if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date'])
+                                                            {{$lot['dataexp']}}<br/>
+                                                        @elseif(!session('product_filter')['expiration_date'])
+                                                            {{$lot['dataexp']}}<br/>
+                                                        @endif
+                                                        @if(\Carbon\Carbon::parse($lot['dataexp'])->diffInDays() < 90)
+                                                </span>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>@if($product->damaged()){{$product->damaged()->total}}@endif</td>
+                                    <td>
+                                        <button data-idp="{{$product->idp}}" type="button" class="btn btn-xs btn-success openHistory" data-toggle="modal" data-target="#historyModal"><i class="fa fa-history"></i> {{__('main.history')}}</button>
+                                        @if(auth()->user()->group->id == '2')
+                                            <button data-idp="{{$product->idp}}" type="button" class="btn btn-xs btn-primary editProduct" data-toggle="modal" data-target="#editProductModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="row">
                         <div class="col-lg-4 pl-4 pt-4">
                             {{--{{__('main.showing_records', ['first_index' => $paginator->items()['from'], 'last_index' =>  $paginator->items()['to'], 'total_count' =>  $paginator->items()['total'] ])}}--}}
@@ -250,88 +252,94 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-sm table-bordered table-hover table-responsive">
-                        <tbody>
-                        <tr>
-                            <th width="25%">{{__('main.product_id')}}</th>
-                            <td width="75%"><span id="product_id"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.sku')}}</th>
-                            <td><span id="product_sku"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.name')}}</th>
-                            <td><span id="product_name"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.create_date')}}</th>
-                            <td><span id="product_create_date"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.stock')}}</th>
-                            <td><span id="product_stock"></span></td>
-                        </tr>
-                        <tr>
-                            <th>{{__('main.lots')}}</th>
-                            <td><span id="product_lots"></span></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th width="25%">{{__('main.product_id')}}</th>
+                                <td width="75%"><span id="product_id"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.sku')}}</th>
+                                <td><span id="product_sku"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.name')}}</th>
+                                <td><span id="product_name"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.create_date')}}</th>
+                                <td><span id="product_create_date"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.stock')}}</th>
+                                <td><span id="product_stock"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.lots')}}</th>
+                                <td><span id="product_lots"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <table class="table table-sm table-bordered table-hover table-responsive" id="product_entries">
-                                <thead>
-                                <tr>
-                                    <th colspan="6"><h4 class="text-center">{{__('main.entries')}}</h4></th>
-                                </tr>
-                                <tr>
-                                    <th>{{__("main.entry_id")}}</th>
-                                    <th>{{__("main.qty")}}</th>
-                                    <th>{{__("main.date_entered")}}</th>
-                                    <th>{{__("main.document")}}</th>
-                                    <th>{{__("main.expiration_date")}}</th>
-                                    <th>{{__("main.batch_number")}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>{{__('main.total')}}</th>
-                                    <th id="product_entries_total"></th>
-                                    <th colspan="4"></th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover" id="product_entries">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="6"><h4 class="text-center">{{__('main.entries')}}</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{__("main.entry_id")}}</th>
+                                        <th>{{__("main.qty")}}</th>
+                                        <th>{{__("main.date_entered")}}</th>
+                                        <th>{{__("main.document")}}</th>
+                                        <th>{{__("main.expiration_date")}}</th>
+                                        <th>{{__("main.batch_number")}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>{{__('main.total')}}</th>
+                                        <th id="product_entries_total"></th>
+                                        <th colspan="4"></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <table class="table table-sm table-bordered table-hover table-responsive" id="product_sales">
-                                <thead>
-                                <tr>
-                                    <th colspan="8"><h4 class="text-center">{{__('main.sales')}}</h4></th>
-                                </tr>
-                                <tr>
-                                    <th>{{__("main.order_id")}}</th>
-                                    <th>{{__("main.external_id")}}</th>
-                                    <th>{{__("main.to")}}</th>
-                                    <th>{{__("main.qty")}}</th>
-                                    <th>{{__("main.date")}}</th>
-                                    <th>{{__("main.status")}}</th>
-                                    <th>{{__("main.batch_number")}}</th>
-                                    <th>{{__("main.expiration_date")}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>{{__('main.total')}}</th>
-                                    <th id="product_sales_total"></th>
-                                    <th colspan="6"></th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover" id="product_sales">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="8"><h4 class="text-center">{{__('main.sales')}}</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{__("main.order_id")}}</th>
+                                        <th>{{__("main.external_id")}}</th>
+                                        <th>{{__("main.to")}}</th>
+                                        <th>{{__("main.qty")}}</th>
+                                        <th>{{__("main.date")}}</th>
+                                        <th>{{__("main.status")}}</th>
+                                        <th>{{__("main.batch_number")}}</th>
+                                        <th>{{__("main.expiration_date")}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>{{__('main.total')}}</th>
+                                        <th id="product_sales_total"></th>
+                                        <th colspan="6"></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -356,24 +364,26 @@
                     <form action="" method="post">
                         @csrf
                         @method('PATCH')
-                        <table class="table table-sm table-bordered table-hover table-responsive">
-                            <tr>
-                                <th width="25%">{{__('main.name')}}</th>
-                                <td width="75%">
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="descriere" id="descriere" autocomplete="off" placeholder="{{__('main.name')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{{__('main.sku')}}</th>
-                                <td>
-                                    <div class="form-group m-0">
-                                        <input type="text" class="form-control form-control-sm" name="codprodusclient" id="codprodusclient" autocomplete="off" placeholder="{{__('main.sku')}}" value="">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-hover">
+                                <tr>
+                                    <th width="25%">{{__('main.name')}}</th>
+                                    <td width="75%">
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="descriere" id="descriere" autocomplete="off" placeholder="{{__('main.name')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{__('main.sku')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="codprodusclient" id="codprodusclient" autocomplete="off" placeholder="{{__('main.sku')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">

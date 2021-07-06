@@ -156,4 +156,5 @@
         'sent_date_from' => 'Изпратена от',
         'sent_date_to' => 'Изпратена до',
         'expire_on' => 'изтича на',
+        'shipping_method' => 'Тип на доставка /само за inout2/',
     ];

@@ -156,4 +156,5 @@
         'sent_date_from' => 'Sent from',
         'sent_date_to' => 'Sent to',
         'expire_on' => 'expires on',
+        'shipping_method' => 'Shipping method /inout2 only/',
     ];

@@ -4,10 +4,6 @@
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -290,14 +286,7 @@
       <workItem from="1625467219801" duration="2879000" />
       <workItem from="1625552934915" duration="1680000" />
       <workItem from="1625561211171" duration="2711000" />
-      <workItem from="1625638107587" duration="2704000" />
-    </task>
-    <task id="LOCAL-00025" summary="Fixing products filters">
-      <created>1623843606241</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1623843606241</updated>
+      <workItem from="1625638107587" duration="3188000" />
     </task>
     <task id="LOCAL-00026" summary="Fixing products filters">
       <created>1623850929877</created>
@@ -635,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625578542791</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Product stacks functionality">
+      <created>1625644741865</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1625644741865</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dashboard sent orders bug fix" />
     <MESSAGE value="Fix Manual new order bug" />
     <MESSAGE value="Fix date filter in Orders" />
     <MESSAGE value="Fixing routes" />
@@ -680,6 +675,7 @@
     <MESSAGE value="orders filtering" />
     <MESSAGE value="Red text on expiration date less than 90d" />
     <MESSAGE value="Order upload fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order upload fix" />
+    <MESSAGE value="Product stacks functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Product stacks functionality" />
   </component>
 </project>

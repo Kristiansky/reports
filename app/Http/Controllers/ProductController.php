@@ -12,6 +12,9 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ProductController extends Controller
 {
+    public $stacks_to_clients = array(
+        262 => true, //KOLIB
+    );
     /**
      * Display a listing of the resource.
      *
@@ -118,7 +121,11 @@ class ProductController extends Controller
                 $sheet->setCellValue('B' . $row, $product->codprodusclient);
                 $sheet->setCellValue('C' . $row, $product->codbare);
                 $sheet->setCellValue('D' . $row, $product->descriere);
-                $sheet->setCellValue('E' . $row, $product->stock());
+                if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true && $product->pieces_in_package != NULL){
+                    $sheet->setCellValue('E' . $row, $product->stock() . ' / ' . __('main.stacks') . ': ' . $product->stacks());
+                }else{
+                    $sheet->setCellValue('E' . $row, $product->stock());
+                }
                 $sheet->setCellValue('F' . $row, $product->stockInclNew());
                 $lots = '';
                 $expiration_dates = '';
@@ -150,7 +157,12 @@ class ProductController extends Controller
     
         $products = $products->paginate(session('per_page'));
 //        $paginator = new Paginator($products, session('per_page'), request('page') ? request('page') : 1, ['path' => route('product.index')]);
-        return view('products.index', compact('products'/*, 'paginator'*/));
+        if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true){
+            $show_stacks = true;
+        }else{
+            $show_stacks = false;
+        }
+        return view('products.index', compact('products', 'show_stacks'/*, 'paginator'*/));
     }
 
     /**

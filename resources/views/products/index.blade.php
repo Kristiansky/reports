@@ -161,6 +161,9 @@
                                     {{__('main.stock')}}
                                     {{--                                </a>--}}
                                 </th>
+                                @if($show_stacks)
+                                    <th>{{__('main.stacks')}}</th>
+                                @endif
                                 <th width="5%">{{__('main.incl_new')}}</th>
                                 <th width="13%">{{__('main.lots')}}</th>
                                 <th width="10%">{{__('main.lot_expiration')}}</th>
@@ -182,6 +185,9 @@
                                     <td>{{$product->descriere}}</td>
                                     {{--                                <td>{{$product->current_total_expediat}}</td>--}}
                                     <td>{{$product->stock()}}</td>
+                                    @if($show_stacks)
+                                        <td>{{$product->stacks()}}</td>
+                                    @endif
                                     {{--                                <td>{{$product->current_total}}</td>--}}
                                     <td>{{$product->stockInclNew()}}</td>
                                     <td>

@@ -175,4 +175,13 @@ class Product extends Model
         }
     }
     
+    public function stacks(){
+        if ($this->pieces_in_package != NULL){
+            $current_total = $this->stock();
+            return (int)$current_total / (int)$this->pieces_in_package;
+        }else{
+            return false;
+        }
+    }
+    
 }

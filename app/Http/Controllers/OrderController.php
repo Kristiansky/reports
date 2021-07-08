@@ -676,6 +676,7 @@ class OrderController extends Controller
                 'data2' => $last_row->data2,
                 'datai' => $last_row->datai,
                 'locatie' => $last_row->locatie,
+                'idextern' => $last_row->idextern,
                 'idcomanda' => $last_row->idcomanda,
                 'adresa' => $last_row->adresa,
                 'tstr' => $last_row->tstr,

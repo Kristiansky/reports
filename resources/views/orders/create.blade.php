@@ -80,7 +80,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit" name="addXlsx" value="1" class="btn btn-primary">{{__('main.submit')}}</button>
-                                <a href="{{ asset('xlsx/example_order.xlsx') }}" class="btn btn-success float-right"><i class="fa fa-download"></i> {{__('main.download_template')}}</a>
+                                <a href="{{ asset('xlsx/example_orders.xlsx') }}" class="btn btn-success float-right"><i class="fa fa-download"></i> {{__('main.download_template')}}</a>
                             </form>
                         </div>
                     </div>

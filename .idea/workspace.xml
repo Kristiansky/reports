@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/public/xlsx/example_order.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/xlsx/example_order.xlsx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,14 +286,7 @@
       <workItem from="1625552934915" duration="1680000" />
       <workItem from="1625561211171" duration="2711000" />
       <workItem from="1625638107587" duration="5137000" />
-      <workItem from="1625726935369" duration="1442000" />
-    </task>
-    <task id="LOCAL-00028" summary="Translations">
-      <created>1623855927088</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1623855927088</updated>
+      <workItem from="1625726935369" duration="1731000" />
     </task>
     <task id="LOCAL-00029" summary="Fix order search qty issue">
       <created>1623917313285</created>
@@ -629,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625732654707</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Order adding product bugfiing">
+      <created>1625733000619</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1625733000619</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-    </list>
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,14 +284,7 @@
       <workItem from="1625552934915" duration="1680000" />
       <workItem from="1625561211171" duration="2711000" />
       <workItem from="1625638107587" duration="5137000" />
-      <workItem from="1625726935369" duration="1136000" />
-    </task>
-    <task id="LOCAL-00027" summary="Fixing products filters">
-      <created>1623853168732</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1623853168732</updated>
+      <workItem from="1625726935369" duration="1442000" />
     </task>
     <task id="LOCAL-00028" summary="Translations">
       <created>1623855927088</created>
@@ -632,7 +622,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625645201637</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Order adding product bugfiing">
+      <created>1625732654707</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1625732654707</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +649,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix date filter in Orders" />
     <MESSAGE value="Fixing routes" />
     <MESSAGE value="Export bug fix" />
     <MESSAGE value="Fix add order packet description in ship instruction" />
@@ -677,6 +673,7 @@
     <MESSAGE value="Order upload fix" />
     <MESSAGE value="Product stacks functionality" />
     <MESSAGE value="Product stacks functionality bugfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product stacks functionality bugfix" />
+    <MESSAGE value="Order adding product bugfiing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order adding product bugfiing" />
   </component>
 </project>

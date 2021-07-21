@@ -204,8 +204,12 @@
                                 <div class="col-12 col-md-3 col-xl-3">
                                     <div class="form-group">
                                         <label for="str">
+                                            <code>*</code>
                                             {{__('main.address')}}</label>
-                                        <input id="str" type="text" name="str" class="form-control form-control-sm" placeholder="{{__('main.address')}}" autocomplete="off">
+                                        <input id="str" type="text" name="str" class="form-control form-control-sm" placeholder="{{__('main.address')}}" autocomplete="off" required>
+                                        @error('address')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 {{--<div class="col-12 col-md-3 col-xl-1">
@@ -237,18 +241,26 @@
                             <div class="row">--}}
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="localitate">
+                                        <code>*</code>
                                         {{__('main.city')}}
                                     </label>
                                     <div class="form-group">
-                                        <input id="localitate" type="text" name="localitate" class="form-control form-control-sm" placeholder="{{__('main.city')}}" autocomplete="off">
+                                        <input id="localitate" type="text" name="localitate" class="form-control form-control-sm" placeholder="{{__('main.city')}}" autocomplete="off" required>
+                                        @error('localitate')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-1">
                                     <label for="codpostal">
+                                        <code>*</code>
                                         {{__('main.post_code')}}
                                     </label>
                                     <div class="form-group">
-                                        <input id="codpostal" type="text" name="codpostal" class="form-control form-control-sm" placeholder="{{__('main.post_code')}}" autocomplete="off">
+                                        <input id="codpostal" type="text" name="codpostal" class="form-control form-control-sm" placeholder="{{__('main.post_code')}}" autocomplete="off" required>
+                                        @error('codpostal')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">
@@ -300,18 +312,26 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="perscontact">
+                                        <code>*</code>
                                         {{__('main.person_name')}}
                                     </label>
                                     <div class="form-group">
-                                        <input id="perscontact" type="text" name="perscontact" class="form-control form-control-sm" placeholder="{{__('main.person_name')}}" autocomplete="off">
+                                        <input id="perscontact" type="text" name="perscontact" class="form-control form-control-sm" placeholder="{{__('main.person_name')}}" autocomplete="off" required>
+                                        @error('perscontact')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="telpers">
+                                        <code>*</code>
                                         {{__('main.phone')}}
                                     </label>
                                     <div class="form-group">
-                                        <input id="telpers" type="text" name="telpers" class="form-control form-control-sm" placeholder="{{__('main.phone')}}" autocomplete="off">
+                                        <input id="telpers" type="text" name="telpers" class="form-control form-control-sm" placeholder="{{__('main.phone')}}" autocomplete="off" required>
+                                        @error('perscontact')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3 col-xl-2">

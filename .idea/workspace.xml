@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="Order adding product bugfiing">
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/create.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -286,14 +287,15 @@
       <workItem from="1625552934915" duration="1680000" />
       <workItem from="1625561211171" duration="2711000" />
       <workItem from="1625638107587" duration="5137000" />
-      <workItem from="1625726935369" duration="3222000" />
-    </task>
-    <task id="LOCAL-00030" summary="Fix order search qty issue">
-      <created>1623920939969</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1623920939969</updated>
+      <workItem from="1625726935369" duration="4747000" />
+      <workItem from="1625813728483" duration="594000" />
+      <workItem from="1626183032404" duration="2098000" />
+      <workItem from="1626247484203" duration="2691000" />
+      <workItem from="1626329748301" duration="4843000" />
+      <workItem from="1626418683375" duration="594000" />
+      <workItem from="1626674766488" duration="1812000" />
+      <workItem from="1626761165330" duration="3687000" />
+      <workItem from="1626849474460" duration="7183000" />
     </task>
     <task id="LOCAL-00031" summary="Fix order search qty issue">
       <created>1623928399238</created>
@@ -631,7 +633,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625733242413</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="example_orders.xslx problem">
+      <created>1625740185045</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1625740185046</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +660,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing routes" />
     <MESSAGE value="Export bug fix" />
     <MESSAGE value="Fix add order packet description in ship instruction" />
     <MESSAGE value="Add order manually bug fixes" />
@@ -676,6 +684,7 @@
     <MESSAGE value="Product stacks functionality" />
     <MESSAGE value="Product stacks functionality bugfix" />
     <MESSAGE value="Order adding product bugfiing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order adding product bugfiing" />
+    <MESSAGE value="example_orders.xslx problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="example_orders.xslx problem" />
   </component>
 </project>

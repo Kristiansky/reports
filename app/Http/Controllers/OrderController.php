@@ -901,7 +901,7 @@ class OrderController extends Controller
             'modplata' => $request->get('ramburs') != 0 ? 'cashondelivery' : '',
             'curier' => $request->get('curier'),
             'shipping_method' => $request->get('shipping_method') ? $request->get('shipping_method') : "",
-            'ship_instructions' => $request->get('ship_instructions') . $i == 0 ? $packet_title : '',
+            'ship_instructions' => $request->get('ship_instructions') . ($i == 0 ? $packet_title : ''),
         ];
     
         if($i==0){

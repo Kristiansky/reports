@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-    </list>
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,14 +294,7 @@
       <workItem from="1626761165330" duration="3687000" />
       <workItem from="1626849474460" duration="7425000" />
       <workItem from="1626935253022" duration="3241000" />
-      <workItem from="1627021492071" duration="2078000" />
-    </task>
-    <task id="LOCAL-00034" summary="favicon">
-      <created>1623934450717</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1623934450717</updated>
+      <workItem from="1627021492071" duration="2330000" />
     </task>
     <task id="LOCAL-00035" summary="favicon">
       <created>1623934535908</created>
@@ -642,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627023513610</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Create order bug fix - ship instructions">
+      <created>1627024493093</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1627024493094</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +659,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add order manually bug fixes" />
     <MESSAGE value="Per page bug fix" />
     <MESSAGE value="Returns info update" />
     <MESSAGE value="Product export add barcode" />
@@ -687,6 +683,7 @@
     <MESSAGE value="example_orders.xslx problem" />
     <MESSAGE value="View order edit" />
     <MESSAGE value="Create order edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create order edit" />
+    <MESSAGE value="Create order bug fix - ship instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create order bug fix - ship instructions" />
   </component>
 </project>

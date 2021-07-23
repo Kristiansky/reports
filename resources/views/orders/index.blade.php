@@ -508,6 +508,10 @@
                                 <th>{{__('main.ship_instructions')}}</th>
                                 <td><span id="order_ship_instructions"></span></td>
                             </tr>
+                            <tr>
+                                <th>{{__('main.shipping_method')}}</th>
+                                <td><span id="order_shipping_method"></span></td>
+                            </tr>
                             <tr class="d-none" id="row_returned">
                                 <th>{{__('main.is_returned')}}</th>
                                 <td><span id="order_returned"></span></td>
@@ -700,6 +704,7 @@
 						$('#order_phone').html(response.telpers);
 						$('#order_other_info').html(response.altele);
 						$('#order_ship_instructions').html(response.ship_instructions);
+						$('#order_shipping_method').html(response.shipping_method);
 						if(response.returned === true){
                             $('#row_returned, .returned').removeClass('d-none');
                             $('#order_returned').html('{{__('main.yes')}}')

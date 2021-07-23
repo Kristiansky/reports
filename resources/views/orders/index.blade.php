@@ -485,6 +485,14 @@
                                 <td><span id="order_address"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.city')}}</th>
+                                <td><span id="order_city"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.country')}}</th>
+                                <td><span id="order_country"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.recipient')}}</th>
                                 <td><span id="order_to"></span></td>
                             </tr>
@@ -686,6 +694,8 @@
 						$('#order_payment_method').html(response.modplata);
 						$('#order_total').html(response.ramburs);
 						$('#order_address').html(response.adresa);
+						$('#order_city').html(response.localitate);
+						$('#order_country').html(response.tara);
 						$('#order_to').html(response.perscontact);
 						$('#order_phone').html(response.telpers);
 						$('#order_other_info').html(response.altele);

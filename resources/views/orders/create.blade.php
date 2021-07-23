@@ -175,14 +175,14 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{--<div class="col-12 col-xl-3">
+                                <div class="col-12 col-xl-3">
                                     <div class="form-group">
-                                        <label for="locatie">
-                                            {{__('main.order_delivery_extra_info')}}:
+                                        <label for="idextern">
+                                            {{__('main.external_id')}}:
                                         </label>
-                                        <input id="locatie" type="text" name="locatie" class="form-control form-control-sm" placeholder="{{__('main.order_extra_info')}}" autocomplete="off">
+                                        <input id="idextern" type="text" name="idextern" class="form-control form-control-sm" placeholder="{{__('main.external_id')}}" autocomplete="off">
                                     </div>
-                                </div>--}}
+                                </div>
                             </div>
                             {{--<div class="row">
                                 <div class="col-12 col-md-3 col-xl-1">

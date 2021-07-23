@@ -884,6 +884,7 @@ class OrderController extends Controller
             'sc' => $sc == null ? '' : $sc,
             'ap' => $ap == null ? '' : $ap,
             'et' => $et == null ? '' : $et,
+            'idextern' => $request->get('idextern'),
             'localitate' => $request->get('localitate'),
             'tara' => $request->get('tara') == '' ? 'BG' : $request->get('tara'),
             'judet' => $request->get('judet'),

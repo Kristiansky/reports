@@ -12,6 +12,9 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class EntryController extends Controller
 {
+    public $stacks_to_clients = array(
+        262 => true, //KOLIB
+    );
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +55,7 @@ class EntryController extends Controller
             return redirect(route('home'));
         }
         $entries = DB::table('stor_produse')
-            ->select('stor_produse.idp','stor_intrari.dataintrare','stor_produse.codprodusclient','stor_produse.descriere', DB::raw('SUM(stor_intrari.bucati) AS bucati'))
+            ->select('stor_produse.idp','stor_intrari.dataintrare','stor_produse.codprodusclient','stor_produse.descriere','stor_produse.pieces_in_package', DB::raw('SUM(stor_intrari.bucati) AS bucati'))
             ->leftJoin('stor_categorii', 'stor_produse.idc', '=', 'stor_categorii.idc')
             ->leftJoin('auth_groups', 'auth_groups.id', '=', 'stor_categorii.idg')
             ->leftJoin('stor_intrari', 'stor_intrari.idp', '=', 'stor_produse.idp')
@@ -106,7 +109,12 @@ class EntryController extends Controller
         }
         $entries = $entries->paginate(session('per_page'));
 //        $paginator = new Paginator($entries, session('per_page'), request('page') ? request('page') : 1, ['path' => route('entries.index')]);
-        return view('entries.index', compact('entries'/*, 'paginator'*/));
+        if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true){
+            $show_stacks = true;
+        }else{
+            $show_stacks = false;
+        }
+        return view('entries.index', compact('entries', 'show_stacks'/*, 'paginator'*/));
     }
 
     /**

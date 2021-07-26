@@ -131,6 +131,9 @@
                                         @if(session('entries_sort') && session('entries_sort') == 'bucati'){!!$icon!!}@endif {{__('main.qty')}}
                                     </a>
                                 </th>
+                                @if($show_stacks)
+                                    <th>{{__('main.stacks')}}</th>
+                                @endif
                                 <th width="15%">
                                     <a href="?sort=dataintrare&direction={{$direction}}">
                                         @if(session('entries_sort') && session('entries_sort') == 'dataintrare'){!!$icon!!}@endif {{__('main.entry_date')}}
@@ -145,6 +148,11 @@
                                     <td>{{$entry->codprodusclient}}</td>
                                     <td>{{$entry->descriere}}</td>
                                     <td>{{$entry->bucati}}</td>
+                                    @if($show_stacks)
+                                        <td>
+                                            {{$entry->pieces_in_package > 0 ? (int)$entry->bucati / (int)$entry->pieces_in_package : ''}}
+                                        </td>
+                                    @endif
                                     <td>{{$entry->dataintrare}}</td>
                                 </tr>
                             @endforeach

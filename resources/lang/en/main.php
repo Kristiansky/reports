@@ -119,6 +119,7 @@
         'cancel' => 'Cancel',
         'sent_orders' => 'Sent orders',
         'returned_orders' => 'Returned orders',
+        'returned_order' => 'Returned order',
         'sent_by_city' => 'Sent to city',
         'top_selling_product' => 'Top selling product',
         'more' => 'More',

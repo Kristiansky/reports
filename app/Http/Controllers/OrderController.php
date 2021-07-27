@@ -161,7 +161,11 @@ class OrderController extends Controller
                 $sheet->setCellValue('G' . $row, $order->qty);
                 $sheet->setCellValue('H' . $row, $order->curier);
                 $sheet->setCellValue('I' . $row, $order->awb);
-                $sheet->setCellValue('J' . $row, $order->statuscurier);
+                if ($order->ceretur != '0000-00-00' && $order->curier == 'econt'){
+                    $sheet->setCellValue('J' . $row, __('main.returned_order'));
+                }else{
+                    $sheet->setCellValue('J' . $row, $order->statuscurier);
+                }
     
                 if (request('include_products') && request('include_products') == '1'){
                     if ($order->ceretur != '0000-00-00'){

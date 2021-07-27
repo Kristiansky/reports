@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EntryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EntryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/entries/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/entries/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -300,14 +302,8 @@
       <workItem from="1626935253022" duration="3241000" />
       <workItem from="1627021492071" duration="5692000" />
       <workItem from="1627048069182" duration="594000" />
-      <workItem from="1627280330112" duration="2095000" />
-    </task>
-    <task id="LOCAL-00036" summary="favicon">
-      <created>1623934543051</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1623934543051</updated>
+      <workItem from="1627280330112" duration="4321000" />
+      <workItem from="1627374213871" duration="847000" />
     </task>
     <task id="LOCAL-00037" summary="favicon">
       <created>1624263336196</created>
@@ -645,7 +641,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627024734537</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Packages in entries">
+      <created>1627283603665</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1627283603666</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +668,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Returns info update" />
     <MESSAGE value="Product export add barcode" />
     <MESSAGE value="Orders index fix" />
     <MESSAGE value="Create order bug fixes" />
@@ -690,6 +692,7 @@
     <MESSAGE value="Create order edit" />
     <MESSAGE value="Create order bug fix - ship instructions" />
     <MESSAGE value="View order missing field" />
-    <option name="LAST_COMMIT_MESSAGE" value="View order missing field" />
+    <MESSAGE value="Packages in entries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Packages in entries" />
   </component>
 </project>

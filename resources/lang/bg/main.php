@@ -119,6 +119,7 @@
         'cancel' => 'Отказ',
         'sent_orders' => 'Изпратени поръчки',
         'returned_orders' => 'Върнати поръчки',
+        'returned_order' => 'Върната поръчка',
         'sent_by_city' => 'Изпратени до град',
         'top_selling_product' => 'Най-продаван продукт',
         'more' => 'Още',

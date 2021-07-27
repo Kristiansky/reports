@@ -235,7 +235,7 @@
                                     <td>{{$order->perscontact}}</td>
                                     <td>{!! $order->status !!}</td>
                                     <td>{{$order->qty}}</td>
-                                    <td>{{$order->getRawOriginal('status')}} @if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
+                                    <td>@if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
                                     <td>{{$order->curier}}</td>
                                     <td>{{$order->awb}}</td>
                                     <td>@if($order->ceretur != '0000-00-00' && $order->curier == 'econt'){{__('main.returned_order')}}@else{{\Illuminate\Support\Str::limit($order->statuscurier, 40, '...')}}@endif</td>

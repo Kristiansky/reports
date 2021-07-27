@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -301,14 +299,7 @@
       <workItem from="1627021492071" duration="5692000" />
       <workItem from="1627048069182" duration="594000" />
       <workItem from="1627280330112" duration="4321000" />
-      <workItem from="1627374213871" duration="2724000" />
-    </task>
-    <task id="LOCAL-00039" summary="fix order excel upload">
-      <created>1624286188325</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1624286188325</updated>
+      <workItem from="1627374213871" duration="4011000" />
     </task>
     <task id="LOCAL-00040" summary="Dashboard sent orders bug fix">
       <created>1624352276362</created>
@@ -646,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627379600671</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Bug fix">
+      <created>1627384337783</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1627384337784</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

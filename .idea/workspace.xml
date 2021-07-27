@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -299,14 +301,7 @@
       <workItem from="1627021492071" duration="5692000" />
       <workItem from="1627048069182" duration="594000" />
       <workItem from="1627280330112" duration="4321000" />
-      <workItem from="1627374213871" duration="1481000" />
-    </task>
-    <task id="LOCAL-00038" summary="fix order destroy bug">
-      <created>1624274705723</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1624274705723</updated>
+      <workItem from="1627374213871" duration="2724000" />
     </task>
     <task id="LOCAL-00039" summary="fix order excel upload">
       <created>1624286188325</created>
@@ -644,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627375084911</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Bug fix">
+      <created>1627379600671</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1627379600671</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +666,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Product export add barcode" />
     <MESSAGE value="Orders index fix" />
     <MESSAGE value="Create order bug fixes" />
     <MESSAGE value="Create order add field" />
@@ -689,6 +690,7 @@
     <MESSAGE value="Create order bug fix - ship instructions" />
     <MESSAGE value="View order missing field" />
     <MESSAGE value="Packages in entries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Packages in entries" />
+    <MESSAGE value="Bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix" />
   </component>
 </project>

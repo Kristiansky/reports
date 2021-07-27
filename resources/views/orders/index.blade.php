@@ -501,6 +501,10 @@
                                 <td><span id="order_phone"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.email')}}</th>
+                                <td><span id="order_email"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.office_code')}}</th>
                                 <td><span id="order_other_info"></span></td>
                             </tr>
@@ -702,6 +706,7 @@
 						$('#order_country').html(response.tara);
 						$('#order_to').html(response.perscontact);
 						$('#order_phone').html(response.telpers);
+						$('#order_email').html(response.emailpers);
 						$('#order_other_info').html(response.altele);
 						$('#order_ship_instructions').html(response.ship_instructions);
 						$('#order_shipping_method').html(response.shipping_method);

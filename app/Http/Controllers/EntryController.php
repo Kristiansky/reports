@@ -83,6 +83,11 @@ class EntryController extends Controller
             )
         ;
     
+        if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true){
+            $show_stacks = true;
+        }else{
+            $show_stacks = false;
+        }
         if(request('export') && request('export') == '1'){
             $entries = $entries->get();
             $spreadsheet = new Spreadsheet();
@@ -91,7 +96,13 @@ class EntryController extends Controller
             $sheet->setCellValue('B1', __('main.sku'));
             $sheet->setCellValue('C1', __('main.name'));
             $sheet->setCellValue('D1', __('main.qty'));
-            $sheet->setCellValue('E1', __('main.entry_date'));
+            if ($show_stacks){
+                $sheet->setCellValue('E1', __('main.stacks'));
+                $sheet->setCellValue('F1', __('main.entry_date'));
+            }else{
+    
+                $sheet->setCellValue('E1', __('main.entry_date'));
+            }
             $row = 1;
             foreach ($entries as $entry) {
                 $row++;
@@ -99,7 +110,13 @@ class EntryController extends Controller
                 $sheet->setCellValue('B' . $row, $entry->codprodusclient);
                 $sheet->setCellValue('C' . $row, $entry->descriere);
                 $sheet->setCellValue('D' . $row, $entry->bucati);
-                $sheet->setCellValue('E' . $row, $entry->dataintrare);
+                if ($show_stacks){
+                    $sheet->setCellValue('E' . $row, $entry->pieces_in_package > 0 ? (int)$entry->bucati / (int)$entry->pieces_in_package : '');
+                    $sheet->setCellValue('F' . $row, $entry->dataintrare);
+                    
+                }else{
+                    $sheet->setCellValue('E' . $row, $entry->dataintrare);
+                }
             }
             $writer = new Xlsx($spreadsheet);
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -109,11 +126,6 @@ class EntryController extends Controller
         }
         $entries = $entries->paginate(session('per_page'));
 //        $paginator = new Paginator($entries, session('per_page'), request('page') ? request('page') : 1, ['path' => route('entries.index')]);
-        if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true){
-            $show_stacks = true;
-        }else{
-            $show_stacks = false;
-        }
         return view('entries.index', compact('entries', 'show_stacks'/*, 'paginator'*/));
     }
 

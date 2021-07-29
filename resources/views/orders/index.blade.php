@@ -489,6 +489,10 @@
                                 <td><span id="order_city"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.post_code')}}</th>
+                                <td><span id="order_post_code"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.country')}}</th>
                                 <td><span id="order_country"></span></td>
                             </tr>
@@ -703,6 +707,7 @@
 						$('#order_total').html(response.ramburs);
 						$('#order_address').html(response.adresa);
 						$('#order_city').html(response.localitate);
+						$('#order_post_code').html(response.codpostal);
 						$('#order_country').html(response.tara);
 						$('#order_to').html(response.perscontact);
 						$('#order_phone').html(response.telpers);

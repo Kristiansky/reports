@@ -269,4 +269,15 @@ class ProductController extends Controller
     {
         //
     }
+    
+    public function getStocks()
+    {
+        $products = Product::where('idc', '=', 180)->get();
+        foreach ($products as $product){
+            $stock = $product->stockInclNew();
+            if ($stock < 0){
+                echo ($stock) . '<br/>';
+            }
+        }
+    }
 }

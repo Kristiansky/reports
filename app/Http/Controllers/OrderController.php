@@ -28,6 +28,7 @@ class OrderController extends Controller
     public $packets_to_clients = array(
         153 => 'smart_packets',
         155 => 'escreo_packets',
+        180 => 'bguchebnik_packets',
     );
     
     /**

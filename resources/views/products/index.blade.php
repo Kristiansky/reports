@@ -69,9 +69,9 @@
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>
-{{--                                @if(session('client')->cod_client == 'BGUCH')--}}
+                                @if(session('client')->cod_client == 'BGUCH')
                                     <a href="{{route('get_stocks')}}" class="btn btn-warning btn-sm ml-2">{{__('main.negative_stock')}}</a>
-{{--                                @endif--}}
+                                @endif
                             </div>
                         </div>
                         {{--<div class="row">

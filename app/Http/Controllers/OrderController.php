@@ -51,6 +51,8 @@ class OrderController extends Controller
                 'sent_date_to' => request('sent_date_to'),
                 'country' => request('country'),
                 'other' => request('other'),
+                'courier' => request('courier'),
+                'status_courier' => request('status_courier'),
             );
             session()->put('order_filter', $order_filter);
             return redirect(route('order.index'));
@@ -77,6 +79,7 @@ class OrderController extends Controller
                 if(session('order_filter')['search'] && session('order_filter')['search'] != ''){
                     $query->where('idcomanda', '=', session('order_filter')['search'])
                         ->orWhere('idextern', '=', session('order_filter')['search'])
+                        ->orWhere('awb', '=', session('order_filter')['search'])
                         ->orWhere('perscontact', 'like', '%' . session('order_filter')['search'] . '%');
                 }
                 if(session('order_filter')['entered_date_from'] && session('order_filter')['entered_date_from'] != ''){
@@ -93,6 +96,12 @@ class OrderController extends Controller
                 }
                 if(session('order_filter')['country'] && session('order_filter')['country'] != ''){
                     $query->where('tara', '=', session('order_filter')['country']);
+                }
+                if(session('order_filter')['courier'] && session('order_filter')['courier'] != ''){
+                    $query->where('curier', '=', session('order_filter')['courier']);
+                }
+                if(session('order_filter')['status_courier'] && session('order_filter')['status_courier'] != ''){
+                    $query->where('statuscurier', '=', session('order_filter')['status_courier']);
                 }
                 if(session('order_filter')['status'] && session('order_filter')['status'] != ''){
                     if(session('order_filter')['status'] == 'procesabila'){
@@ -196,7 +205,18 @@ class OrderController extends Controller
     
         $status_options = $this->status_options;
         $country_options = $this->country_options;
-        return view('orders.index', compact('orders'/*, 'paginator'*/, 'status_options', 'country_options'));
+        $courier_options = Order::select('curier')
+            ->where('ido', '=', $ido)
+            ->distinct()
+            ->get()
+        ;
+        $status_courier_options = Order::select('statuscurier')
+            ->where('ido', '=', $ido)
+            ->where('statuscurier', '!=', '')
+            ->distinct()
+            ->get()
+        ;
+        return view('orders.index', compact('orders'/*, 'paginator'*/, 'status_options', 'country_options', 'courier_options', 'status_courier_options'));
     }
 
     /**

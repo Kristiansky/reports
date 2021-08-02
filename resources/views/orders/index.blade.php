@@ -118,6 +118,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6 col-lg-1">
+                                <div class="form-group">
+                                    <label for="courier">{{__('main.courier')}}</label>
+                                    <select class="form-control form-control-sm" id="courier" name="courier">
+                                        <option value="">{{ __('main.choose') }}</option>
+                                        @foreach($courier_options as $courier_option)
+                                            <option value="{{ $courier_option->curier }}" @if(session('order_filter')['courier'] == $courier_option->curier) selected @endif>{{$courier_option->curier}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-1">
+                                <div class="form-group">
+                                    <label for="status_courier">{{__('main.status_courier')}}</label>
+                                    <select class="form-control form-control-sm" id="status_courier" name="status_courier">
+                                        <option value="">{{ __('main.choose') }}</option>
+                                        @foreach($status_courier_options as $status_courier_option)
+                                            <option value="{{ $status_courier_option->statuscurier }}" @if(session('order_filter')['status_courier'] == $status_courier_option->statuscurier) selected @endif>{{$status_courier_option->statuscurier}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <!-- /.card-body -->

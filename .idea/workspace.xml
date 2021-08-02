@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/bg/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/bg/main.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -306,21 +305,7 @@
       <workItem from="1627454256561" duration="2204000" />
       <workItem from="1627560278665" duration="2095000" />
       <workItem from="1627642931166" duration="3362000" />
-      <workItem from="1627886993269" duration="3406000" />
-    </task>
-    <task id="LOCAL-00047" summary="Per page bug fix">
-      <created>1624452721768</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1624452721768</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Returns info update">
-      <created>1624459074113</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1624459074113</updated>
+      <workItem from="1627886993269" duration="7122000" />
     </task>
     <task id="LOCAL-00049" summary="Product export add barcode">
       <created>1624516014462</created>
@@ -651,7 +636,21 @@
       <option name="project" value="LOCAL" />
       <updated>1627890708340</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Negative stock button">
+      <created>1627893482286</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1627893482286</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Negative stock button">
+      <created>1627893498127</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1627893498127</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +670,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Order Product delete bug fix" />
     <MESSAGE value="Order edit loading spinner" />
     <MESSAGE value="Order Adding products" />
     <MESSAGE value="Order Adding products xlsx fix for payment method" />
@@ -696,6 +694,7 @@
     <MESSAGE value="Bug fixes" />
     <MESSAGE value="testing get stocks on bguchebnik" />
     <MESSAGE value="Bug fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixing" />
+    <MESSAGE value="Negative stock button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Negative stock button" />
   </component>
 </project>

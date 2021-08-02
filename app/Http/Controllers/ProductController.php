@@ -295,23 +295,14 @@ class ProductController extends Controller
                 $sheet->setCellValue('B' . $row, $product->codprodusclient);
                 $sheet->setCellValue('C' . $row, $product->codbare);
                 $sheet->setCellValue('D' . $row, $product->descriere);
-                if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true && $product->pieces_in_package != NULL){
-                    $sheet->setCellValue('E' . $row, $product->stock() . ' / ' . __('main.stacks') . ': ' . $product->stacks());
-                }else{
-                    $sheet->setCellValue('E' . $row, $product->stock());
-                }
+                $sheet->setCellValue('E' . $row, $product->stock());
                 $sheet->setCellValue('F' . $row, $product->stockInclNew());
                 $lots = '';
                 $expiration_dates = '';
                 if($product->lots()){
                     foreach($product->lots() as $lot){
-                        if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date']){
-                            $lots .= $lot['number_of_items'] . ' ' . __('main.items_in') . ' ' . $lot['lotul'] . "\n";
-                            $expiration_dates .= $lot['dataexp'] . "\n";
-                        }elseif(!session('product_filter')['expiration_date']){
-                            $lots .= $lot['number_of_items'] . ' ' . __('main.items_in') . ' ' . $lot['lotul'] . "\n";
-                            $expiration_dates .= $lot['dataexp'] . "\n";
-                        }
+                        $lots .= $lot['number_of_items'] . ' ' . __('main.items_in') . ' ' . $lot['lotul'] . "\n";
+                        $expiration_dates .= $lot['dataexp'] . "\n";
                     }
                 }
                 $sheet->setCellValue('G' . $row, $lots);

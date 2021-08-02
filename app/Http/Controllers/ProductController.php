@@ -273,11 +273,60 @@ class ProductController extends Controller
     public function getStocks()
     {
         $products = Product::where('idc', '=', 180)->get();
+    
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', __('main.product_id'));
+        $sheet->setCellValue('B1', __('main.sku'));
+        $sheet->setCellValue('C1', __('main.barcode'));
+        $sheet->setCellValue('D1', __('main.name'));
+        $sheet->setCellValue('E1', __('main.stock'));
+        $sheet->setCellValue('F1', __('main.incl_new'));
+        $sheet->setCellValue('G1', __('main.lots'));
+        $sheet->setCellValue('H1', __('main.lot_expiration'));
+        $sheet->setCellValue('I1', __('main.damaged'));
+        $row = 1;
+        
         foreach ($products as $product){
             $stock = $product->stockInclNew();
             if ($stock < 0){
-                echo ($stock) . '<br/>';
+                $row++;
+                $sheet->setCellValue('A' . $row, $product->idp);
+                $sheet->setCellValue('B' . $row, $product->codprodusclient);
+                $sheet->setCellValue('C' . $row, $product->codbare);
+                $sheet->setCellValue('D' . $row, $product->descriere);
+                if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true && $product->pieces_in_package != NULL){
+                    $sheet->setCellValue('E' . $row, $product->stock() . ' / ' . __('main.stacks') . ': ' . $product->stacks());
+                }else{
+                    $sheet->setCellValue('E' . $row, $product->stock());
+                }
+                $sheet->setCellValue('F' . $row, $product->stockInclNew());
+                $lots = '';
+                $expiration_dates = '';
+                if($product->lots()){
+                    foreach($product->lots() as $lot){
+                        if(session('product_filter')['expiration_date'] && $lot['dataexp'] <= session('product_filter')['expiration_date']){
+                            $lots .= $lot['number_of_items'] . ' ' . __('main.items_in') . ' ' . $lot['lotul'] . "\n";
+                            $expiration_dates .= $lot['dataexp'] . "\n";
+                        }elseif(!session('product_filter')['expiration_date']){
+                            $lots .= $lot['number_of_items'] . ' ' . __('main.items_in') . ' ' . $lot['lotul'] . "\n";
+                            $expiration_dates .= $lot['dataexp'] . "\n";
+                        }
+                    }
+                }
+                $sheet->setCellValue('G' . $row, $lots);
+                $sheet->setCellValue('H' . $row, $expiration_dates);
+                $damaged = '';
+                if($product->damaged()){
+                    $damaged = $product->damaged()->total;
+                }
+                $sheet->setCellValue('I' . $row, $damaged);
             }
         }
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode('negative-stock-' . date("H-i-s-d-m-Y") . '.xlsx').'"');
+        $writer->save('php://output');
+        exit;
     }
 }

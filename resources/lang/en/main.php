@@ -158,5 +158,6 @@
         'sent_date_to' => 'Sent to',
         'expire_on' => 'expires on',
         'shipping_method' => 'Shipping method /inout2 only/',
-        'stacks' => 'Stacks'
+        'stacks' => 'Stacks',
+        'negative_stock' => 'Negative stock',
     ];

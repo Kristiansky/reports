@@ -158,5 +158,6 @@
         'sent_date_to' => 'Изпратена до',
         'expire_on' => 'изтича на',
         'shipping_method' => 'Тип на доставка /само за inout2/',
-        'stacks' => 'Стекове'
+        'stacks' => 'Стекове',
+        'negative_stock' => 'Минусово количество',
     ];

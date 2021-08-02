@@ -13,7 +13,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-    Route::get('/get_stocks', 'ProductController@getStocks');
+    Route::get('/get_stocks', 'ProductController@getStocks')->name('get_stocks');
 
     Route::get('admin/pre', function(){
         return Redirect::to('', 301);

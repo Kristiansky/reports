@@ -592,6 +592,26 @@
     <script>
 		$(document).ready(function () {
 			$('.select2').select2();
+			var chosen_product = []
+			$('#adding_product').select2({
+				ajax: {
+					url: '{{route("product_ajax_search")}}',
+					dataType: 'json',
+					processResults: function (data) {
+						return {
+							results:  $.map(data, function (item) {
+								chosen_product = item;
+								return {
+									text: item.name,
+									id: item.id
+								}
+							})
+						};
+					},
+				},
+				placeholder: 'Търсене на продукт...',
+				minimumInputLength: 3,
+			});
 			$('#entered_date_from, #entered_date_to, #sent_date_from, #sent_date_to').datetimepicker({
 				format: 'YYYY-MM-DD',
 				icons:
@@ -650,7 +670,7 @@
 					type:"GET",
 					success:function(response){
 						$('#editOverlay').addClass('d-none');
-						var adding_products_html = "<option value=''>{{ __('main.choose') }}</option>";
+						/*var adding_products_html = "<option value=''>{{ __('main.choose') }}</option>";
 						var products_details=[];
 						response.adding_products.forEach(function(adding_product){
 							products_details[adding_product.idp] = {
@@ -662,15 +682,15 @@
                                 '<option value="'+adding_product.idp+'">'+adding_product.codprodusclient+': '+adding_product.descriere+'</option>'
                                 ;
                         });
-						$('#adding_product').html(adding_products_html);
+						$('#adding_product').html(adding_products_html);*/
 
 						$('#adding_product').on('change', function () {
-							var chosen_idp = $(this).val();
-							$('input#adding_qty').attr('max', products_details[chosen_idp].stock).attr('required',true);
-							$('#internal_id_product_holder').html(chosen_idp);
-							$('#current_stock_product_holder').html(products_details[chosen_idp].stock);
-							$('#sku_product_holder').html(products_details[chosen_idp].codprodusclient);
-							$('#barcode_product_holder').html(products_details[chosen_idp].codbare);
+							// var chosen_idp = $(this).val();
+							$('input#adding_qty').attr('max', chosen_product.stock).attr('required',true);
+							$('#internal_id_product_holder').html(chosen_product.idp);
+							$('#current_stock_product_holder').html(chosen_product.stock);
+							$('#sku_product_holder').html(chosen_product.codprodusclient);
+							$('#barcode_product_holder').html(chosen_product.codbare);
 						});
 
 						$('#edit_order_number').html(response.order.idextern);

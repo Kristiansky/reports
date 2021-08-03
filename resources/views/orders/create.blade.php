@@ -32,10 +32,10 @@
                                         <div class="form-group">
                                             <label for="product"><code>*</code>{{__('main.choose_product')}}</label>
                                             <select class="form-control form-control-sm select2 @error('product') is-invalid @enderror" id="product" name="product" required>
-                                                <option value="">{{ __('main.choose') }}</option>
+                                                {{--<option value="">{{ __('main.choose') }}</option>
                                                 @foreach($products as $product)
                                                     <option value="{{ $product->idp }}">{{$product->codprodusclient}}: {{$product->descriere}}</option>
-                                                @endforeach
+                                                @endforeach--}}
                                             </select>
                                             @error('product')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -470,11 +470,29 @@
     <script>
 		$(document).ready(function () {
 			$('.select2').select2();
-			var volumes = {
-                @foreach($products as $product)
-				    {{$product->idp}}: {{$product->stock()}},
-                @endforeach
-			};
+			$('select#product').select2({
+				ajax: {
+					url: '{{route("product_ajax_search")}}',
+					dataType: 'json',
+					processResults: function (data) {
+						return {
+							results:  $.map(data, function (item) {
+								return {
+									text: item.name,
+									id: item.id
+								}
+							})
+						};
+					},
+				},
+				placeholder: 'Търсене на продукт...',
+				minimumInputLength: 3,
+			});
+			{{--var volumes = {--}}
+            {{--    @foreach($products as $product)--}}
+			{{--	    {{$product->idp}}: {{$product->stock()}},--}}
+            {{--    @endforeach--}}
+			{{--};--}}
             $('select#product').on('change', function () {
                 var idp = $(this).val();
                 $('#text_stock_of_idp').html(idp);

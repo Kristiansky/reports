@@ -228,22 +228,22 @@ class OrderController extends Controller
     {
         $client = session('client');
         $productCategories = $client->group->product_categories;
-        $data['products'] = array();
-        $exclude = array();
-        if(session('cart_products')){
-            foreach (session('cart_products') as $item) {
-                $exclude[]=$item[0]['idp'];
-            }
-        }
-        $idcs = array();
-        foreach ($productCategories as $productCategory){
-            $idcs[] = $productCategory->idc;
-            foreach ($productCategory->products->sortBy('idp') as $product){
-                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
-                    $data['products'][] = $product;
-                }
-            }
-        }
+//        $data['products'] = array();
+//        $exclude = array();
+//        if(session('cart_products')){
+//            foreach (session('cart_products') as $item) {
+//                $exclude[]=$item[0]['idp'];
+//            }
+//        }
+//        $idcs = array();
+//        foreach ($productCategories as $productCategory){
+//            $idcs[] = $productCategory->idc;
+//            foreach ($productCategory->products->sortBy('idp') as $product){
+//                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
+//                    $data['products'][] = $product;
+//                }
+//            }
+//        }
         
         if(request('removeCartProduct')){
             
@@ -638,27 +638,28 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $client = session('client');
-        $productCategories = $client->group->product_categories;
-        $adding_products = array();
-        $exclude = array();
-        if($order->products){
-            foreach ($order->products as $item) {
-                $exclude[]=$item['idp'];
-            }
-        }
-        $idcs = array();
-        foreach ($productCategories as $productCategory){
-            $idcs[] = $productCategory->idc;
-            foreach ($productCategory->products->sortBy('idp') as $product){
-                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
-                    $product['stock'] = (int)$product->stock();
-                    $adding_products[] = $product;
-                }
-            }
-        }
-        
-        return response()->json(['order'=>$order,'adding_products'=>$adding_products]);
+//        $client = session('client');
+//        $productCategories = $client->group->product_categories;
+//        $adding_products = array();
+//        $exclude = array();
+//        if($order->products){
+//            foreach ($order->products as $item) {
+//                $exclude[]=$item['idp'];
+//            }
+//        }
+//        $idcs = array();
+//        foreach ($productCategories as $productCategory){
+//            $idcs[] = $productCategory->idc;
+//            foreach ($productCategory->products->sortBy('idp') as $product){
+//                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
+//                    $product['stock'] = (int)$product->stock();
+//                    $adding_products[] = $product;
+//                }
+//            }
+//        }
+
+//        return response()->json(['order'=>$order,'adding_products'=>$adding_products]);
+        return response()->json(['order'=>$order]);
     }
 
     /**

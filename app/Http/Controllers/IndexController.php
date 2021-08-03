@@ -2,8 +2,10 @@
     
     namespace App\Http\Controllers;
     
+    use App\AuthGroup;
     use App\Client;
     use App\Order;
+    use App\Product;
     use App\User;
     use DateInterval;
     use DatePeriod;
@@ -485,5 +487,39 @@
                 ->get()
             ;
             return response()->json($top_products);
+        }
+    
+    
+        public function ajaxSearch(Request $request)
+        {
+    
+            $client = session('client');
+            $idc = array();
+            foreach(AuthGroup::where('id', '=', $client->group->id)->firstOrFail()->product_categories as $product_category){
+                $idc[] = $product_category->idc;
+            }
+            $data = [];
+        
+            if($request->has('q')){
+                $search = $request->q;
+                $data = Product::select(
+                    DB::raw('*'),
+                    DB::raw('idp AS id'),
+                    DB::raw('CONCAT(codprodusclient, " ", codbare, " ", descriere) AS name')
+                )
+                    ->where(function ($query) use ($search){
+                        $query->where('idp', '=', $search)
+                            ->orWhere('codprodusclient', 'like', '%' . $search . '%')
+                            ->orWhere('descriere', 'like', '%' . $search . '%');
+                    })
+                    ->where(function ($query) use ($idc){
+                        $query->whereIn('idc', $idc);
+                    })
+                    ->get();
+            }
+            foreach ($data as $key => $datum) {
+                $data[$key]['stock'] = $datum->stock();
+            }
+            return response()->json($data);
         }
     }

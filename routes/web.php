@@ -42,6 +42,7 @@
         Route::post('/order/store', 'OrderController@store')->name('order.store');
         Route::resource('/product', 'ProductController');
         Route::post('/product', 'ProductController@index')->name('product.index');
+        Route::get('/product_ajax_search', 'IndexController@ajaxSearch')->name('product_ajax_search');
         Route::get('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/entries', 'EntryController@index')->name('entries.index');
         Route::post('/get_top_products', 'IndexController@getAllTopProducts');

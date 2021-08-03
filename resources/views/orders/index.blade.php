@@ -592,7 +592,7 @@
     <script>
 		$(document).ready(function () {
 			$('.select2').select2();
-			var chosen_product = []
+			var chosen_product = [];
 			$('#adding_product').select2({
 				ajax: {
 					url: '{{route("product_ajax_search")}}',

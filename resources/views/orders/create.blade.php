@@ -470,6 +470,7 @@
     <script>
 		$(document).ready(function () {
 			$('.select2').select2();
+			var chosen_product = [];
 			$('select#product').select2({
 				ajax: {
 					url: '{{route("product_ajax_search")}}',
@@ -477,6 +478,7 @@
 					processResults: function (data) {
 						return {
 							results:  $.map(data, function (item) {
+								chosen_product = item;
 								return {
 									text: item.name,
 									id: item.id
@@ -496,8 +498,8 @@
             $('select#product').on('change', function () {
                 var idp = $(this).val();
                 $('#text_stock_of_idp').html(idp);
-                $('#text_stock_of_qty').html(volumes[idp]);
-                $('input#qty').attr('max', volumes[idp]);
+                $('#text_stock_of_qty').html(chosen_product.stock);
+                $('input#qty').attr('max', chosen_product.stock);
 			});
             $('#data1, #data2').datetimepicker({
                 format: 'YYYY-MM-DD',

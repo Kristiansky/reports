@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -305,14 +303,8 @@
       <workItem from="1627454256561" duration="2204000" />
       <workItem from="1627560278665" duration="2095000" />
       <workItem from="1627642931166" duration="3362000" />
-      <workItem from="1627886993269" duration="7122000" />
-    </task>
-    <task id="LOCAL-00049" summary="Product export add barcode">
-      <created>1624516014462</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1624516014462</updated>
+      <workItem from="1627886993269" duration="8338000" />
+      <workItem from="1627972596984" duration="595000" />
     </task>
     <task id="LOCAL-00050" summary="Orders index fix">
       <created>1624540108817</created>
@@ -650,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627893498127</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="More filtering orders">
+      <created>1627910333907</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1627910333907</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Order edit loading spinner" />
     <MESSAGE value="Order Adding products" />
     <MESSAGE value="Order Adding products xlsx fix for payment method" />
     <MESSAGE value="Order Adding products xlsx bug fixes" />
@@ -695,6 +693,7 @@
     <MESSAGE value="testing get stocks on bguchebnik" />
     <MESSAGE value="Bug fixing" />
     <MESSAGE value="Negative stock button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Negative stock button" />
+    <MESSAGE value="More filtering orders" />
+    <option name="LAST_COMMIT_MESSAGE" value="More filtering orders" />
   </component>
 </project>

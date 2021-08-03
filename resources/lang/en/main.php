@@ -160,4 +160,5 @@
         'shipping_method' => 'Shipping method /inout2 only/',
         'stacks' => 'Stacks',
         'negative_stock' => 'Negative stock',
+        'district' => 'District',
     ];

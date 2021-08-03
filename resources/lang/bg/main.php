@@ -50,6 +50,7 @@
         'apartment' => 'Апартамент',
         'city' => 'Град',
         'choose_district' => 'Избор квартал',
+        'district' => 'Квартал',
         'post_code' => 'Пощенски код',
         'person_name' => 'Име',
         'phone' => 'Телефон',

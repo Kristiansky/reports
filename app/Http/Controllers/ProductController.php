@@ -78,6 +78,7 @@ class ProductController extends Controller
                 if(session('product_filter')['search'] && session('product_filter')['search'] != ''){
                     $query->where('stor_produse.idp', '=', session('product_filter')['search'])
                         ->orWhere('codprodusclient', 'like', '%' . session('product_filter')['search'] . '%')
+                        ->orWhere('codbare', '=', session('product_filter')['search'])
                         ->orWhere('descriere', 'like', '%' . session('product_filter')['search'] . '%');
                 }
                 if((session('product_filter')['entry_from_date'] && session('product_filter')['entry_from_date']!="") && !session('product_filter')['entry_to_date']){

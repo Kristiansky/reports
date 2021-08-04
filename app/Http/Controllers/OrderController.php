@@ -235,15 +235,15 @@ class OrderController extends Controller
 //                $exclude[]=$item[0]['idp'];
 //            }
 //        }
-//        $idcs = array();
-//        foreach ($productCategories as $productCategory){
-//            $idcs[] = $productCategory->idc;
+        $idcs = array();
+        foreach ($productCategories as $productCategory){
+            $idcs[] = $productCategory->idc;
 //            foreach ($productCategory->products->sortBy('idp') as $product){
 //                if(/*$product->stock() > 0 &&*/ !in_array($product->idp, $exclude)){
 //                    $data['products'][] = $product;
 //                }
 //            }
-//        }
+        }
         
         if(request('removeCartProduct')){
             

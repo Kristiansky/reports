@@ -31,6 +31,10 @@ class OrderController extends Controller
         180 => 'bguchebnik_packets',
     );
     
+    public $stacks_to_clients = array(
+        262 => true, //KOLIB
+    );
+    
     /**
      * Display a listing of the resource.
      *
@@ -141,6 +145,13 @@ class OrderController extends Controller
                 session('orders_sort_direction') ? session('orders_sort_direction') : 'desc'
             );
     
+    
+        if (isset($this->stacks_to_clients[$client->group->id]) && $this->stacks_to_clients[$client->group->id] == true){
+            $show_stacks = true;
+        }else{
+            $show_stacks = false;
+        }
+        
         if(request('export') && request('export') == '1'){
             $orders = $orders->get();
             $spreadsheet = new Spreadsheet();
@@ -216,7 +227,7 @@ class OrderController extends Controller
             ->distinct()
             ->get()
         ;
-        return view('orders.index', compact('orders'/*, 'paginator'*/, 'status_options', 'country_options', 'courier_options', 'status_courier_options'));
+        return view('orders.index', compact('orders'/*, 'paginator'*/, 'status_options', 'country_options', 'courier_options', 'status_courier_options', 'show_stacks'));
     }
 
     /**

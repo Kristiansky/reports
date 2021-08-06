@@ -558,6 +558,9 @@
                             <tr>
                                 <th>{{__('main.product_name')}}</th>
                                 <th>{{__('main.qty')}}</th>
+                                @if($show_stacks)
+                                    <th>{{__('main.stacks')}}</th>
+                                @endif
                                 <th>{{__('main.internal_id')}}</th>
                                 <th>{{__('main.current_stock')}}</th>
                                 <th>{{__('main.sku')}}</th>
@@ -777,10 +780,17 @@
 								"<td>" + returned + "</td>" +
 								"<td>" + return_reason + "</td>";
                             }
+							var stacks = null;
+							if(element.pieces_in_package > 0){
+								stacks = parseInt(element.volum) / parseInt(element.pieces_in_package);
+                            }
 							table_html +=
                                 "<tr>" +
                                     "<td>" + element.descriere + "</td>" +
                                     "<td>" + element.volum + "</td>" +
+                                    @if($show_stacks)
+                                        "<td>" + stacks + "<td>" +
+                                    @endif
                                     "<td>" + element.idp + "</td>" +
 								    "<td>" + element.stock + "</td>" +
                                     "<td>" + element.codprodusclient + "</td>" +

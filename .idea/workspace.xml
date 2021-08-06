@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,14 +309,7 @@
       <workItem from="1627972596984" duration="11377000" />
       <workItem from="1628057136854" duration="2673000" />
       <workItem from="1628143834951" duration="1199000" />
-      <workItem from="1628233438371" duration="1833000" />
-    </task>
-    <task id="LOCAL-00056" summary="Order Product delete bug fix">
-      <created>1624623942994</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1624623942994</updated>
+      <workItem from="1628233438371" duration="4260000" />
     </task>
     <task id="LOCAL-00057" summary="Order edit loading spinner">
       <created>1624627309605</created>
@@ -650,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628240594678</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Add edit order max qty of product input remove max">
+      <created>1628240954962</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1628240954962</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +674,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Order Adding products xlsx bug fixes" />
     <MESSAGE value="Product sales history ordering fix" />
     <MESSAGE value="Fix dashboard top products count" />
     <MESSAGE value="Fix table responsiveness" />
@@ -695,6 +698,7 @@
     <MESSAGE value="More filtering orders" />
     <MESSAGE value="Order bug fixing" />
     <MESSAGE value="Product filter bug fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Product filter bug fixing" />
+    <MESSAGE value="Add edit order max qty of product input remove max" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add edit order max qty of product input remove max" />
   </component>
 </project>

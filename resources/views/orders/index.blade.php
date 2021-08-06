@@ -454,7 +454,7 @@
                                     </td>
                                     <td id="quantity_product_holder">
                                         <div class="form-group">
-                                            <input id="adding_qty" type="number" name="adding_qty" class="form-control form-control-sm" placeholder="{{__('main.qty')}}" min="1" max="1" autocomplete="off">
+                                            <input id="adding_qty" type="number" name="adding_qty" class="form-control form-control-sm" placeholder="{{__('main.qty')}}" {{--min="1" max="1"--}} autocomplete="off">
                                         </div>
                                     </td>
                                     <td id="internal_id_product_holder"></td>
@@ -686,7 +686,7 @@
 
 						$('#adding_product').on('change', function () {
 							// var chosen_idp = $(this).val();
-							$('input#adding_qty').attr('max', chosen_product.stock).attr('required',true);
+							// $('input#adding_qty').attr('max', chosen_product.stock).attr('required',true);
 							$('#internal_id_product_holder').html(chosen_product.idp);
 							$('#current_stock_product_holder').html(chosen_product.stock);
 							$('#sku_product_holder').html(chosen_product.codprodusclient);

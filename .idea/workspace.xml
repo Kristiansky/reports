@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,14 +305,7 @@
       <workItem from="1627972596984" duration="11377000" />
       <workItem from="1628057136854" duration="2673000" />
       <workItem from="1628143834951" duration="1199000" />
-      <workItem from="1628233438371" duration="1307000" />
-    </task>
-    <task id="LOCAL-00055" summary="Create order add field">
-      <created>1624621325588</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1624621325588</updated>
+      <workItem from="1628233438371" duration="1833000" />
     </task>
     <task id="LOCAL-00056" summary="Order Product delete bug fix">
       <created>1624623942994</created>
@@ -652,7 +643,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628077011147</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Product filter bug fixing">
+      <created>1628240594677</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1628240594678</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

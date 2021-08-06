@@ -499,7 +499,7 @@
                 var idp = $(this).val();
                 $('#text_stock_of_idp').html(idp);
                 $('#text_stock_of_qty').html(chosen_product.stock);
-                $('input#qty').attr('max', chosen_product.stock);
+                // $('input#qty').attr('max', chosen_product.stock);
 			});
             // Todo: stock is not right
             $('#data1, #data2').datetimepicker({

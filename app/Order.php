@@ -51,7 +51,7 @@ class Order extends Model
     public function getProductsAttribute()
     {
         $result = DB::table($this->table)
-            ->select('stor_produse.idp','stor_produse.descriere','stor_produse.codprodusclient','stor_produse.codbare','stor_iesiri.volum')
+            ->select('stor_produse.idp','stor_produse.descriere','stor_produse.codprodusclient','stor_produse.codbare','stor_produse.pieces_in_package','stor_iesiri.volum')
             ->join('stor_produse','stor_iesiri.idp','=','stor_produse.idp')
             ->where('idcomanda', '=', $this->idie)->get();
         if($result){
@@ -63,6 +63,7 @@ class Order extends Model
                 $return[$key]['idp'] = $item->idp;
                 $return[$key]['codprodusclient'] = $item->codprodusclient;
                 $return[$key]['codbare'] = $item->codbare;
+                $return[$key]['pieces_in_package'] = $item->pieces_in_package;
                 $return[$key]['stock'] = $current_product->stock();
                 $returned_result = DB::table('stor_intrari')
                     ->where('aviz', '=', $this->idie)

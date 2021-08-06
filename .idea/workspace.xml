@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -309,14 +309,7 @@
       <workItem from="1627972596984" duration="11377000" />
       <workItem from="1628057136854" duration="2673000" />
       <workItem from="1628143834951" duration="1199000" />
-      <workItem from="1628233438371" duration="4260000" />
-    </task>
-    <task id="LOCAL-00057" summary="Order edit loading spinner">
-      <created>1624627309605</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1624627309605</updated>
+      <workItem from="1628233438371" duration="4760000" />
     </task>
     <task id="LOCAL-00058" summary="Order Adding products">
       <created>1624635364579</created>
@@ -654,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628240954962</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="Stacks in orders">
+      <created>1628261096470</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1628261096470</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -674,7 +674,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Product sales history ordering fix" />
     <MESSAGE value="Fix dashboard top products count" />
     <MESSAGE value="Fix table responsiveness" />
     <MESSAGE value="admin/pre Redirect 301" />
@@ -699,6 +698,7 @@
     <MESSAGE value="Order bug fixing" />
     <MESSAGE value="Product filter bug fixing" />
     <MESSAGE value="Add edit order max qty of product input remove max" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add edit order max qty of product input remove max" />
+    <MESSAGE value="Stacks in orders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stacks in orders" />
   </component>
 </project>

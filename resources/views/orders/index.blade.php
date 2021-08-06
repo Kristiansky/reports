@@ -784,12 +784,13 @@
 							if(element.pieces_in_package > 0){
 								stacks = parseInt(element.volum) / parseInt(element.pieces_in_package);
                             }
+							console.log(element);
 							table_html +=
                                 "<tr>" +
                                     "<td>" + element.descriere + "</td>" +
                                     "<td>" + element.volum + "</td>" +
                                     @if($show_stacks)
-                                        "<td>" + stacks + "<td>" +
+                                        "<td>" + stacks + "</td>" +
                                     @endif
                                     "<td>" + element.idp + "</td>" +
 								    "<td>" + element.stock + "</td>" +

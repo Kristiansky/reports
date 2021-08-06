@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -309,14 +307,7 @@
       <workItem from="1627972596984" duration="11377000" />
       <workItem from="1628057136854" duration="2673000" />
       <workItem from="1628143834951" duration="1199000" />
-      <workItem from="1628233438371" duration="4760000" />
-    </task>
-    <task id="LOCAL-00058" summary="Order Adding products">
-      <created>1624635364579</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1624635364579</updated>
+      <workItem from="1628233438371" duration="5449000" />
     </task>
     <task id="LOCAL-00059" summary="Order Adding products xlsx fix for payment method">
       <created>1624866690215</created>
@@ -654,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628261096470</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="Stacks in orders">
+      <created>1628261491656</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1628261491656</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

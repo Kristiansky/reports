@@ -769,6 +769,8 @@
 							$('#row_returned, .returned').addClass('d-none');
                         }
 						var table_html = '';
+						var total_volum = 0;
+						var total_stacks = 0;
 						response.products.forEach(function(element){
 							var returned = "";
 							var return_reason = "";
@@ -783,8 +785,9 @@
 							var stacks = null;
 							if(element.pieces_in_package > 0){
 								stacks = parseInt(element.volum) / parseInt(element.pieces_in_package);
+								total_stacks = parseInt(total_stacks) + parseInt(stacks);
                             }
-							console.log(element);
+							total_volum = parseInt(total_volum) + parseInt(element.volum);
 							table_html +=
                                 "<tr>" +
                                     "<td>" + element.descriere + "</td>" +
@@ -799,6 +802,15 @@
 								    return_part +
                                 "</tr>";
                         });
+						table_html += '<tr>' +
+                                '<td></td>' +
+                                '<td>'+total_volum+'</td>' +
+                                '<td>'+total_stacks+'</td>' +
+                                '<td></td>' +
+                                '<td></td>' +
+                                '<td></td>' +
+                                '<td colspan="3"></tdcolspa>' +
+                            '</tr>';
 						$('#order_products').html(table_html);
 					}
 				});

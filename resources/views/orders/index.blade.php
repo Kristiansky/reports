@@ -484,7 +484,7 @@
                                     </td>
                                     <td id="quantity_product_holder">
                                         <div class="form-group">
-                                            <input id="adding_qty" type="number" name="adding_qty" class="form-control form-control-sm" placeholder="{{__('main.qty')}}" {{--min="1" max="1"--}} autocomplete="off">
+                                            <input id="adding_qty" type="number" name="adding_qty" class="form-control form-control-sm" placeholder="{{__('main.qty')}}" min="1" {{--max="1"--}} autocomplete="off">
                                         </div>
                                     </td>
                                     <td id="internal_id_product_holder"></td>

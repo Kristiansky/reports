@@ -11,3 +11,6 @@
     background-color: rgba(255,255,255,.5);
     color: #212529;
 }
+td#choose_product_holder {
+    max-width: 400px;
+}

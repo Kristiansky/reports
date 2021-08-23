@@ -107,20 +107,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($cart_products as $cart_product)
-                                    <tr>
-                                        <td>{{$cart_product['product']->idp}}</td>
-                                        <td>{{$cart_product['product']->codprodusclient}}</td>
-                                        <td>{{$cart_product['product']->descriere}}</td>
-                                        <td>{{$cart_product['qty']}}</td>
-                                        <td>
-                                            <form method="post" action="{{route('order.create')}}">
-                                                @csrf
-                                                <button type="submit" name="removeCartProduct" value="{{$cart_product['product']->idp}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> {{__('main.remove')}}</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach($cart_products as $cart_product)
+                                <tr>
+                                    <td>{{$cart_product['product']->idp}}</td>
+                                    <td>{{$cart_product['product']->codprodusclient}}</td>
+                                    <td>{{$cart_product['product']->descriere}}</td>
+                                    <td>{{$cart_product['qty']}}</td>
+                                    <td>
+                                        <form method="post" action="{{route('order.create')}}">
+                                            @csrf
+                                            <button type="submit" name="removeCartProduct" value="{{$cart_product['product']->idp}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> {{__('main.remove')}}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -237,8 +237,8 @@
                                         <input id="ap" type="text" name="ap" class="form-control form-control-sm" placeholder="{{__('main.apartment')}}" autocomplete="off">
                                     </div>
                                 </div>--}}
-                            {{--</div>
-                            <div class="row">--}}
+                                {{--</div>
+                                <div class="row">--}}
                                 <div class="col-12 col-md-3 col-xl-2">
                                     <label for="localitate">
                                         <code>*</code>
@@ -470,7 +470,7 @@
     <script>
 		$(document).ready(function () {
 			$('.select2').select2();
-			var chosen_product = [];
+			var found_products = [];
 			$('select#product').select2({
 				ajax: {
 					url: '{{route("product_ajax_search")}}',
@@ -478,7 +478,7 @@
 					processResults: function (data) {
 						return {
 							results:  $.map(data, function (item) {
-								chosen_product = item;
+								found_products[item.idp] = item;
 								return {
 									text: item.name,
 									id: item.id
@@ -490,20 +490,21 @@
 				placeholder: 'Търсене на продукт...',
 				minimumInputLength: 3,
 			});
-			{{--var volumes = {--}}
+            {{--var volumes = {--}}
             {{--    @foreach($products as $product)--}}
-			{{--	    {{$product->idp}}: {{$product->stock()}},--}}
+            {{--	    {{$product->idp}}: {{$product->stock()}},--}}
             {{--    @endforeach--}}
-			{{--};--}}
-            $('select#product').on('change', function () {
-                var idp = $(this).val();
-                $('#text_stock_of_idp').html(idp);
-                $('#text_stock_of_qty').html(chosen_product.stock);
-                // $('input#qty').attr('max', chosen_product.stock);
+            {{--};--}}
+			$('select#product').on('change', function () {
+				console.log();
+				var idp = $(this).val();
+				$('#text_stock_of_idp').html(idp);
+				$('#text_stock_of_qty').html(found_products[idp].stock);
+				// $('input#qty').attr('max', chosen_product.stock);
 			});
-            // Todo: stock is not right
-            $('#data1, #data2').datetimepicker({
-                format: 'YYYY-MM-DD',
+			// Todo: stock is not right
+			$('#data1, #data2').datetimepicker({
+				format: 'YYYY-MM-DD',
 				icons:
 					{
 						previous: 'fas fa-angle-left',
@@ -513,18 +514,18 @@
 					}
 			})
 		});
-        @if(session('message'))
-		    var Toast = Swal.mixin({
+            @if(session('message'))
+		var Toast = Swal.mixin({
 				toast: true,
 				position: 'top-end',
 				showConfirmButton: false,
 				timer: 3000
 			});
 
-            Toast.fire({
-                icon: "{{session('message_type')}}",
-                title: "{{session('message')}}"
-            })
+		Toast.fire({
+			icon: "{{session('message_type')}}",
+			title: "{{session('message')}}"
+		})
         @endif
     </script>
 @stop

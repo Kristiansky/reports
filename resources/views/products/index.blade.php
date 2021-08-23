@@ -69,10 +69,28 @@
                                 <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2">{{__('main.filter')}}</button>
                                 <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2">{{__('main.reset')}}</button>
                                 <button type="submit" name="export" value="1" class="btn btn-warning btn-sm">{{__('main.export_xlsx')}}</button>
-                                @if(session('client')->cod_client == 'BGUCH')
-                                    <a href="{{route('get_stocks')}}" class="btn btn-warning btn-sm ml-2">{{__('main.negative_stock')}}</a>
-                                @endif
                             </div>
+                        </div>
+                        <div class="row">
+                            @if($show_from_to_idextern)
+                                <div class="col-6 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="from_id">{{__('main.from_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="from_id" name="from_id" autocomplete="off" placeholder="{{__('main.from_id')}}" value="{{isset(session('product_filter')['from_id']) ? session('product_filter')['from_id'] : ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="to_id">{{__('main.to_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="to_id" name="to_id" autocomplete="off" placeholder="{{__('main.to_id')}}" value="{{isset(session('product_filter')['to_id']) ? session('product_filter')['to_id'] : ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                </div>
+                                <div class="col-6 col-lg-3 pt-4 mt-2 text-right">
+                                    <a href="{{route('get_stocks')}}" class="btn btn-warning btn-sm ml-2">{{__('main.negative_stock')}}</a>
+                                </div>
+                            @endif
                         </div>
                         {{--<div class="row">
                             <div class="col-md-2">
@@ -463,22 +481,22 @@
 								html += element.number_of_items + " {{__('main.items_in')}} " + element.lotul + " {{__('main.expire_on')}} " + element.dataexp + "<br/>";
 							});
 							$('#product_lots').html(html);
-                        }
+						}
 						var html = '';
 						var product_entries_total = 0;
 						response.entries.forEach(function (product) {
 							if (product.idreceptie == null || product.idreceptie == undefined || product.idreceptie == '') {
 								product.idreceptie = '';
-                            }
+							}
 							product_entries_total = parseInt(product_entries_total) + parseInt(product.bucati);
 							html += "<tr>" +
-                                "<td>" + product.idin + "</td>" +
+								"<td>" + product.idin + "</td>" +
 								"<td>" + product.bucati + "</td>" +
-                                "<td>" + product.dataintrare + "</td>" +
-                                "<td>" + product.aviz + "</td>" +
-                                "<td>" + product.data_expirare + "</td>" +
-                                "<td>" + product.idreceptie + "</td>" +
-                                "</tr>";
+								"<td>" + product.dataintrare + "</td>" +
+								"<td>" + product.aviz + "</td>" +
+								"<td>" + product.data_expirare + "</td>" +
+								"<td>" + product.idreceptie + "</td>" +
+								"</tr>";
 						});
 						$('#product_entries_total').html(product_entries_total);
 						$('#product_entries tbody').html(html);

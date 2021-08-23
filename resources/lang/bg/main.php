@@ -1,7 +1,7 @@
 <?php
     
     return [
-    
+        
         'dashboard' => 'Табло',
         'showing_records' => 'Показване на запис :first_index до :last_index от :total_count',
         'order_edit_text' => 'При влизане в това меню се промени статуса на поръчката в <strong>"БЛОКИРАНО"</strong>. Складът не може да обработи тази поръчка, докато не бъде натиснат бутона <strong>"ЗАПАЗВАНЕ"</strong> по-долу',
@@ -161,4 +161,8 @@
         'shipping_method' => 'Тип на доставка /само за inout2/',
         'stacks' => 'Стекове',
         'negative_stock' => 'Минусово количество',
+        'upload_invoice' => 'Качи фактура',
+        'from_id' => 'От външно ID',
+        'to_id' => 'До външно ID',
+        'export_orders_products' => 'Изтегли прод. инфо',
     ];

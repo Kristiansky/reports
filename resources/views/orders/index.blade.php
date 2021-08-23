@@ -20,13 +20,13 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-6 col-lg-1">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="search">{{__('main.search')}}</label>
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" autocomplete="off" placeholder="{{__('main.search')}}" value="{{isset(session('order_filter')['search']) ? session('order_filter')['search'] : ''}}">
                                 </div>
                             </div>
-                            <div class="col-6 col-lg-1">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="status">{{__('main.status')}}</label>
                                     <select class="form-control form-control-sm" id="status" name="status">
@@ -37,7 +37,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-4">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
                                         <div class="form-group">
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-4">
                                 <div class="row">
                                     <div class="col-6 col-lg-6">
                                         <div class="form-group">
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 col-lg-1">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="country">{{__('main.country')}}</label>
                                     <select class="form-control form-control-sm" id="country" name="country">
@@ -108,18 +108,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6 col-lg-3 pt-4 mt-2">
-                                <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2 float-left">{{__('main.filter')}}</button>
-                                <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2 float-left">{{__('main.reset')}}</button>
-                                <button type="submit" name="export" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_xlsx')}}</button>
-                                <div class="custom-control custom-checkbox float-lg-left float-right">
-                                    <input class="custom-control-input" type="checkbox" id="include_products" name="include_products" value="1">
-                                    <label for="include_products" class="custom-control-label"><small>{{__('main.include_products')}}</small></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 col-lg-1">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="courier">{{__('main.courier')}}</label>
                                     <select class="form-control form-control-sm" id="courier" name="courier">
@@ -130,7 +119,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6 col-lg-1">
+                            <div class="col-6 col-lg-2">
                                 <div class="form-group">
                                     <label for="status_courier">{{__('main.status_courier')}}</label>
                                     <select class="form-control form-control-sm" id="status_courier" name="status_courier">
@@ -141,7 +130,35 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-6 col-lg-6 pt-4 mt-2">
+                                <button type="submit" name="filter" value="1" class="btn btn-primary btn-sm mr-2 float-left">{{__('main.filter')}}</button>
+                                <button type="submit" name="reset" value="1" class="btn btn-default btn-sm mr-2 float-left">{{__('main.reset')}}</button>
+                                <button type="submit" name="export" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_xlsx')}}</button>
+                                <div class="custom-control custom-checkbox float-lg-left float-right">
+                                    <input class="custom-control-input" type="checkbox" id="include_products" name="include_products" value="1">
+                                    <label for="include_products" class="custom-control-label"><small>{{__('main.include_products')}}</small></label>
+                                </div>
+                            </div>
                         </div>
+                        @if($show_from_to_idextern)
+                            <div class="row">
+                                <div class="col-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="from_id">{{__('main.from_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="from_id" name="from_id" autocomplete="off" placeholder="{{__('main.from_id')}}" value="{{isset(session('order_filter')['from_id']) ? session('order_filter')['from_id'] : ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="to_id">{{__('main.to_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="to_id" name="to_id" autocomplete="off" placeholder="{{__('main.to_id')}}" value="{{isset(session('order_filter')['to_id']) ? session('order_filter')['to_id'] : ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2 pt-4 mt-2">
+                                    <button type="submit" name="export_orders_products" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_orders_products')}}</button>
+                                </div>
+                            </div>
+                        @endif
                     </form>
                 </div>
                 <!-- /.card-body -->
@@ -234,6 +251,11 @@
                                         @if(session('orders_sort') && session('orders_sort') == 'qty'){!!$icon!!}@endif {{__('main.qty')}}
                                     </a>
                                 </th>
+                                @if($show_stacks)
+                                    <th width="5%">
+                                        {{__('main.stacks')}}
+                                    </th>
+                                @endif
                                 <th width="2%"></th>
                                 <th width="5%">
                                     <a href="?sort=curier&direction={{$direction}}">
@@ -259,9 +281,14 @@
                                     <td>{{$order->perscontact}}</td>
                                     <td>{!! $order->status !!}</td>
                                     <td>{{$order->qty}}</td>
+                                    @if($show_stacks)
+                                        <td>{{$order->getTotalStacks()}}</td>
+                                    @endif
                                     <td>@if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
                                     <td>{{$order->curier}}</td>
-                                    <td>{{$order->awb}}</td>
+                                    <td>
+                                        {{$order->awb}}
+                                    </td>
                                     <td>@if($order->ceretur != '0000-00-00' && $order->curier == 'econt'){{__('main.returned_order')}}@else{{\Illuminate\Support\Str::limit($order->statuscurier, 40, '...')}}@endif</td>
                                     <td class="pr-1">
                                         <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-success openOrder" data-toggle="modal" data-target="#orderModal"><i class="fa fa-eye"></i> {{__('main.view')}}</button>
@@ -275,6 +302,9 @@
                                                 <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
                                                 <button class="btn btn-danger btn-xs" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt"></i> {{__('main.delete')}}</button>
                                             </form>
+                                        @endif
+                                        @if($show_upload_ivnoice)
+                                            <a class="btn btn-xs btn-primary" href="{{route('order.upload_invoice', $order->idcomanda)}}"><i class="fas fa-file-upload"></i> {{__('main.upload_invoice')}}</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -537,6 +567,10 @@
                                 <td><span id="order_other_info"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.url_invoice')}}</th>
+                                <td><span id="order_url_invoice"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.ship_instructions')}}</th>
                                 <td><span id="order_ship_instructions"></span></td>
                             </tr>
@@ -593,6 +627,15 @@
 
 @section('js')
     <script>
+		function validURL(str) {
+			var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+				'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+				'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+				'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+				'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+				'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+			return !!pattern.test(str);
+		}
 		$(document).ready(function () {
 			$('.select2').select2();
 			var chosen_product = [];
@@ -633,10 +676,10 @@
 				timer: 3000
 			});
             @if(session('message'))
-                Toast.fire({
-                    icon: "{{session('message_type')}}",
-                    title: "{{session('message')}}"
-                })
+			Toast.fire({
+				icon: "{{session('message_type')}}",
+				title: "{{session('message')}}"
+			})
             @endif
 
 			function editOrderModal(idcomanda){
@@ -660,12 +703,12 @@
 								location.reload();
 							}, 2000);
 							throw new Error("{{__('main.order_in_process')}}");
-                        }else{
+						}else{
 							Toast.fire({
 								icon: "warning",
 								title: "{{__('main.order_blocked')}}"
 							})
-                        }
+						}
 					}
 				});
 				$.ajax({
@@ -731,8 +774,8 @@
 			}
 
             @if(session('edited_order_idcomanda'))
-			    $('.editOrder[data-idcomanda="{{session('edited_order_idcomanda')}}"]').trigger( "click" );
-			    editOrderModal({{session('edited_order_idcomanda')}});
+			$('.editOrder[data-idcomanda="{{session('edited_order_idcomanda')}}"]').trigger( "click" );
+			editOrderModal({{session('edited_order_idcomanda')}});
             @endif
 
 			$(document).on('click', '.editOrder' , function () {
@@ -740,9 +783,9 @@
 				$('#editOverlay').removeClass('d-none');
 				editOrderModal(idcomanda);
 			});
-            $('.openOrder').on('click', function () {
+			$('.openOrder').on('click', function () {
 				$('#viewOverlay').removeClass('d-none');
-            	var idcomanda = $(this).attr('data-idcomanda');
+				var idcomanda = $(this).attr('data-idcomanda');
 				$.ajax({
 					url: 'order/'+idcomanda,
 					type:"GET",
@@ -760,14 +803,18 @@
 						$('#order_phone').html(response.telpers);
 						$('#order_email').html(response.emailpers);
 						$('#order_other_info').html(response.altele);
+						if(validURL(response.url_factura)){
+							response.url_factura = '<a href="'+response.url_factura+'">'+response.url_factura+'</a>';
+						}
+						$('#order_url_invoice').html(response.url_factura);
 						$('#order_ship_instructions').html(response.ship_instructions);
 						$('#order_shipping_method').html(response.shipping_method);
 						if(response.returned === true){
-                            $('#row_returned, .returned').removeClass('d-none');
-                            $('#order_returned').html('{{__('main.yes')}}')
-                        }else{
+							$('#row_returned, .returned').removeClass('d-none');
+							$('#order_returned').html('{{__('main.yes')}}')
+						}else{
 							$('#row_returned, .returned').addClass('d-none');
-                        }
+						}
 						var table_html = '';
 						var total_volum = 0;
 						var total_stacks = 0;
@@ -779,38 +826,41 @@
 								returned = "{{__('main.yes')}}";
 								return_reason = element.return_reason == null ? '' : element.return_reason;
 								return_part =
-								"<td>" + returned + "</td>" +
-								"<td>" + return_reason + "</td>";
-                            }
+									"<td>" + returned + "</td>" +
+									"<td>" + return_reason + "</td>";
+							}
 							var stacks = null;
 							if(element.pieces_in_package > 0){
 								stacks = parseInt(element.volum) / parseInt(element.pieces_in_package);
 								total_stacks = parseInt(total_stacks) + parseInt(stacks);
-                            }
+							}
 							total_volum = parseInt(total_volum) + parseInt(element.volum);
 							table_html +=
-                                "<tr>" +
-                                    "<td>" + element.descriere + "</td>" +
-                                    "<td>" + element.volum + "</td>" +
-                                    @if($show_stacks)
-                                        "<td>" + stacks + "</td>" +
-                                    @endif
-                                    "<td>" + element.idp + "</td>" +
-								    "<td>" + element.stock + "</td>" +
-                                    "<td>" + element.codprodusclient + "</td>" +
-                                    "<td>" + element.codbare + "</td>" +
-								    return_part +
-                                "</tr>";
-                        });
-						table_html += '<tr>' +
-                                '<td></td>' +
-                                '<td>'+total_volum+'</td>' +
-                                '<td>'+total_stacks+'</td>' +
-                                '<td></td>' +
-                                '<td></td>' +
-                                '<td></td>' +
-                                '<td colspan="3"></tdcolspa>' +
-                            '</tr>';
+								"<tr>" +
+								"<td>" + element.descriere + "</td>" +
+								"<td>" + element.volum + "</td>" +
+                                @if($show_stacks)
+									"<td>" + stacks + "</td>" +
+                                @endif
+									"<td>" + element.idp + "</td>" +
+								"<td>" + element.stock + "</td>" +
+								"<td>" + element.codprodusclient + "</td>" +
+								"<td>" + element.codbare + "</td>" +
+								return_part +
+								"</tr>";
+						});
+
+                        @if($show_stacks)
+							table_html += '<tr>' +
+							'<td></td>' +
+							'<td>'+total_volum+'</td>' +
+							'<td>'+total_stacks+'</td>' +
+							'<td></td>' +
+							'<td></td>' +
+							'<td></td>' +
+							'<td colspan="3"></tdcolspa>' +
+							'</tr>';
+                        @endif
 						$('#order_products').html(table_html);
 					}
 				});

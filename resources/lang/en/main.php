@@ -1,7 +1,7 @@
 <?php
     
     return [
-    
+        
         'dashboard' => 'Dashboard',
         'showing_records' => 'Showing record :first_index to :last_index from :total_count',
         'order_edit_text' => 'When entering this menu the status of the order has changed to <strong>"BLOCKED"</strong>. The warehouse cannot fulfill this order, until the button <strong>"SAVE"</strong> is submitted',
@@ -161,4 +161,8 @@
         'stacks' => 'Stacks',
         'negative_stock' => 'Negative stock',
         'district' => 'District',
+        'upload_invoice' => 'Upload inv',
+        'from_id' => 'From ext. ID',
+        'to_id' => 'To ext. ID',
+        'export_orders_products' => 'Export products info',
     ];

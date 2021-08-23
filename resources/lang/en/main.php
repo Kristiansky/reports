@@ -165,4 +165,6 @@
         'from_id' => 'From ext. ID',
         'to_id' => 'To ext. ID',
         'export_orders_products' => 'Export products info',
+        'from_internal_id' => 'From int. ID',
+        'to_internal_id' => 'To int. ID',
     ];

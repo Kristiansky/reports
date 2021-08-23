@@ -165,4 +165,6 @@
         'from_id' => 'От външно ID',
         'to_id' => 'До външно ID',
         'export_orders_products' => 'Изтегли прод. инфо',
+        'from_internal_id' => 'От вътрешно ID',
+        'to_internal_id' => 'До вътрешно ID',
     ];

@@ -73,16 +73,28 @@
                         </div>
                         <div class="row">
                             @if($show_from_to_idextern)
-                                <div class="col-6 col-lg-3">
+                                {{--<div class="col-6 col-lg-2">
                                     <div class="form-group">
                                         <label for="from_id">{{__('main.from_id')}}</label>
                                         <input type="text" class="form-control form-control-sm" id="from_id" name="from_id" autocomplete="off" placeholder="{{__('main.from_id')}}" value="{{isset(session('product_filter')['from_id']) ? session('product_filter')['from_id'] : ''}}">
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                <div class="col-6 col-lg-2">
                                     <div class="form-group">
                                         <label for="to_id">{{__('main.to_id')}}</label>
                                         <input type="text" class="form-control form-control-sm" id="to_id" name="to_id" autocomplete="off" placeholder="{{__('main.to_id')}}" value="{{isset(session('product_filter')['to_id']) ? session('product_filter')['to_id'] : ''}}">
+                                    </div>
+                                </div>--}}
+                                <div class="col-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="from_internal_id">{{__('main.from_internal_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="from_internal_id" name="from_internal_id" autocomplete="off" placeholder="{{__('main.from_internal_id')}}" value="{{isset(session('product_filter')['from_internal_id']) ? session('product_filter')['from_internal_id'] : ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="to_internal_id">{{__('main.to_internal_id')}}</label>
+                                        <input type="text" class="form-control form-control-sm" id="to_internal_id" name="to_internal_id" autocomplete="off" placeholder="{{__('main.to_internal_id')}}" value="{{isset(session('product_filter')['to_internal_id']) ? session('product_filter')['to_internal_id'] : ''}}">
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-3 pt-4 mt-2">

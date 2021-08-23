@@ -40,6 +40,8 @@
                     'expiration_date' => request('expiration_date'),
                     'from_id' => request('from_id'),
                     'to_id' => request('to_id'),
+                    'from_internal_id' => request('from_internal_id'),
+                    'to_internal_id' => request('to_internal_id'),
                 );
                 session()->put('product_filter', $product_filter);
                 return redirect(route('product.index'));
@@ -116,13 +118,13 @@
             ;
             
             
-            if ((session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && (session('product_filter')['from_id'] && session('product_filter')['from_id'] != '')){
+            if ((session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && (session('product_filter')['to_id'] && session('product_filter')['to_id'] != '')){
                 $sales_expediat = DB::table('stor_iesiri')
                     ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
                     ->where(function ($query){
                         $query
                             ->where(DB::raw('CAST(idextern AS INT)'), '>=', session('product_filter')['from_id'])
-                            ->where(DB::raw('CAST(idextern AS INT)'), '<=', session('product_filter')['from_id'])
+                            ->where(DB::raw('CAST(idextern AS INT)'), '<=', session('product_filter')['to_id'])
                         ;
                     })
                     ->groupBy('stor_iesiri.idp')
@@ -133,13 +135,12 @@
                 ;
             }
             
-            if (!(session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && (session('product_filter')['from_id'] && session('product_filter')['from_id'] != '')){
+            if (!(session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && (session('product_filter')['to_id'] && session('product_filter')['to_id'] != '')){
                 $sales_expediat = DB::table('stor_iesiri')
                     ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
                     ->where(function ($query){
                         $query
-//						->where(DB::raw('CAST(idextern AS INT)'), '>=', session('product_filter')['from_id'])
-                            ->where(DB::raw('CAST(idextern AS INT)'), '<=', session('product_filter')['from_id'])
+                            ->where(DB::raw('CAST(idextern AS INT)'), '<=', session('product_filter')['to_id'])
                         ;
                     })
                     ->groupBy('stor_iesiri.idp')
@@ -150,19 +151,82 @@
                 ;
             }
             
-            if ((session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && !(session('product_filter')['from_id'] && session('product_filter')['from_id'] != '')){
+            if ((session('product_filter')['from_id'] && session('product_filter')['from_id'] != '') && !(session('product_filter')['to_id'] && session('product_filter')['to_id'] != '')){
                 $sales_expediat = DB::table('stor_iesiri')
                     ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
                     ->where(function ($query){
                         $query
                             ->where(DB::raw('CAST(idextern AS INT)'), '>=', session('product_filter')['from_id'])
-//						->where(DB::raw('CAST(idextern AS INT)'), '<=', session('product_filter')['from_id'])
                         ;
                     })
                     ->groupBy('stor_iesiri.idp')
                 ;
                 $products->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
                     $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
+                })
+                ;
+            }
+            
+            if ((session('product_filter')['from_internal_id'] && session('product_filter')['from_internal_id'] != '') && (session('product_filter')['to_internal_id'] && session('product_filter')['to_internal_id'] != '')){
+                /*$sales_expediat = DB::table('stor_iesiri')
+                    ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
+                    ->where(function ($query){
+                        $query
+                            ->where('idp', '>=', session('product_filter')['from_internal_id'])
+                            ->where('idp', '<=', session('product_filter')['to_internal_id'])
+                        ;
+                    })
+                    ->groupBy('stor_iesiri.idp')
+                ;*/
+                $products->where(function ($query){
+                    $query
+                        ->where('stor_produse.idp', '>=', session('product_filter')['from_internal_id'])
+                        ->where('stor_produse.idp', '<=', session('product_filter')['to_internal_id'])
+                    ;
+                })
+                ;
+            }
+            
+            if (!(session('product_filter')['from_internal_id'] && session('product_filter')['from_internal_id'] != '') && (session('product_filter')['to_internal_id'] && session('product_filter')['to_internal_id'] != '')){
+                /*$sales_expediat = DB::table('stor_iesiri')
+                    ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
+                    ->where(function ($query){
+                        $query
+                            ->where('idp', '<=', session('product_filter')['to_internal_id'])
+                        ;
+                    })
+                    ->groupBy('stor_iesiri.idp')
+                ;
+                $products->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
+                    $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
+                })
+                ;*/
+                $products->where(function ($query){
+                    $query
+                        ->where('stor_produse.idp', '<=', session('product_filter')['to_internal_id'])
+                    ;
+                })
+                ;
+            }
+            
+            if ((session('product_filter')['from_internal_id'] && session('product_filter')['from_internal_id'] != '') && !(session('product_filter')['to_internal_id'] && session('product_filter')['to_internal_id'] != '')){
+                /*$sales_expediat = DB::table('stor_iesiri')
+                    ->select('stor_iesiri.idp', DB::raw('SUM(volum) AS suma'))
+                    ->where(function ($query){
+                        $query
+                            ->where('idp', '>=', session('product_filter')['from_internal_id'])
+                        ;
+                    })
+                    ->groupBy('stor_iesiri.idp')
+                ;
+                $products->leftJoinSub($sales_expediat, 'sales_expediat', function ($join) {
+                    $join->on('sales_expediat.idp', '=', 'stor_produse.idp');
+                })
+                ;*/
+                $products->where(function ($query){
+                    $query
+                        ->where('stor_produse.idp', '>=', session('product_filter')['from_internal_id'])
+                    ;
                 })
                 ;
             }

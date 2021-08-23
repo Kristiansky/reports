@@ -85,9 +85,7 @@
                                         <input type="text" class="form-control form-control-sm" id="to_id" name="to_id" autocomplete="off" placeholder="{{__('main.to_id')}}" value="{{isset(session('product_filter')['to_id']) ? session('product_filter')['to_id'] : ''}}">
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-2">
-                                </div>
-                                <div class="col-6 col-lg-3 pt-4 mt-2 text-right">
+                                <div class="col-6 col-lg-3 pt-4 mt-2">
                                     <a href="{{route('get_stocks')}}" class="btn btn-warning btn-sm ml-2">{{__('main.negative_stock')}}</a>
                                 </div>
                             @endif

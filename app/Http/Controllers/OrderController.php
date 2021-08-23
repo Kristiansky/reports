@@ -203,9 +203,9 @@
                                 $products_feed[$product['codprodusclient']]['qty_ordered'] = (int) $products_feed[$product['codprodusclient']]['qty_ordered'] + (int) $product['volum'];
                             }else{
                                 $total_for_warehouse = 0;
-                                if ($product['volum'] > $product['stock']){
-                                    $total_for_warehouse = $product['volum'] + abs($product['stock']);
-                                }
+//                                if ($product['volum'] > $product['stock']){
+//                                    $total_for_warehouse = $product['volum'] + abs($product['stock']);
+//                                }
                                 $products_feed[$product['codprodusclient']] = array(
                                     'sku' => $product['codprodusclient'],
                                     'name' => $product['descriere'],
@@ -216,6 +216,13 @@
                                 );
                             }
                         }
+                    }
+                    foreach($products_feed as $product_key => $product){
+                        $total_for_warehouse = 0;
+                        if ($product['qty_ordered'] > $product['current_stock']){
+                            $total_for_warehouse = $product['qty_ordered'] + abs($product['current_stock']);
+                        }
+                        $products_feed[$product_key]['total_for_warehouse'] = $total_for_warehouse;
                     }
                     
                     $row = 1;

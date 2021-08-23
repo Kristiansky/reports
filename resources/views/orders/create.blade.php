@@ -53,7 +53,7 @@
                                                 <span id="text_stock_of_idp"></span>:
                                                 <span id="text_stock_of_qty"></span>
                                             </label>
-                                            <input id="qty" type="number" name="qty" class="form-control form-control-sm @error('qty') is-invalid @enderror" placeholder="{{__('main.qty')}}" {{--min="1" max="1"--}} required autocomplete="off">
+                                            <input id="qty" type="number" name="qty" class="form-control form-control-sm @error('qty') is-invalid @enderror" placeholder="{{__('main.qty')}}" min="1" {{--max="1"--}} required autocomplete="off">
                                             @error('qty')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror

@@ -760,7 +760,7 @@
 							table_html +=
 								"<tr>" +
 								"<td>" + element.descriere + "</td>" +
-								"<td><input type='number' class='form-control form-control-sm' name='qty["+ element.idp + "]' value='" + element.volum + "' /></td>" +
+								"<td><input type='number' class='form-control form-control-sm' name='qty["+ element.idp + "]' value='" + element.volum + "' min='1'/></td>" +
 								"<td>" + element.idp + "</td>" +
 								"<td>" + element.stock + "</td>" +
 								"<td>" + element.codprodusclient + "</td>" +

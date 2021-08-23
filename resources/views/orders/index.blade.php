@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-2 pt-4 mt-2">
-                                    <button type="submit" name="export_orders_products" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.export_orders_products')}}</button>
+                                    <button type="submit" name="export_orders_products" value="1" class="btn btn-warning btn-sm mr-2 float-left">{{__('main.negative_stock')}}</button>
                                 </div>
                             </div>
                         @endif

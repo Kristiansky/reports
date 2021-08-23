@@ -221,6 +221,8 @@
                         $total_for_warehouse = 0;
                         if (($product['qty_ordered'] > $product['current_stock']) && ($product['current_stock'] >= 0)){
                             $total_for_warehouse = $product['qty_ordered'] - $product['current_stock'];
+                        }elseif (($product['qty_ordered'] > $product['current_stock']) && ($product['current_stock'] < 0)){
+                            $total_for_warehouse = $product['qty_ordered'] + abs($product['current_stock']);
                         }
                         $products_feed[$product_key]['total_for_warehouse'] = $total_for_warehouse;
                     }

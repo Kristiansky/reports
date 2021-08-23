@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="">
+    <list default="true" id="c6ade361-440e-4c34-927f-98c3fbad938b" name="Default Changelist" comment="Bguchebnik export demand pt.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -309,21 +311,7 @@
       <workItem from="1628143834951" duration="1199000" />
       <workItem from="1628233438371" duration="6797000" />
       <workItem from="1628351784599" duration="141000" />
-      <workItem from="1629701848815" duration="5882000" />
-    </task>
-    <task id="LOCAL-00062" summary="Fix dashboard top products count">
-      <created>1624957342677</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1624957342678</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Fix dashboard top products count">
-      <created>1624957414945</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1624957414946</updated>
+      <workItem from="1629701848815" duration="6550000" />
     </task>
     <task id="LOCAL-00064" summary="Fix table responsiveness">
       <created>1624957864507</created>
@@ -654,7 +642,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629709762421</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Bguchebnik export demand pt.1">
+      <created>1629713158162</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1629713158162</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Bguchebnik export demand pt.1">
+      <created>1629713214732</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1629713214732</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

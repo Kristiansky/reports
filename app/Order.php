@@ -53,7 +53,7 @@
             $result = DB::table($this->table)
                 ->select('stor_produse.idp','stor_produse.descriere','stor_produse.codprodusclient','stor_produse.codbare','stor_produse.pieces_in_package','stor_iesiri.volum')
                 ->join('stor_produse','stor_iesiri.idp','=','stor_produse.idp')
-                ->where('idcomanda', '=', $this->idie)->get();
+                ->where('idcomanda', '=', $this->idcomanda)->get();
             if($result){
                 $return = array();
                 foreach($result as $key=>$item){

@@ -226,7 +226,7 @@
                                         @if(session('orders_sort') && session('orders_sort') == 'idextern'){!!$icon!!}@endif {{__('main.external_id')}}
                                     </a>
                                 </th>
-                                <th width="7%">
+                                <th width="10%">
                                     <a href="?sort=datai&direction={{$direction}}">
                                         @if(session('orders_sort') && session('orders_sort') == 'datai'){!!$icon!!}@endif {{__('main.order_in_date')}}
                                     </a>
@@ -268,7 +268,7 @@
                                     </a>
                                 </th>
                                 <th width="20%">{{__('main.status_courier')}}</th>
-                                <th width="12%">{{__('main.actions')}}</th>
+                                <th width="9%">{{__('main.actions')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -291,20 +291,20 @@
                                     </td>
                                     <td>@if($order->ceretur != '0000-00-00' && $order->curier == 'econt'){{__('main.returned_order')}}@else{{\Illuminate\Support\Str::limit($order->statuscurier, 40, '...')}}@endif</td>
                                     <td class="pr-1">
-                                        <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-success openOrder" data-toggle="modal" data-target="#orderModal"><i class="fa fa-eye"></i> {{__('main.view')}}</button>
+                                        <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-success openOrder float-left mr-1" data-toggle="modal" data-target="#orderModal" data-tooltip title="{{__('main.view')}}"><i class="fa fa-eye"></i></button>
                                         @if($order->getRawOriginal('status') == 'Comanda' || $order->getRawOriginal('status') == 'Blocata')
-                                            <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-primary editOrder" data-toggle="modal" data-target="#editOrderModal"><i class="fa fa-pen"></i> {{__('main.edit')}}</button>
+                                            <button data-idcomanda="{{$order->idcomanda}}" type="button" class="btn btn-xs btn-primary editOrder float-left mr-1" data-toggle="modal" data-target="#editOrderModal" data-tooltip title="{{__('main.edit')}}"><i class="fa fa-pen"></i></button>
                                         @endif
                                         @if($order->getRawOriginal('status') == 'Blocata')
                                             <form method="post" action="{{route('order.destroy')}}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
-                                                <button class="btn btn-danger btn-xs" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt"></i> {{__('main.delete')}}</button>
+                                                <button class="btn btn-danger btn-xs float-left mr-1" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt" data-tooltip title="{{__('main.delete')}}"></i></button>
                                             </form>
                                         @endif
                                         @if($show_upload_ivnoice)
-                                            <a class="btn btn-xs btn-primary" href="{{route('order.upload_invoice', $order->idcomanda)}}"><i class="fas fa-file-upload"></i> {{__('main.upload_invoice')}}</a>
+                                            <a class="btn btn-xs btn-primary float-left mr-1" href="{{route('order.upload_invoice', $order->idcomanda)}}"><i class="fas fa-file-upload" data-tooltip title="{{__('main.upload_invoice')}}"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -864,7 +864,8 @@
 						$('#order_products').html(table_html);
 					}
 				});
-			})
+			});
+			$('[data-tooltip]').tooltip();
 		});
     </script>
 @stop

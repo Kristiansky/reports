@@ -873,9 +873,9 @@
 					}
 				});
 			});
-			$('[data-tooltip]').tooltip({
+			/*$('[data-tooltip]').tooltip({
 				placement: 'top'
-            });
+            });*/
 		});
     </script>
 @stop

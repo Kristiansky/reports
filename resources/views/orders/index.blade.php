@@ -583,6 +583,10 @@
                                 <td><span id="order_ship_instructions"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.print_note')}}</th>
+                                <td><span id="order_print_note"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.shipping_method')}}</th>
                                 <td><span id="order_shipping_method"></span></td>
                             </tr>
@@ -816,6 +820,7 @@
 						}
 						$('#order_url_invoice').html(response.url_factura);
 						$('#order_ship_instructions').html(response.ship_instructions);
+						$('#order_print_note').html(response.print_note);
 						$('#order_shipping_method').html(response.shipping_method);
 						if(response.returned === true){
 							$('#row_returned, .returned').removeClass('d-none');

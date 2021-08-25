@@ -156,6 +156,8 @@
                                 ->where('status', '!=', 'expediat');
                         }elseif(session('order_filter')['status'] == 'retur'){
                             $query->where('ceretur', '!=', '0000-00-00');
+                        }elseif(session('order_filter')['status'] == 'incompleta'){
+                            $query->where('incompleta', '=', 'da');
                         }else{
                             $query->where('status', '=', session('order_filter')['status']);
                         }
@@ -175,6 +177,7 @@
                     'parcurs',
                     'deadline',
                     'idcomanda',
+                    'incompleta',
                     DB::raw('SUM(volum) as qty')
                 )
                 ->groupBy('idcomanda')
@@ -921,6 +924,37 @@
          */
         public function destroy(Request $request)
         {
+            DB::table('stor_iesiri')
+                ->where('idcomanda','=', $request->idcomanda)
+                ->delete();
+            session()->flash('message', __('main.order_success_delete'));
+            session()->flash('message_type', 'success');
+            return redirect(route('order.index'));
+        }
+        
+        public function exclude(Request $request)
+        {
+            $selection = DB::table('stor_iesiri')
+                ->select(
+                    'idie',
+                    'ido',
+                    'idcomanda',
+                    'idextern',
+                    'group_id'
+                )
+                ->where('idcomanda','=', $request->idcomanda)
+                ->join('auth_users','stor_iesiri.ido','=','auth_users.id')
+                ->first()
+            ;
+            
+            DB::table('stor_comenzi_excluse')->insert([
+                'idcomandaclient' => $selection->idextern,
+                'idg' => $selection->group_id,
+                'iduser' => Auth::user()->id,
+                'data' => date('Y-m-d H:i:s')
+            ]);
+            
+//            $this->destroy($request);
             DB::table('stor_iesiri')
                 ->where('idcomanda','=', $request->idcomanda)
                 ->delete();

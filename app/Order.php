@@ -17,22 +17,26 @@
         
         public function getStatusAttribute($value)
         {
-            if($value == 'Comanda'){
-                return '<span style="color:blue">Order</span>';
-            }elseif($value == 'InProcesare'){
-                return '<span style="color:orange">InProcess</span>';
-            }elseif($value == 'Blocata'){
-                return '<span style="color:purple">Blocked</span>';
+            if($this->incompleta == 'da'){
+                return '<span style="color:red">Incomplete</span>';
             }else{
-                $color = 'green';
-                if($this->ceretur != '0000-00-00'){
-                    $return_date = new Carbon($this->ceretur);
-                    $current_date = new Carbon();
-                    if($return_date->diff($current_date)->days > 25){
-                        $color = 'red';
+                if($value == 'Comanda'){
+                    return '<span style="color:blue">Order</span>';
+                }elseif($value == 'InProcesare'){
+                    return '<span style="color:orange">InProcess</span>';
+                }elseif($value == 'Blocata'){
+                    return '<span style="color:purple">Blocked</span>';
+                }else{
+                    $color = 'green';
+                    if($this->ceretur != '0000-00-00'){
+                        $return_date = new Carbon($this->ceretur);
+                        $current_date = new Carbon();
+                        if($return_date->diff($current_date)->days > 25){
+                            $color = 'red';
+                        }
                     }
+                    return '<span style="color:'.$color.'">Sent' . ($this->ceretur != '0000-00-00' ? ' - <strong>Return</strong> on ' . date('d M Y', strtotime($this->ceretur)) : '') . '</span>';
                 }
-                return '<span style="color:'.$color.'">Sent' . ($this->ceretur != '0000-00-00' ? ' - <strong>Return</strong> on ' . date('d M Y', strtotime($this->ceretur)) : '') . '</span>';
             }
         }
         

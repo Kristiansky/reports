@@ -303,14 +303,14 @@
                                                 <button class="btn btn-danger btn-xs float-left mr-1" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fa fa-trash-alt" data-tooltip title="{{__('main.delete')}}"></i></button>
                                             </form>
                                         @endif
-                                        @if($order->incompleta == 'da')
+{{--                                        @if($order->incompleta == 'da')--}}
                                             <form method="post" action="{{route('order.exclude')}}">
                                                 @csrf
                                                 @method('POST')
                                                 <input type="hidden" name="idcomanda" value="{{$order->idcomanda}}">
                                                 <button class="btn btn-danger btn-xs float-left mr-1" onclick="return confirm('{{__('main.are_you_sure')}}')"><i class="fas fa-file-archive" data-tooltip title="{{__('main.exclude')}}"></i></button>
                                             </form>
-                                        @endif
+{{--                                        @endif--}}
                                         @if($show_upload_ivnoice)
                                             <a class="btn btn-xs btn-primary float-left mr-1" href="{{route('order.upload_invoice', $order->idcomanda)}}"><i class="fas fa-file-upload" data-tooltip title="{{__('main.upload_invoice')}}"></i></a>
                                         @endif

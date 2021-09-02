@@ -117,12 +117,12 @@
                             ->orWhere('perscontact', 'like', '%' . session('order_filter')['search'] . '%');
                     }
                     if(session('order_filter')['from_id'] && session('order_filter')['from_id'] != ''){
-                        $query->where(DB::raw('CAST(idextern AS INT)'), '>=', session('order_filter')['from_id'])
-                            ->where('status', '!=', 'expediat');
+                        $query->where(DB::raw('CAST(idextern AS INT)'), '>=', session('order_filter')['from_id']);
+//                            ->where('status', '!=', 'expediat');
                     }
                     if(session('order_filter')['to_id'] && session('order_filter')['to_id'] != ''){
-                        $query->where(DB::raw('CAST(idextern AS INT)'), '<=', session('order_filter')['to_id'])
-                            ->where('status', '!=', 'expediat');
+                        $query->where(DB::raw('CAST(idextern AS INT)'), '<=', session('order_filter')['to_id']);
+//                            ->where('status', '!=', 'expediat');
                     }
                     if(session('order_filter')['entered_date_from'] && session('order_filter')['entered_date_from'] != ''){
                         $query->where('datai', '>', session('order_filter')['entered_date_from'].' 00:00:00');
@@ -148,12 +148,12 @@
                     if(session('order_filter')['status'] && session('order_filter')['status'] != ''){
                         if(session('order_filter')['status'] == 'procesabila'){
                             $query->where('deadline', '!=', '0000-00-00 00:00:00')
-                                ->where('parcurs', '=', '1')
-                                ->where('status', '!=', 'expediat');
+                                ->where('parcurs', '=', '1');
+//                                ->where('status', '!=', 'expediat')
                         }elseif(session('order_filter')['status'] == 'neprocesabila'){
                             $query->where('deadline', '=', '0000-00-00 00:00:00')
-                                ->where('parcurs', '=', '1')
-                                ->where('status', '!=', 'expediat');
+                                ->where('parcurs', '=', '1');
+//                                ->where('status', '!=', 'expediat')
                         }elseif(session('order_filter')['status'] == 'retur'){
                             $query->where('ceretur', '!=', '0000-00-00');
                         }elseif(session('order_filter')['status'] == 'incompleta'){
@@ -180,6 +180,7 @@
                     'incompleta',
                     DB::raw('SUM(volum) as qty')
                 )
+                ->where('status', '!=', 'expediat')
                 ->groupBy('idcomanda')
                 ->orderBy(
                     session('orders_sort') ? session('orders_sort') : 'idcomanda',

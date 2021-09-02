@@ -180,7 +180,6 @@
                     'incompleta',
                     DB::raw('SUM(volum) as qty')
                 )
-                ->where('status', '!=', 'expediat')
                 ->groupBy('idcomanda')
                 ->orderBy(
                     session('orders_sort') ? session('orders_sort') : 'idcomanda',
@@ -188,6 +187,8 @@
                 );
             
             if(request('export_orders_products') && request('export_orders_products') == '1'){
+    
+                $orders->where('status', '!=', 'expediat');
                 $orders = $orders->get();
                 $spreadsheet = new Spreadsheet();
                 $sheet = $spreadsheet->getActiveSheet();

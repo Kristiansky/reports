@@ -457,6 +457,14 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>{{__('main.url_invoice')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="url_factura" id="url_factura" autocomplete="off" placeholder="{{__('main.url_invoice')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <div class="row">
@@ -766,6 +774,7 @@
 							$('#sambata').prop("checked", true);
 						}
 						$('#ship_instructions').val(response.order.ship_instructions);
+						$('#url_factura').val(response.order.url_factura);
 						$('#altele').val(response.order.altele);
 						var table_html = '';
 						response.order.products.forEach(function(element){

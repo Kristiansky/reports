@@ -890,6 +890,7 @@
                     'emailpers' => $request->emailpers,
                     'sambata' => $request->sambata,
                     'ship_instructions' => $request->ship_instructions,
+                    'url_factura' => $request->url_factura,
                     'altele' => $request->altele,
                 ]);
             foreach($request->qty as $key=>$qty){

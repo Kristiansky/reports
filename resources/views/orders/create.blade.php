@@ -489,6 +489,11 @@
 				},
 				placeholder: 'Търсене на продукт...',
 				minimumInputLength: 3,
+				language: {
+					inputTooShort: function() {
+						return '{{__('main.select_add_more_text')}}';
+					}
+				}
 			});
             {{--var volumes = {--}}
             {{--    @foreach($products as $product)--}}

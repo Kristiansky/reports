@@ -169,4 +169,5 @@
         'to_internal_id' => 'To int. ID',
         'exclude' => 'Exclude',
         'print_note' => 'Print note',
+        'select_add_more_text' => 'Please, add 3 or more characters'
     ];

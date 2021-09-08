@@ -39,6 +39,7 @@
         public $upload_invoice_to_clients = array(
             268 => true, //BGUCH
             254 => true, //PAOLITA
+            263 => true, //MetART
         );
         
         public $from_to_idextern = array(

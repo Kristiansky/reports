@@ -179,6 +179,8 @@
                     'deadline',
                     'idcomanda',
                     'incompleta',
+                    'tara',
+                    'shipping_method',
                     DB::raw('SUM(volum) as qty')
                 )
                 ->groupBy('idcomanda')
@@ -267,15 +269,19 @@
                     $sheet->setCellValue('I1', __('main.courier'));
                     $sheet->setCellValue('J1', __('main.awb'));
                     $sheet->setCellValue('K1', __('main.status_courier'));
+                    $sheet->setCellValue('L1', __('main.shipping_method'));
+                    $sheet->setCellValue('M1', __('main.country'));
                     if (request('include_products') && request('include_products') == '1'){
-                        $sheet->setCellValue('L1', __('main.order_products'));
+                        $sheet->setCellValue('N1', __('main.order_products'));
                     }
                 }else{
                     $sheet->setCellValue('H1', __('main.courier'));
                     $sheet->setCellValue('I1', __('main.awb'));
                     $sheet->setCellValue('J1', __('main.status_courier'));
+                    $sheet->setCellValue('K1', __('main.shipping_method'));
+                    $sheet->setCellValue('L1', __('main.country'));
                     if (request('include_products') && request('include_products') == '1'){
-                        $sheet->setCellValue('K1', __('main.order_products'));
+                        $sheet->setCellValue('M1', __('main.order_products'));
                     }
                 }
                 
@@ -298,6 +304,8 @@
                         }else{
                             $sheet->setCellValue('K' . $row, $order->statuscurier);
                         }
+                        $sheet->setCellValue('L' . $row, $order->shipping_method);
+                        $sheet->setCellValue('M' . $row, $order->tara);
                     }else{
                         $sheet->setCellValue('H' . $row, $order->curier);
                         $sheet->setCellValue('I' . $row, $order->awb);
@@ -306,6 +314,8 @@
                         }else{
                             $sheet->setCellValue('J' . $row, $order->statuscurier);
                         }
+                        $sheet->setCellValue('K' . $row, $order->shipping_method);
+                        $sheet->setCellValue('L' . $row, $order->tara);
                     }
                     
                     if (request('include_products') && request('include_products') == '1'){
@@ -321,9 +331,9 @@
                             }
                         }
                         if($show_stacks){
-                            $sheet->setCellValue('L' . $row, $products_text);
+                            $sheet->setCellValue('N' . $row, $products_text);
                         }else{
-                            $sheet->setCellValue('K' . $row, $products_text);
+                            $sheet->setCellValue('M' . $row, $products_text);
                         }
                     }
                 }

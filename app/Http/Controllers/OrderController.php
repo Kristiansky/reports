@@ -610,7 +610,7 @@
                                         'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                         'ship_instructions' => $comments,
                                         'idextern' => $codcomanda,
-                                        'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                                        'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                         'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                                     ];
                                     
@@ -656,7 +656,7 @@
                                     'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                     'ship_instructions' => $comments,
                                     'idextern' => $codcomanda,
-                                    'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                                    'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                     'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                                 ];
                                 
@@ -702,7 +702,7 @@
                                 'curier' => isset($row['courier']) ? strtolower(trim($row['courier'])) : "n/a",
                                 'ship_instructions' => $comments,
                                 'idextern' => $codcomanda,
-                                'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : '',
+                                'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                 'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
                             ];
                             

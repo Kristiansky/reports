@@ -411,6 +411,28 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-3 col-xl-2 d-none" id="shipping_method_menu">
+                                    <label for="shipping_method">
+                                        {{__('main.shipping_method')}}
+                                    </label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                  <i class="fas fa-dolly"></i>
+                                                </span>
+                                            </div>
+                                            <select name="shipping_method" id="shipping_method" class="form-control form-control-sm @error('shipping_method') is-invalid @enderror">
+                                                <option value="">{{ __('main.choose') }}</option>
+                                                <option value="crossborder">Crossborder</option>
+                                                <option value="eushipmentsairexpress">AirExpress (DHL)</option>
+                                            </select>
+                                        </div>
+                                        @error('shipping_method')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 @if(session('client')->cod_client == 'PAOLITA')
                                     <div class="col-12 col-md-3 col-xl-2">
                                         <label for="shipping_method">
@@ -507,7 +529,6 @@
 				$('#text_stock_of_qty').html(found_products[idp].stock);
 				// $('input#qty').attr('max', chosen_product.stock);
 			});
-			// Todo: stock is not right
 			$('#data1, #data2').datetimepicker({
 				format: 'YYYY-MM-DD',
 				icons:
@@ -517,6 +538,14 @@
 						up: 'fas fa-angle-up',
 						down: 'fas fa-angle-down'
 					}
+			})
+            $('select#curier').on('change', function () {
+                var value = $(this).val();
+                if(value == 'inout2'){
+                    $('#shipping_method_menu').removeClass('d-none');
+                }else{
+					$('#shipping_method_menu').removeClass('d-none').addClass('d-none');
+                }
 			})
 		});
             @if(session('message'))

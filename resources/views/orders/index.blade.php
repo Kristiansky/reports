@@ -605,10 +605,6 @@
                                 <td><span id="order_print_note"></span></td>
                             </tr>
                             <tr>
-                                <th>{{__('main.msg_warehouse')}}</th>
-                                <td><span id="order_msg_warehouse"></span></td>
-                            </tr>
-                            <tr>
                                 <th>{{__('main.shipping_method')}}</th>
                                 <td><span id="order_shipping_method"></span></td>
                             </tr>

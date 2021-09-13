@@ -348,7 +348,7 @@
             }
             
             $orders = DB::table('stor_iesiri')
-                ->select('stor_iesiri.idie', 'stor_iesiri.idextern', 'stor_iesiri.perscontact', 'stor_iesiri.volum', 'stor_iesiri.datai', 'stor_iesiri.status', 'stor_iesiri.expiration_batch', 'stor_iesiri.expiration_date')
+                ->select('stor_iesiri.idcomanda', 'stor_iesiri.idie', 'stor_iesiri.idextern', 'stor_iesiri.perscontact', 'stor_iesiri.volum', 'stor_iesiri.datai', 'stor_iesiri.status', 'stor_iesiri.expiration_batch', 'stor_iesiri.expiration_date')
                 ->where('stor_iesiri.idp', '=', $product->idp)
                 ->orderBy('idie', 'DESC')
                 ->get()

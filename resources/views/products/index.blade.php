@@ -516,7 +516,7 @@
 						response.orders.forEach(function (order) {
 							product_sales_total = parseInt(product_sales_total) + parseInt(order.volum);
 							html += "<tr>" +
-								"<td>" + order.idie + "</td>" +
+								"<td>" + order.idcomanda + "</td>" +
 								"<td>" + order.idextern + "</td>" +
 								"<td>" + order.perscontact + "</td>" +
 								"<td>" + order.volum + "</td>" +

@@ -319,21 +319,21 @@
                     }
                     
                     if (request('include_products') && request('include_products') == '1'){
-                        if ($order->ceretur != '0000-00-00'){
-                            $products_text = '';
-                            foreach ($order->products as $product){
-                                $products_text .= $product['codprodusclient'] . ' - ' . $product['volum'] . ' - ' . ($product['is_returned'] ? __('main.returned') : __('main.not_returned')) . ";\r\n";
-                            }
-                        }else{
-                            $products_text = '';
-                            foreach ($order->products as $product){
-                                $products_text .= $product['codprodusclient'] . ' - ' . $product['volum'] . ";\r\n";
-                            }
-                        }
                         if($show_stacks){
-                            $sheet->setCellValue('N' . $row, $products_text);
+                            $column_number = 14;
                         }else{
-                            $sheet->setCellValue('M' . $row, $products_text);
+                            $column_number = 13;
+                        }
+                        if ($order->ceretur != '0000-00-00'){
+                            foreach ($order->products as $product){
+                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['volum'] . ' - ' . ($product['is_returned'] ? __('main.returned') : __('main.not_returned')));
+                                $column_number++;
+                            }
+                        }else{
+                            foreach ($order->products as $product){
+                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['volum']);
+                                $column_number++;
+                            }
                         }
                     }
                 }

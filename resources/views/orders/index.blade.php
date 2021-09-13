@@ -467,6 +467,14 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>{{__('main.msg_warehouse')}}</th>
+                                    <td>
+                                        <div class="form-group m-0">
+                                            <input type="text" class="form-control form-control-sm" name="msg_warehouse" id="msg_warehouse" autocomplete="off" placeholder="{{__('main.msg_warehouse')}}" value="">
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <div class="row">
@@ -597,8 +605,16 @@
                                 <td><span id="order_print_note"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.msg_warehouse')}}</th>
+                                <td><span id="order_msg_warehouse"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.shipping_method')}}</th>
                                 <td><span id="order_shipping_method"></span></td>
+                            </tr>
+                            <tr>
+                                <th>{{__('main.msg_warehouse')}}</th>
+                                <td><span id="order_msg_warehouse"></span></td>
                             </tr>
                             <tr class="d-none" id="row_returned">
                                 <th>{{__('main.is_returned')}}</th>
@@ -778,6 +794,7 @@
 						$('#ship_instructions').val(response.order.ship_instructions);
 						$('#url_factura').val(response.order.url_factura);
 						$('#altele').val(response.order.altele);
+						$('#msg_warehouse').val(response.order.msg_warehouse);
 						var table_html = '';
 						response.order.products.forEach(function(element){
 							table_html +=
@@ -833,6 +850,7 @@
 						$('#order_ship_instructions').html(response.ship_instructions);
 						$('#order_print_note').html(response.print_note);
 						$('#order_shipping_method').html(response.shipping_method);
+						$('#order_msg_warehouse').html(response.msg_warehouse);
 						if(response.returned === true){
 							$('#row_returned, .returned').removeClass('d-none');
 							$('#order_returned').html('{{__('main.yes')}}')

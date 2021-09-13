@@ -622,6 +622,7 @@
                                         'idextern' => $codcomanda,
                                         'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                         'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
+                                        'msg_warehouse' => isset($row['msg_warehouse']) ? $row['msg_warehouse'] : "",
                                     ];
                                     
                                     if($i==0){
@@ -668,6 +669,7 @@
                                     'idextern' => $codcomanda,
                                     'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                     'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
+                                    'msg_warehouse' => isset($row['msg_warehouse']) ? $row['msg_warehouse'] : "",
                                 ];
                                 
                                 if($i==0){
@@ -714,6 +716,7 @@
                                 'idextern' => $codcomanda,
                                 'shipping_method' => isset($row['shipping_method']) ? $row['shipping_method'] : null,
                                 'url_factura' => isset($row['invoice_url']) ? $row['invoice_url'] : "",
+                                'msg_warehouse' => isset($row['msg_warehouse']) ? $row['msg_warehouse'] : "",
                             ];
                             
                             if($i==0){
@@ -869,6 +872,7 @@
                     'emailpers' => $last_row->emailpers,
                     'ramburs' => $last_row->ramburs,
                     'url_factura' => $last_row->url_factura,
+                    'msg_warehouse' => $last_row->msg_warehouse,
                     'sambata' => $last_row->sambata,
                     'altele' => $last_row->altele,
                     'status' => $last_row->getRawOriginal('status'),
@@ -902,6 +906,7 @@
                     'sambata' => $request->sambata,
                     'ship_instructions' => $request->ship_instructions,
                     'url_factura' => $request->url_factura,
+                    'msg_warehouse' => $request->msg_warehouse,
                     'altele' => $request->altele,
                 ]);
             foreach($request->qty as $key=>$qty){
@@ -1100,6 +1105,7 @@
                 'emailpers' => $request->get('emailpers'),
                 'ramburs' => $request->get('ramburs'),
                 'url_factura' => $request->get('url_factura'),
+                'msg_warehouse' => $request->get('msg_warehouse'),
                 'sambata' => $request->get('sambata') ? $request->get('sambata') : 'nu',
                 'altele' => $request->get('altele'),
                 'status' => 'Comanda',

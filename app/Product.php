@@ -71,6 +71,48 @@ class Product extends Model
         }
         return $return;
     }
+    /**
+     * Returns the reserved stock (shipped + unshipped orders)
+     * @return int
+     */
+    public function reserved_stock(){
+        $entries_sub = Entry::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(bucati) AS suma'))
+            ->groupBy('idp')
+        ;
+        
+        $entries_sum = DB::table( DB::raw("({$entries_sub->toSql()}) as entries") )
+            ->mergeBindings($entries_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_entries'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+        
+        $orders_sub = Order::where('idp', '=', $this->idp)
+            ->select('idp', DB::raw('SUM(volum) AS suma'))
+            ->groupBy('idp')
+        ;
+        
+        $orders_sum = DB::table( DB::raw("({$orders_sub->toSql()}) as orders") )
+            ->mergeBindings($orders_sub->getQuery())
+            ->select(
+                DB::raw('SUM(suma) as total_orders'),
+                'idp'
+            )
+            ->groupBy('idp')
+            ->first();
+        
+        $return = 0;
+        if($entries_sum != null){
+            $return = $entries_sum->total_entries;
+        }
+        if($orders_sum != null){
+            $return = $return - $orders_sum->total_orders;
+        }
+        return $return;
+    }
     
     /**
      * Returns the stock including new (unshipped) orders

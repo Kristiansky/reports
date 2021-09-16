@@ -496,6 +496,16 @@
 			$('select#product').select2({
 				ajax: {
 					url: '{{route("product_ajax_search")}}',
+					data: function (params) {
+						var query = {
+							q: params.term,
+                            @if($create_order_max_vol)
+							    reserved: true,
+                            @endif
+						};
+
+						return query;
+					},
 					dataType: 'json',
 					processResults: function (data) {
 						return {

@@ -492,7 +492,11 @@
     
         public function ajaxSearch(Request $request)
         {
-    
+            $reserved = false;
+            if($request->has('reserved')) {
+                $reserved = true;
+            }
+            
             $client = session('client');
             $idc = array();
             foreach(AuthGroup::where('id', '=', $client->group->id)->firstOrFail()->product_categories as $product_category){
@@ -518,7 +522,11 @@
                     ->get();
             }
             foreach ($data as $key => $datum) {
-                $data[$key]['stock'] = $datum->stock();
+                if($reserved == true){
+                    $data[$key]['stock'] = $datum->reserved_stock();
+                }else{
+                    $data[$key]['stock'] = $datum->stock();
+                }
             }
             return response()->json($data);
         }

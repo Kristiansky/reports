@@ -149,12 +149,12 @@
                     if(session('order_filter')['status'] && session('order_filter')['status'] != ''){
                         if(session('order_filter')['status'] == 'procesabila'){
                             $query->where('deadline', '!=', '0000-00-00 00:00:00')
-                                ->where('parcurs', '=', '1');
-//                                ->where('status', '!=', 'expediat')
+                                ->where('parcurs', '=', '1')
+                                ->where('status', '!=', 'expediat');
                         }elseif(session('order_filter')['status'] == 'neprocesabila'){
                             $query->where('deadline', '=', '0000-00-00 00:00:00')
-                                ->where('parcurs', '=', '1');
-//                                ->where('status', '!=', 'expediat')
+                                ->where('parcurs', '=', '1')
+                                ->where('status', '!=', 'expediat');
                         }elseif(session('order_filter')['status'] == 'retur'){
                             $query->where('ceretur', '!=', '0000-00-00');
                         }elseif(session('order_filter')['status'] == 'incompleta'){

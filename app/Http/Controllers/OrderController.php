@@ -46,6 +46,10 @@
             268 => true, //BGUCH
         );
         
+        public $create_order_max_vol = array(
+            254 => true, //PAOLITA
+        );
+        
         /**
          * Display a listing of the resource.
          *
@@ -752,6 +756,11 @@
             }
             
             $data['stroptions'] = $this->str_options;
+            if (isset($this->create_order_max_vol[$client->group->id]) && $this->create_order_max_vol[$client->group->id] == true){
+                $data['create_order_max_vol'] = true;
+            }else{
+                $data['create_order_max_vol'] = false;
+            }
             return view('orders.create', $data);
         }
         

@@ -527,7 +527,9 @@
 				var idp = $(this).val();
 				$('#text_stock_of_idp').html(idp);
 				$('#text_stock_of_qty').html(found_products[idp].stock);
-				// $('input#qty').attr('max', chosen_product.stock);
+                @if($create_order_max_vol)
+				    $('input#qty').attr('max', found_products[idp].stock);
+                @endif
 			});
 			$('#data1, #data2').datetimepicker({
 				format: 'YYYY-MM-DD',

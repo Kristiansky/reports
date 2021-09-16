@@ -59,6 +59,7 @@
         'saturday_delivery' => 'Sat. delivery',
         'other_info' => 'More info',
         'order_success_add' => 'Order successfully added',
+        'order_none_added' => 'None orders added',
         'orders' => 'Orders',
         'filters' => 'Filters',
         'search' => 'Search',

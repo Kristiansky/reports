@@ -60,6 +60,7 @@
         'saturday_delivery' => 'Дост. събота',
         'other_info' => 'Още инфо',
         'order_success_add' => 'Успешно добавена поръчка',
+        'order_none_added' => 'Не се добавиха поръчки',
         'orders' => 'Поръчки',
         'filters' => 'Филтри',
         'search' => 'Търсене',

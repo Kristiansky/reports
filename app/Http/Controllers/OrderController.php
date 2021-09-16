@@ -526,9 +526,15 @@
                 }
                 
                 $orderTotalFields = array('order_total', 'order total', 'order_value', 'order value', 'price');
+    
+                $ido = User::where('group_id','=',$client->group->id)->where('name','=',$client->group->name)->firstOrFail()->id;
                 
-                foreach ($orders as $order){
+                foreach ($orders as $major_key => $order){
+                    $order_exists = Order::where('ido', '=', $ido)->where('idextern', '=', $major_key)->first();
                     $i=0;
+                    if($order_exists){
+                        continue;
+                    }
                     foreach ($order as $key => $row){
                         $codcomanda = $row['order_id'];
                         if (empty($codcomanda)) {
@@ -734,8 +740,13 @@
                         }
                     }
                 }
-                session()->flash('message', __('main.order_success_add'));
-                session()->flash('message_type', 'success');
+                if($i == 0){
+                    session()->flash('message', __('main.order_none_added'));
+                    session()->flash('message_type', 'warning');
+                }else{
+                    session()->flash('message', __('main.order_success_add'));
+                    session()->flash('message_type', 'success');
+                }
                 
                 return redirect(route('order.index'));
             }

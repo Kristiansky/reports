@@ -13,7 +13,7 @@
     class ProductController extends Controller
     {
         public $stacks_to_clients = array(
-            262 => true, //KOLIB
+//            262 => true, //KOLIB
         );
         
         public $from_to_idextern = array(

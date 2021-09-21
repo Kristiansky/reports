@@ -609,6 +609,10 @@
                                 <td><span id="order_shipping_method"></span></td>
                             </tr>
                             <tr>
+                                <th>{{__('main.awb')}}</th>
+                                <td><span id="order_awb"></span></td>
+                            </tr>
+                            <tr>
                                 <th>{{__('main.msg_warehouse')}}</th>
                                 <td><span id="order_msg_warehouse"></span></td>
                             </tr>
@@ -846,6 +850,7 @@
 						$('#order_ship_instructions').html(response.ship_instructions);
 						$('#order_print_note').html(response.print_note);
 						$('#order_shipping_method').html(response.shipping_method);
+						$('#order_awb').html(response.awb);
 						$('#order_msg_warehouse').html(response.msg_warehouse);
 						if(response.returned === true){
 							$('#row_returned, .returned').removeClass('d-none');

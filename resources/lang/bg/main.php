@@ -146,6 +146,7 @@
         'not_returned' => 'Не върнат',
         'include_products' => 'Вкл. продуктите',
         'order_success_delete' => 'Успешно изтрита поръчка',
+        'order_success_exclude' => 'Успешно анулирана поръчка',
         'choose_county' => 'Избор област',
         'return_reason' => 'Причина за връщане',
         'current_stock' => 'Текуща наличност',

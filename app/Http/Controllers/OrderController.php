@@ -997,7 +997,7 @@
             DB::table('stor_iesiri')
                 ->where('idcomanda','=', $request->idcomanda)
                 ->delete();
-            session()->flash('message', __('main.order_success_delete'));
+            session()->flash('message', __('main.order_success_exclude'));
             session()->flash('message_type', 'success');
             return redirect(route('order.index'));
         }

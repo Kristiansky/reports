@@ -145,6 +145,7 @@
         'not_returned' => 'Not returned',
         'include_products' => 'Incl. products',
         'order_success_delete' => 'Order successfully deleted',
+        'order_success_exclude' => 'Order successfully excluded',
         'choose_county' => 'Choose county',
         'return_reason' => 'Reason for return',
         'current_stock' => 'Current stock',

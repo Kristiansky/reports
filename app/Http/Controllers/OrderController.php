@@ -515,7 +515,7 @@
                                 unset($row['item_id_'.$i]);
                                 unset($row['name_'.$i]);
                                 unset($row['quantity_'.$i]);
-                                $orders[$row['order_id']][]=$row;
+                                $orders[trim($row['order_id'])][]=$row;
                             }
                         }else{
                             $row['item_id'] = $row['item_id_1'];
@@ -524,7 +524,7 @@
                             unset($row['item_id_1']);
                             unset($row['name_1']);
                             unset($row['quantity_1']);
-                            $orders[$row['order_id']][]=$row;
+                            $orders[trim($row['order_id'])][]=$row;
                         }
                     }
                 }

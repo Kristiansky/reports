@@ -330,12 +330,12 @@
                         }
                         if ($order->ceretur != '0000-00-00'){
                             foreach ($order->products as $product){
-                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['volum'] . ' - ' . ($product['is_returned'] ? __('main.returned') : __('main.not_returned')));
+                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['descriere'] . ' - ' . $product['volum'] . ' - ' . ($product['is_returned'] ? __('main.returned') . ' - ' . $product['return_reason'] : __('main.not_returned')));
                                 $column_number++;
                             }
                         }else{
                             foreach ($order->products as $product){
-                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['volum']);
+                                $sheet->setCellValueByColumnAndRow($column_number, $row, $product['codprodusclient'] . ' - ' . $product['descriere'] . ' - ' . $product['volum']);
                                 $column_number++;
                             }
                         }

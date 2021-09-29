@@ -841,6 +841,8 @@
         {
             if(isset($request->removeProduct)){
                 $old_order_id = $order->idie;
+                $idcomanda_for_redirect = $order->idcomanda;
+                $page_for_redirect = $request->current_page;
                 DB::table('stor_iesiri')
                     ->where('idcomanda', '=', $order->idie)
                     ->where('idp', '=', (int)$request->removeProduct)
@@ -854,11 +856,13 @@
                         ->update(
                             ['idcomanda' => $new_order_id]
                         );
+                    $idcomanda_for_redirect = $new_order_id;
+//                    $page_for_redirect = 1;
                 }
-                session()->flash('edited_order_idcomanda', $order->idcomanda);
+                session()->flash('edited_order_idcomanda', $idcomanda_for_redirect);
                 session()->flash('message', __('main.order_cart_success_remove'));
                 session()->flash('message_type', 'success');
-                return redirect(route('order.index') . "?page=" . $request->current_page);
+                return redirect(route('order.index') . "?page=" . $page_for_redirect);
             }
             if(isset($request->addingProduct)){
                 $last_row = Order::where('idcomanda', '=', $order->idie)

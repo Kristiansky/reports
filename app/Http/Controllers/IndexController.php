@@ -429,7 +429,7 @@
                 $sheet->setCellValue('A1', __('main.date'));
                 $sheet->setCellValue('B1', __('main.shelves'));
                 $sheet->setCellValue('C1', __('main.shelf_price'));
-                $sheet->setCellValue('D1', __('main.shelves'));
+                $sheet->setCellValue('D1', __('main.pallets'));
                 $sheet->setCellValue('E1', __('main.pallet_price'));
                 $row = 1;
                 foreach ($days_data as $key => $days_datum) {

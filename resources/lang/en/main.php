@@ -173,4 +173,8 @@
         'print_note' => 'Print note',
         'select_add_more_text' => 'Please, add 3 or more characters',
         'msg_warehouse' => 'Msg. for warehouse',
+        'shelves' => 'Shelves',
+        'shelf_price' => 'Shelf price',
+        'pallets' => 'Pallets',
+        'pallet_price' => 'Pallet price',
     ];

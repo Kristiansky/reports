@@ -61,7 +61,7 @@
                                 <th>{{__('main.date')}}</th>
                                 <th>{{__('main.shelves')}}</th>
                                 <th>{{__('main.shelf_price')}}</th>
-                                <th>{{__('main.shelves')}}</th>
+                                <th>{{__('main.pallets')}}</th>
                                 <th>{{__('main.pallet_price')}}</th>
                             </tr>
                             </thead>

@@ -40,6 +40,7 @@
             268 => true, //BGUCH
             254 => true, //PAOLITA
             263 => true, //MetART
+            242 => true, //Haspro
         );
         
         public $from_to_idextern = array(

@@ -384,7 +384,7 @@
                     AND ecommerce="da"
                     AND auth_groups.id='.$client->group->id.'
                     AND x>=20
-                    GROUP BY x,stor_locatii_ecommerce_log.data
+                    GROUP BY y,x,stor_locatii_ecommerce_log.data
                     ORDER BY stor_locatii_ecommerce_log.data ASC, x ASC, y ASC, z ASC, t ASC, u ASC
                 ) as shelve_table
                 GROUP BY shelve_table.datal

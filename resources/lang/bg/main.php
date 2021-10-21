@@ -173,8 +173,8 @@
         'print_note' => 'Бележка за принт',
         'select_add_more_text' => 'Моля, въведете 3 или повече символа',
         'msg_warehouse' => 'Съобщ. за склада',
-        'shelves' => 'Рафтове',
-        'shelf_price' => 'Цена рафт',
+        'shelves' => 'Стелажи',
+        'shelf_price' => 'Цена стелаж',
         'pallets' => 'Палети',
         'pallet_price' => 'Палети цена',
     ];

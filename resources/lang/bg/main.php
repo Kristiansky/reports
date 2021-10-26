@@ -177,4 +177,5 @@
         'shelf_price' => 'Цена стелаж',
         'pallets' => 'Палети',
         'pallet_price' => 'Палети цена',
+        'grouping' => 'Групаж',
     ];

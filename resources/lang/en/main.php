@@ -177,4 +177,5 @@
         'shelf_price' => 'Shelf price',
         'pallets' => 'Pallets',
         'pallet_price' => 'Pallet price',
+        'grouping' => 'Grouping',
     ];

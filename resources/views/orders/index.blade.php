@@ -285,7 +285,19 @@
                                         <td>{{$order->getTotalStacks()}}</td>
                                     @endif
                                     <td>@if($order->getRawOriginal('status') != 'expediat' && $order->parcurs == 1) @if($order->deadline == '0000-00-00 00:00:00' || empty($order->deadline)) <button class="btn btn-xs btn-danger px-2">&nbsp;</button> @else <button class="btn btn-xs btn-success px-2">&nbsp;</button> @endif @endif</td>
-                                    <td>{{$order->curier}}</td>
+                                    <td>
+                                        @if($order->curier == 'inout2')
+                                            @if($order->shipping_method == 'eushipmentsairexpress')
+                                                {{$order->curier}} (DHL)
+                                            @elseif($order->shipping_method == 'crossborder' && $order->tara == 'GR')
+                                                {{$order->curier}} (ACS)
+                                            @else
+                                                {{$order->curier}} {{__('main.grouping')}}
+                                            @endif
+                                        @else
+                                            {{$order->curier}}
+                                        @endif
+                                    </td>
                                     <td>
                                         {{$order->awb}}
                                     </td>
